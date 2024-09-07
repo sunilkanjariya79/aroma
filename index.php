@@ -1,9 +1,9 @@
 
 <?php
 // showing page dynamically
-require_once 'function.php'
+require_once 'function.php';
 //user variable thi editprogile ma user ni pic get karava
-if(isset($_SESSION['Auth']){}){
+if(isset($_SESSION['Auth'])){
     $user=getUser($_SESSION['userdata']['id']);
     $post=filterPost();
     $follow_suggestion=filterFollowSuggetions();
@@ -61,7 +61,5 @@ unset($_SESSION['error']);
 unset($_SESSION['formdata']);
 
 //logout button code for navbar
-<a href="action.php">logout</a>
-
-// new is here
+echo "<a href='action.php'>logout</a>"
  ?>

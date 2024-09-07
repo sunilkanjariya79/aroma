@@ -1,6 +1,5 @@
 <?php
-require_once 'include/conn.php'
-$db=mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME) or die("database not connected");
+require_once 'include/conn.php';
 // function for showing pages
 function showPage($page,$data=""){
     include("include/$page.php");
@@ -71,7 +70,7 @@ function createUser($data){
     return mysqli_query($db,$query);
 }
 //for checking dublicate username
-function isUsernameRegisterd($$username){
+function isUsernameRegisterd($username){
     global $db;
     $query="SELECT count(*) as row FROM tablename where username ='$username'";
     $run=mysqli_query($db,$query);
@@ -79,7 +78,7 @@ function isUsernameRegisterd($$username){
     return $return_data['row'];
 }
 //for checking dublicate username by other
-function isUsernameRegisterdByOther($$username){
+function isUsernameRegisterdByOther($username){
     global $db;
     $ser_id=$_SESSION['username']['id'];
     $query="SELECT count(*) as row FROM tablename where username='$username' && id!=$user_id";
@@ -176,7 +175,7 @@ function validatesEditForm($form_data,$image_data){
 
     //username  alredy register by other
     if($isUsernameRegisteredByOther($form_data['email'])){
-        $response['msg']=$form_data['username']". is alredy registered";
+        $response['msg']=$form_data['username']." is alredy registered";
         $response['status']=false;
         $response['field']='username';
     }
@@ -443,8 +442,10 @@ function getAllMessages(){
     $conversation=array();
     foreach($active_chat_ids as $index=>$id){
         $conversation[$index]['useer_id']=$id;
-        $conversation[$index]['messages']=>getMessages($id);
+        $conversation[$index]['messages']=  getMessages($id);
     }
     return $conversation;
+}
+}
 }
 ?>
