@@ -62,4 +62,6 @@ unset($_SESSION['formdata']);
 
 //logout button code for navbar
 <a href="action.php">logout</a>
+
+// new is here
  ?>
