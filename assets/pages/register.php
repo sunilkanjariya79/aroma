@@ -19,25 +19,26 @@ include_once('assets/pages/header.php');?>
                   <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
-                  <input type="file" name="profile-photo" id="profile-photo">
+                  <input type="file" name="uprofile_photo" id="uprofile_photo">
                   <a onClick class="primery-button"> Add</a>
                 </div>
               </div>
             </div>
             
-            <input class="log-reg-field w-input" maxlength="20" name="field" data-name="Field" placeholder="Email" type="email" id="field" required=""/>
-            <input class="log-reg-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required=""/>
+            <input class="log-reg-field w-input" maxlength="20" name="umail" data-name="Field" placeholder="Email" type="email" id="field" required=""/>
+            <input class="log-reg-field w-input" maxlength="256" name="	username" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required=""/>
             <div class="lr-field-box">
-              <input class="log-reg-field lg-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="" />
-              <select id="Gender" name="Gender" data-name="Gender" required="" class="log-reg-field lg-field w-select">
+              <input class="log-reg-field lg-field w-input" maxlength="256" name="uname" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="" />
+              <select id="Gender" name="gender" data-name="Gender" required="" class="log-reg-field lg-field w-select">
                 <option value="1">Male</option>
                 <option value="2">Female</option>
+                <option value="3">Other</option>
               </select>
             </div>
-            <textarea placeholder="Example Text" maxlength="220" id="field-4" name="field-4" data-name="Field 4" class="log-reg-field reg-edit-about w-input"></textarea>
+            <textarea placeholder="Example Text" maxlength="220" id="	uabout" name="	uabout" data-name="Field 4" class="log-reg-field reg-edit-about w-input"></textarea>
             <input type="date" class="log-reg-field" />
-            <input class="log-reg-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="">
-            <input class="log-reg-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="">
+            <input class="log-reg-field w-input" maxlength="256" name="	upassword" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="">
+            <input class="log-reg-field w-input" maxlength="256" name="cpassword" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="">
             <div class="lr-field-box lr-fb-2">
               <a href="login.php" class="side-bar-heading lr-link">Log in</a>
               <input type="submit" data-wait="Please wait..." class="primery-button lr-btn w-button" value="Submit"/>
