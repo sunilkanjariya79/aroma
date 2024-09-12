@@ -9,23 +9,48 @@ include_once('assets/pages/header.php');?>
           <h2 class="secondary-heading"> Create Account</h2>
         </div>
         <div class="form-block w-form">
-          <form method="get" class="register-form">
-            <a class="reg-edit-img-in w-inline-block">
-              <img src="images/typcn_plus.svg" loading="lazy" alt="" class="image-2" /></a>
+          <form
+            method="get"
+            class="register-form"
+          >
+            <a class="reg-edit-img-in w-inline-block"
+              ><img
+                src="assets/images/site-meta/typcn_plus.svg"
+                alt=""
+                class="image-2" /></a
+            >
             <div class="pop-up-window add-img hide" >
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">heading</h2>
-                  <a class="close"><img src="assets/images/charm_cross.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
                   <input type="file" name="profile-photo" id="profile-photo">
                   <a onClick class="primery-button"> Add</a>
                 </div>
               </div>
-            </div>  
-            <input class="log-reg-field w-input" maxlength="20" name="field" data-name="Field" placeholder="Email" type="email" id="field" required="" />
-            <input class="log-reg-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="" />
+            </div>
+            
+            <input
+              class="log-reg-field w-input"
+              maxlength="20"
+              name="field"
+              data-name="Field"
+              placeholder="Email"
+              type="email"
+              id="field"
+              required=""
+            /><input
+              class="log-reg-field w-input"
+              maxlength="256"
+              name="field-2"
+              data-name="Field 2"
+              placeholder="Example Text"
+              type="text"
+              id="field-2"
+              required=""
+            />
             <div class="lr-field-box">
               <input class="log-reg-field lg-field w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="" />
               <select id="Gender" name="Gender" data-name="Gender" required="" class="log-reg-field lg-field w-select">
