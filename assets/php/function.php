@@ -1,8 +1,8 @@
 <?php
-require_once 'include/conn.php';
+require_once 'conn.php';
 // function for showing pages
 function showPage($page,$data=""){
-    include("include/$page.php");
+    include("assets/pages/$page.php");
 }
 //function for show error
 function showError(){

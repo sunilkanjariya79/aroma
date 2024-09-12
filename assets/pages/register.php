@@ -25,13 +25,27 @@
             method="get"
             class="register-form"
           >
-            <a href="#" class="reg-edit-img-in w-inline-block"
+            <a onClick= "" class="reg-edit-img-in w-inline-block"
               ><img
                 src="images/typcn_plus.svg"
                 loading="lazy"
                 alt=""
                 class="image-2" /></a
-            ><input
+            >
+            <div class="pop-up-window">
+              <div class="pop-up">
+                <div class="pop-up-heading">
+                  <h2 class="heading-2">heading</h2>
+                  <img src="images/charm_cross.svg" loading="lazy" width="32" height="32" alt="">
+                </div>
+                <div class="pop-up-content">
+                  <input type="file" name="profile-photo" id="profile-photo">
+                  <a onClick class="primery-button"> Add</a>
+                </div>
+              </div>
+            </div>
+            
+            <input
               class="log-reg-field w-input"
               maxlength="20"
               name="field"

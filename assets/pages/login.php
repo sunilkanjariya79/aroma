@@ -40,7 +40,7 @@
                 type="text"
               />
               <div class="lr-field-box lr-fb-2">
-                <a href="register.php" class="side-bar-heading lr-link">New user? Register</a
+                <a href="#/register" class="side-bar-heading lr-link">New user? Register</a
                 ><input
                   type="submit"
                   class="primery-button lr-btn w-button"

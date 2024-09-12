@@ -1,7 +1,7 @@
 
 <?php
 // showing page dynamically
-require_once 'function.php';
+require_once 'assets/php/function.php';
 //user variable thi editprogile ma user ni pic get karava
 if(isset($_SESSION['Auth'])){
     $user=getUser($_SESSION['userdata']['id']);
@@ -34,9 +34,9 @@ elseif(isset($_SESSION['Auth']) && isset($_GET['u'])){
     }
    
 }
-elseif(isset($_GET['signup'])){
+elseif(isset($_GET['register'])){
  showPage('header',['page_title'=>'aroma-signup']);
- showPage('signup');
+ showPage('register');
 }
 elseif(isset($_GET['login'])){
     showPage('header',['page_title'=>'aroma-login']);
