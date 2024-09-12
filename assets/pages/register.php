@@ -1,9 +1,5 @@
-<html>
-  <head>
-    <link rel="stylesheet" href="style/test.css"><div class="log-reg-container">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
+<?php
+include_once('assets/pages/header.php');?>
     <div class="log-reg-side">
       <img
         src="images/bookshelf.png"
@@ -126,5 +122,5 @@
       </div>
     </div>
   </div>
-</body>
-</html> 
+  <?php include_once('assets/pages/header.php');
+?>
