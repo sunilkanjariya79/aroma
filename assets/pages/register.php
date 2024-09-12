@@ -1,7 +1,7 @@
 <?php
 include_once('assets/pages/header.php');?>
     <div class="log-reg-side">
-      <img src="images/bookshelf.png" loading="lazy" width="Auto" height="Auto" alt="" class="log-reg-img" />
+      <img src="assets/images/site-meta/bookshelf.png" loading="lazy" width="Auto" height="Auto" alt="" class="log-reg-img" />
     </div>
     <div class="log-reg-form-container">
       <div class="log-reg-form">
@@ -19,7 +19,7 @@ include_once('assets/pages/header.php');?>
                   <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
-                  <input type="file" name="uprofile_photo" id="uprofile_photo">
+                  <input type="file" name="uprofile_pic" id="uprofile_photo">
                   <a onClick class="primery-button"> Add</a>
                 </div>
               </div>
@@ -27,7 +27,7 @@ include_once('assets/pages/header.php');?>
             
             <input class="log-reg-field w-input" maxlength="20" name="umail" placeholder="Enter your Email" type="email" required=""/>
             <?=showError('umail')?>
-            <input class="log-reg-field w-input" maxlength="256" name="	uname" placeholder="Enter your Name" type="text" required=""/>
+            <input class="log-reg-field w-input" maxlength="256" name="uname" placeholder="Enter your Name" type="text" required=""/>
             <?=showError('uname')?>
             <div class="lr-field-box">
               <input class="log-reg-field lg-field w-input" maxlength="256" name="username" placeholder="Enter your Username" type="text"  required="" />
@@ -38,10 +38,10 @@ include_once('assets/pages/header.php');?>
                 <option value="3" <?=showFormaData('gender')==3?'male':''?>>Other</option>
               </select>
             </div>
-            <textarea placeholder="Enter your about" maxlength="220" name="	uabout"  value=<?=showFormaData('uabout')?> class="log-reg-field reg-edit-about w-input"></textarea>
+            <textarea placeholder="Enter your about" maxlength="220" name="uabout"  value="<?=showFormaData('uabout')?>" class="log-reg-field reg-edit-about w-input"></textarea>
             <?=showError('uabout')?>
-            <input type="date" class="log-reg-field" />
-            <input class="log-reg-field w-input" maxlength="256" name="	upassword" placeholder="Enteer tour password" type="text" required="">
+            <input type="date" class="log-reg-field" name="udate" />
+            <input class="log-reg-field w-input" maxlength="256" name="upassword" placeholder="Enteer tour password" type="text" required="">
             <?=showError('upassword')?>
             <input class="log-reg-field w-input" maxlength="256" name="cpassword" placeholder="Confirm password" type="text" required="">
             <div class="lr-field-box lr-fb-2">

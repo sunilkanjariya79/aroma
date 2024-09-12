@@ -66,15 +66,18 @@ function showFormaData($field){
 //for checking dublicate email
 function isEmailRegistered($email){
     global $db;
-    $query="select count(*) as row from users where umail='$email'";
+    $query="select count(*) as 'row' from users where umail='".$email."'";
     $run=mysqli_query($db,$query);
-    $return_data=mysqli_fetch_assoc($run);
+    if (!$run) {
+        echo "Query error: " . mysqli_error($db);
+    }
+    $return_data=mysqli_fetch_array($run);
     return $return_data['row'];
 }
 //for checking dublicate username
 function isUsernameRegistered($username){
     global $db;
-    $query="select count(*) as row from users where  username='$username'";
+    $query="select count(*) as 'row' from users where  username='$username'";
     $run=mysqli_query($db,$query);
     $return_data=mysqli_fetch_assoc($run);
     return $return_data['row'];
@@ -90,7 +93,11 @@ function createuser($data){
     $udate = mysqli_real_escape_string($db, $data['udate']);
     $upassword = mysqli_real_escape_string($db, $data['upassword']);
     $profile_pic = mysqli_real_escape_string($db, $data['uprofile_pic']);
-    $query="insert into users(uprofile_photo,umail,uname,username,gender,uabout,udate,upassword)values('$profile_pic','$umail','$uname','$username','$gender','$uabout','$udate','$upassword')";
+    $query="insert into users(uprofile_photo,umail,uname,username,gender,uabout,udate,upassword) values('".$profile_pic."','".$umail."','".$uname."','".$username."','".$gender."','".$uabout."','".$udate."','".$upassword."')";
+    $run = mysqli_query($db,$query);
+    if (!$run) {
+        echo "Query error: " . mysqli_error($db);
+    }
     return mysqli_query($db,$query);
 }
 ?>

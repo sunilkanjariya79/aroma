@@ -2,7 +2,7 @@
 include_once('assets/pages/header.php');?>
       <div class="log-reg-side">
         <img
-          src="images/bookshelf.png"
+          src="assets/images/site-meta/bookshelf.png"
           loading="lazy"
           width="Auto"
           height="Auto"
