@@ -102,7 +102,7 @@ function createuser($data){
 function validatesLoginForm($form_data){
     $response=array();
     $response['status']=true;
-    $blank=true;
+    $blank=false;
     //for all filed are desending order like password,email,username etc
     if(!$form_data['upassword']){
         $response['msg']="password is not give";
@@ -135,7 +135,7 @@ $password=$login_data['upassword'];
 $query="SELECT * FROM users WHERE (umail='".$username_email."' || username='".$username_email."')&& upassword='".$password."'";
 $run=mysqli_query($db,$query);
 $data['user']= mysqli_fetch_assoc($run);
-if(  count($data['user'])>0){
+if(!is_null($data['user']) && count($data['user'])>0){
     $data['status']=true;
 }
 else{
