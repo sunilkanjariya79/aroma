@@ -7,7 +7,7 @@ showPage('register');
 }
 
 //open log-in if get is open
-if(isset($_GET['login'])){
+elseif(isset($_GET['login'])){
     showPage('header',['page_title'=>'aroma-Log-In']);
     showPage('login');
     }

@@ -20,23 +20,23 @@ include_once('assets/pages/header.php');?>
             <form
               method="post"
               class="register-form"
-              action="casual-post-wall.php"
+              action="assets/php/action.php?login"
             >
               <input
                 class="log-reg-field w-input"
                 maxlength="20"
-                name="email"
+                name="umail"
                 placeholder="Email"
                 type="email"
               /><input
                 class="log-reg-field w-input"
                 maxlength="256"
-                name="pass"
+                name="upassword"
                 placeholder="Your Password"
                 type="text"
               />
               <div class="lr-field-box lr-fb-2">
-                <a href="#/register" class="side-bar-heading lr-link">New user? Register</a
+                <a href="?register" class="side-bar-heading lr-link">New user? Register</a
                 ><input
                   type="submit"
                   class="primery-button lr-btn w-button"

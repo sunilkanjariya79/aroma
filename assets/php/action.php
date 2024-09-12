@@ -15,4 +15,18 @@ if(isset($_GET['register'])){
         header("location:../../");
     }
 }
+
+if(isset($_GET['login'])){
+    $response=validatesLoginForm($_POST);
+    if($response['status']){
+        $_SESSION['Auth']=true;
+        $_SESSION['userdata']=$response['user'];
+        header("location:index.php?done");
+    }
+    else{
+        $_SESSION['error']=$response;
+        $_SESSION['formdata']=$_POST;
+        header("location:index.php?login");
+    }
+}
 ?>
