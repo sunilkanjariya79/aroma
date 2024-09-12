@@ -23,14 +23,13 @@ $(document).ready(function() {
 
     //to show add photo menu on register and update page
     $('.reg-edit-img-in').click(function(event) {
-
         $('.add-img').removeClass('hide');
     });
 
     //to close pop up manu on page
-    $('close').click(function(event) {
+    $('.close').click(function(event) {
         $('.pop-up-window').addClass('hide');
-    })
+    });
 });
 
 

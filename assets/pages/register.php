@@ -23,8 +23,7 @@ include_once('assets/pages/header.php');?>
           >
             <a class="reg-edit-img-in w-inline-block"
               ><img
-                src="images/typcn_plus.svg"
-                loading="lazy"
+                src="assets/images/site-meta/typcn_plus.svg"
                 alt=""
                 class="image-2" /></a
             >
@@ -32,7 +31,7 @@ include_once('assets/pages/header.php');?>
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">heading</h2>
-                  <a class="close"><img src="assets/images/charm_cross.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
                   <input type="file" name="profile-photo" id="profile-photo">

@@ -527,6 +527,38 @@ body {
   height: 100vh;
   display: flex;
 }
+
+
+.pop-up-window {
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  grid-auto-columns: 1fr;
+  justify-content:center;
+  place-items: center;
+  display: grid;
+  position: fixed;
+  inset: 0;
+ 
+}
+
+.pop-up {
+  background-color: #0c0c0c;
+  flex-flow: column;
+  align-items: center;
+  display: flex;
+}
+
+.pop-up-heading {
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+}
+.close {
+  width: 20px;
+  height: 20px;
+}
 .log-reg-form-container {
   flex-flow: column;
   align-items: flex-start;
