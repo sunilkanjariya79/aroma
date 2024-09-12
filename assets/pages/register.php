@@ -9,7 +9,7 @@ include_once('assets/pages/header.php');?>
           <h2 class="secondary-heading"> Create Account</h2>
         </div>
         <div class="form-block w-form">
-          <form method="get" class="register-form">
+          <form method="post" class="register-form" action="assets/php/action.php?register">
             <a class="reg-edit-img-in w-inline-block">
               <img src="assets/images/site-meta/typcn_plus.svg" alt="" class="image-2" /></a>
             <div class="pop-up-window add-img hide" >
@@ -25,23 +25,28 @@ include_once('assets/pages/header.php');?>
               </div>
             </div>
             
-            <input class="log-reg-field w-input" maxlength="20" name="umail" data-name="Field" placeholder="Email" type="email" id="field" required=""/>
-            <input class="log-reg-field w-input" maxlength="256" name="	username" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required=""/>
+            <input class="log-reg-field w-input" maxlength="20" name="umail" placeholder="Enter your Email" type="email" required=""/>
+            <?=showError('umail')?>
+            <input class="log-reg-field w-input" maxlength="256" name="	uname" placeholder="Enter your Name" type="text" required=""/>
+            <?=showError('uname')?>
             <div class="lr-field-box">
-              <input class="log-reg-field lg-field w-input" maxlength="256" name="uname" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="" />
-              <select id="Gender" name="gender" data-name="Gender" required="" class="log-reg-field lg-field w-select">
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Other</option>
+              <input class="log-reg-field lg-field w-input" maxlength="256" name="username" placeholder="Enter your Username" type="text"  required="" />
+              <?=showError('username')?>
+              <select name="gender" required="" class="log-reg-field lg-field w-select">
+                <option value="1" <?=showFormaData('gender')==1?'male':''?>>Male</option>
+                <option value="2" <?=showFormaData('gender')==2?'male':''?>>Female</option>
+                <option value="3" <?=showFormaData('gender')==3?'male':''?>>Other</option>
               </select>
             </div>
-            <textarea placeholder="Example Text" maxlength="220" id="	uabout" name="	uabout" data-name="Field 4" class="log-reg-field reg-edit-about w-input"></textarea>
+            <textarea placeholder="Enter your about" maxlength="220" name="	uabout"  value=<?=showFormaData('uabout')?> class="log-reg-field reg-edit-about w-input"></textarea>
+            <?=showError('uabout')?>
             <input type="date" class="log-reg-field" />
-            <input class="log-reg-field w-input" maxlength="256" name="	upassword" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="">
-            <input class="log-reg-field w-input" maxlength="256" name="cpassword" data-name="Field 2" placeholder="Example Text" type="text" id="field-2" required="">
+            <input class="log-reg-field w-input" maxlength="256" name="	upassword" placeholder="Enteer tour password" type="text" required="">
+            <?=showError('upassword')?>
+            <input class="log-reg-field w-input" maxlength="256" name="cpassword" placeholder="Confirm password" type="text" required="">
             <div class="lr-field-box lr-fb-2">
               <a href="login.php" class="side-bar-heading lr-link">Log in</a>
-              <input type="submit" data-wait="Please wait..." class="primery-button lr-btn w-button" value="Submit"/>
+              <input type="submit" class="primery-button lr-btn w-button" value="Submit"/>
             </div>
           </form>
         </div>
