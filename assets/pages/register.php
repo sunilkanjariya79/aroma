@@ -21,18 +21,18 @@ include_once('assets/pages/header.php');?>
             method="get"
             class="register-form"
           >
-            <a onClick= "" class="reg-edit-img-in w-inline-block"
+            <a class="reg-edit-img-in w-inline-block"
               ><img
                 src="images/typcn_plus.svg"
                 loading="lazy"
                 alt=""
                 class="image-2" /></a
             >
-            <div class="pop-up-window">
+            <div class="pop-up-window add-img hide" >
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">heading</h2>
-                  <img src="images/charm_cross.svg" loading="lazy" width="32" height="32" alt="">
+                  <a class="close"><img src="assets/images/charm_cross.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
                   <input type="file" name="profile-photo" id="profile-photo">
