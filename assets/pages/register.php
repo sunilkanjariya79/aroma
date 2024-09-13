@@ -45,7 +45,7 @@ include_once('assets/pages/header.php');?>
             <?=showError('upassword')?>
             <input class="log-reg-field w-input" maxlength="256" name="cpassword" placeholder="Confirm password" type="text" required="">
             <div class="lr-field-box lr-fb-2">
-              <a href="assets/pages/login.php" class="side-bar-heading lr-link">Log in</a>
+              <a href="login.php" class="side-bar-heading lr-link">Log in</a>
               <input type="submit" class="primery-button lr-btn w-button" value="Submit"/>
             </div>
           </form>

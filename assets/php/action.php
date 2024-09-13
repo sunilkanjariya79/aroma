@@ -31,4 +31,19 @@ if(isset($_GET['login'])){
         header("location:../../?login");
     }
 }
+
+if(isset($_GET['login'])){
+    $response=validatesLoginForm($_POST);
+    if($response['status']){
+        $_SESSION['Auth']=true;
+        $_SESSION['userdata']=$response['user'];
+        print_r( $response);
+        // header("location:index.php?done");
+    }
+    else{
+        $_SESSION['error']=$response;
+        $_SESSION['formdata']=$_POST;
+        header("location:../../?login");
+    }
+}
 ?>

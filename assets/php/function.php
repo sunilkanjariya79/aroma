@@ -111,9 +111,6 @@ function isEmailRegistered($email){
     global $db;
     $query="select count(*) as 'row' from users where umail='".$email."'";
     $run=mysqli_query($db,$query);
-    if (!$run) {
-        echo "Query error: " . mysqli_error($db);
-    }
     $return_data=mysqli_fetch_array($run);
     return $return_data['row'];
 }
@@ -138,9 +135,64 @@ function createuser($data){
     $profile_pic = mysqli_real_escape_string($db, $data['uprofile_pic']);
     $query="insert into users(uprofile_photo,umail,uname,username,gender,uabout,udate,upassword) values('".$profile_pic."','".$umail."','".$uname."','".$username."','".$gender."','".$uabout."','".$udate."','".$upassword."')";
     $run = mysqli_query($db,$query);
-    if (!$run) {
-        echo "Query error: " . mysqli_error($db);
-    }
     return mysqli_query($db,$query);
+}
+
+//login functions
+
+
+//for validating login
+function validatesLoginForm($form_data){
+    $response=array();
+    $response['status']=true;
+    $blank=false;
+    //for all filed are desending order like password,email,username etc
+    if(!$form_data['upassword']){
+        $response['msg']="password is not give";
+        $response['status']=false;
+        $response['field']='password';
+        $blank=true;
+    }
+    if(!$form_data['umail']){
+        $response['msg']="username/email is not give";
+        $response['status']=false;
+        $response['field']='username_email';
+        $blank=true;
+    }
+    //for incorrect password or usernaame hoi tyare
+    if(!$blank && !checkUser($form_data)['status']){
+        $response['msg']="something is incorect";
+        $response['status']=false;
+        $response['field']='checkUser';
+    }
+    else{
+        $response['user']=checkUser($form_data)['user'];
+    }
+    return $response;
+}
+//for chacking user
+function checkUser($login_data){
+    global $db;
+$username_email=$login_data['umail'];
+$password=$login_data['upassword'];
+$query="SELECT * FROM users WHERE (umail='".$username_email."' || username='".$username_email."')&& upassword='".$password."'";
+$run=mysqli_query($db,$query);
+$data['user']= mysqli_fetch_assoc($run);
+if(!is_null($data['user']) && count($data['user'])>0){
+    $data['status']=true;
+}
+else{
+    $data['status']=false;
+}
+return $data;
+}
+
+//for getting userdata by id
+function getUser($user_id){
+    global $db;
+$query="SELECT *FROM users WHERE uid=$user_id";
+$run=mysqli_query($db,$query);
+return mysqli_fetch_assoc($run);
+
 }
 ?>
