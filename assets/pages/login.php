@@ -9,31 +9,15 @@ include_once('assets/pages/header.php');?>
             <h2 class="secondary-heading"> Log in </h2>
           </div>
           <div class="form-block w-form">
-            <form
-              method="post"
-              class="register-form"
-              action="casual-post-wall.php"
-            >
-              <input
-                class="log-reg-field w-input"
-                maxlength="20"
-                name="email"
-                placeholder="Email"
-                type="email"
-              /><input
-                class="log-reg-field w-input"
-                maxlength="256"
-                name="pass"
-                placeholder="Your Password"
-                type="text"
-              />
+          <form method="post" class="register-form" action="assets/php/action.php?login">
+              <input class="log-reg-field w-input" maxlength="20" name="username_email" placeholder="Email/Username"  type="text"/>
+              <?=showError('username_email')?>
+              <input class="log-reg-field w-input" maxlength="256" name="upassword" placeholder="Your Password" type="text"/>
+              <?=showError('upassword')?>
+              <?=showError('checkuser')?>
               <div class="lr-field-box lr-fb-2">
-                <a href="#/register" class="side-bar-heading lr-link">New user? Register</a
-                ><input
-                  type="submit"
-                  class="primery-button lr-btn w-button"
-                  value="Log In"
-                />
+                <a href="#/register" class="side-bar-heading lr-link">New user? Register</a>
+                <input type="submit" class="primery-button lr-btn w-button" value="Log In" />
               </div>
             </form>
           </div>
