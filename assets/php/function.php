@@ -45,6 +45,49 @@ function validateRegisterForm($form_data){
     }
     return $response;
 }
+
+//for managing login form
+//for validating register form
+function validateLoginForm($form_data){
+    $response=array();
+    $response['status']=true;
+    $blank=false;
+    if(!$form_data['upassword']){
+        $response['msg']="password is not given";
+        $response['status']=false;
+        $response['field']='upassword';
+        $blank=true;
+    }
+    if(!$form_data['username_email']){
+        $response['msg']="username/email is not given";
+        $response['status']=false;
+        $response['field']='username_email';
+        $blank=true;
+    }
+    if(!$blank && !checkUser($form_data)['status']){
+        $response['msg']="something is wrong";
+        $response['status']=false;
+        $response['field']='checkuser';
+    }else{
+       $response['user']=checkUser($form_data)['user'];
+    }
+    return $response;
+}
+//for checking a user
+function checkUser($login_data){
+    global $db;
+    $username_email=$login_data['username_email'];
+    $password=$login_data['upassword'];
+    $query="select * from users where (umail='$username_email' || username='$username_email') && upassword='$password'";
+    $run=mysqli_query($db,$query);
+    $data['user']=mysqli_fetch_assoc($run);
+    if($data['user']>0){
+        $data['status']=true;
+    }else{
+        $data['status']=false;
+    }
+    return $data;
+}
 //function for show error
 function showError($field){
     if(isset($_SESSION['error'])){
