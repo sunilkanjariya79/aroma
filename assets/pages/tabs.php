@@ -1,10 +1,4 @@
-<div
-      data-current="Casual"
-      data-easing="ease-in"
-      data-duration-in="300"
-      data-duration-out="100"
-      class=" w-tabs"
-    >
+<div>
       <div class="tabs-menu w-tab-menu">
         <a class="p-tab w-inline-block w-tab-link w--current"
           id="casuals">
@@ -19,34 +13,15 @@
           <a href="#" class="post-thumbnail tab-details w-inline-block">
             <div class="post-controls">
               <div class="pc-option">
-                <img
-                  src="images/mdi_heart-outline.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/mdi_heart-outline.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
               <div class="pc-option">
-                <img
-                  src="images/uil_comment.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/uil_comment.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
-              <img
-                src="images/uil_share.svg"
-                alt=""
-                width="24"
-                height="24"
-              /><img
-                src="images/zondicons_dots-horizontal-triple.svg"
-                alt=""
-                width="24"
-                height="24"
-              />
+              <img src="images/uil_share.svg" alt="" width="24" height="24"/>
+              <img src="images/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24"/>
             </div>
             <div class="post-content-container">
               <div class="pc-title-container">
@@ -79,34 +54,15 @@
           <a href="#" class="post-thumbnail tab-details w-inline-block">
             <div class="post-controls">
               <div class="pc-option">
-                <img
-                  src="images/mdi_heart-outline.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/mdi_heart-outline.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
               <div class="pc-option">
-                <img
-                  src="images/uil_comment.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/uil_comment.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
-              <img
-                src="images/uil_share.svg"
-                alt=""
-                width="24"
-                height="24"
-              /><img
-                src="images/zondicons_dots-horizontal-triple.svg"
-                alt=""
-                width="24"
-                height="24"
-              />
+              <img src="images/uil_share.svg" alt="" width="24" height="24"/>
+              <img src="images/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24"/>
             </div>
             <div class="post-content-container">
               <div class="pc-title-container">
@@ -139,34 +95,15 @@
           <a href="#" class="post-thumbnail tab-details w-inline-block">
             <div class="post-controls">
               <div class="pc-option">
-                <img
-                  src="images/mdiheart-outline.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/mdiheart-outline.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
               <div class="pc-option">
-                <img
-                  src="images/uilcomment.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/uilcomment.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
-              <img
-                src="images/uilshare.svg"
-                alt=""
-                width="24"
-                height="24"
-              /><img
-                src="images/zondiconsdots-horizontal-triple.svg"
-                alt=""
-                width="24"
-                height="24"
-              />
+              <img src="images/uilshare.svg" alt="" width="24" height="24"/>
+              <img src="images/zondiconsdots-horizontal-triple.svg" alt="" width="24" height="24"/>
             </div>
             <div class="post-content-container">
               <div class="pc-title-container">
@@ -199,34 +136,15 @@
           <a href="#" class="post-thumbnail tab-details w-inline-block">
             <div class="post-controls">
               <div class="pc-option">
-                <img
-                  src="images/mdiheart-outline.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/mdiheart-outline.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
               <div class="pc-option">
-                <img
-                  src="images/uilcomment.svg"
-                  alt=""
-                  width="24"
-                  height="24"
-                />
+                <img src="images/uilcomment.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
-              <img
-                src="images/uilshare.svg"
-                alt=""
-                width="24"
-                height="24"
-              /><img
-                src="images/zondiconsdots-horizontal-triple.svg"
-                alt=""
-                width="24"
-                height="24"
-              />
+              <img src="images/uilshare.svg" alt="" width="24" height="24"/>
+              <img src="images/zondiconsdots-horizontal-triple.svg" alt="" width="24" height="24"/>
             </div>
             <div class="post-content-container">
               <div class="pc-title-container">
@@ -260,14 +178,7 @@
         <div class="p-tab-content w-tab-pane hide" id="books-container">
           <div class="book-card tab-details">
             <div class="book-thumbnail">
-              <img
-                src="images/Rectangle-39.png"
-                loading="lazy"
-                width="Auto"
-                height="200"
-                alt=""
-                class="image"
-              />
+              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">
@@ -275,12 +186,12 @@
                 <p class="pcm-text pcm-username">About</p>
               </div>
               <div class="book-description">
-                <p class="book-description-text">
+                <a class="book-description-text">
                   Here will be discription of Book, a little discription that
                   will take some time to be something but there will always be
                   time when we all will hate something that we cannot become,
                   because that is what life is all about
-                </p>
+                </a>
               </div>
               <div class="bd-bottom">
                 <a href="#" class="primery-button">Read Now</a>
@@ -293,14 +204,7 @@
           </div>
           <div class="book-card tab-details">
             <div class="book-thumbnail">
-              <img
-                src="images/Rectangle-39.png"
-                loading="lazy"
-                width="Auto"
-                height="200"
-                alt=""
-                class="image"
-              />
+              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">
@@ -326,14 +230,7 @@
           </div>
           <div class="book-card tab-details ">
             <div class="book-thumbnail">
-              <img
-                src="images/Rectangle-39.png"
-                loading="lazy"
-                width="Auto"
-                height="200"
-                alt=""
-                class="image"
-              />
+              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">
@@ -359,14 +256,7 @@
           </div>
           <div class="book-card tab-detils">
             <div class="book-thumbnail">
-              <img
-                src="images/Rectangle-39.png"
-                loading="lazy"
-                width="Auto"
-                height="200"
-                alt=""
-                class="image"
-              />
+              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">

@@ -23,22 +23,7 @@ if(isset($_GET['login'])){
     if($response['status']){
        $_SESSION['auth']=true;
        $_SESSION['uid']=$response['user'];
-       header("location:../../");
-    }
-    else{
-        $_SESSION['error']=$response;
-        $_SESSION['formdata']=$_POST;
-        header("location:../../?login");
-    }
-}
-
-if(isset($_GET['login'])){
-    $response=validatesLoginForm($_POST);
-    if($response['status']){
-        $_SESSION['Auth']=true;
-        $_SESSION['userdata']=$response['user'];
-        print_r( $response);
-        // header("location:index.php?done");
+       header("location:../../?post-wall");
     }
     else{
         $_SESSION['error']=$response;

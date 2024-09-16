@@ -10,7 +10,7 @@ showPage('register');
 elseif(isset($_GET['login'])){
     showPage('header',['page_title'=>'aroma-Log-In']);
     showPage('login');
-    }
+}
 
 
 

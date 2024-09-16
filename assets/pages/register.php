@@ -32,13 +32,13 @@ include_once('assets/pages/header.php');?>
             <div class="lr-field-box">
               <input class="log-reg-field lg-field w-input" maxlength="256" name="username" placeholder="Enter your Username" type="text"  required="" />
               <?=showError('username')?>
-              <select name="gender" required="" class="log-reg-field lg-field w-select">
+              <select name="gender" class="log-reg-field lg-field w-select">
                 <option value="1" <?=showFormaData('gender')==1?'male':''?>>Male</option>
                 <option value="2" <?=showFormaData('gender')==2?'male':''?>>Female</option>
                 <option value="3" <?=showFormaData('gender')==3?'male':''?>>Other</option>
               </select>
             </div>
-            <textarea placeholder="Enter your about" maxlength="220" name="uabout"  value="<?=showFormaData('uabout')?>" class="log-reg-field reg-edit-about w-input"></textarea>
+            <textarea placeholder="Enter your about" maxlength="220" name="uabout" class="log-reg-field reg-edit-about w-input"></textarea>
             <?=showError('uabout')?>
             <input type="date" class="log-reg-field" name="udate" />
             <input class="log-reg-field w-input" maxlength="256" name="upassword" placeholder="Enteer tour password" type="text" required="">

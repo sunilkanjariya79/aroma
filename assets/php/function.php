@@ -67,7 +67,7 @@ function validateLoginForm($form_data){
     if(!$blank && !checkUser($form_data)['status']){
         $response['msg']="something is wrong";
         $response['status']=false;
-        $response['field']='checkUser';
+        $response['field']='checkuser';
     }else{
        $response['user']=checkUser($form_data)['user'];
     }
