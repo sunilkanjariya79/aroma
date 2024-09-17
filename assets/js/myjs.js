@@ -31,6 +31,17 @@ $(document).ready(function() {
         $('.pop-up-window').addClass('hide');
     });
 
+    //to show add details menu in books section
+    $('.show-book-input').click(function(event) {
+      $('.pop-up-window').removeClass('hide');
+    });
+
+    //to close pop up manu on page
+     $('.close').click(function(event) {
+      $('.pop-up-window').addClass('hide');
+      });
+
+
     // create post, books and casual posts both
     let optionsButtons = $(".option-button");
     let advancedOptionButton = $(".adv-option-button");

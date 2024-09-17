@@ -1,8 +1,11 @@
 <?php
 include("header.php");?>
 
-<div class="main-content">
-    <form action="" method="post"></form>
+
+
+
+    <form action="" method="post" class="main-content" style= "padding: 0px 20px;">
+    <h2 class="secondary-heading" style="margin-right:auto"> Create Post</h2>
     <input type="text" name="title" id="title" placeholder="Title" class="log-reg-field">
       <div class="options">
         <!-- Text Format -->
@@ -40,11 +43,12 @@ include("header.php");?>
         <button id="unlink" class="option-button">
           <i class="fa fa-unlink"></i>
         </button>
+        <input type="submit" value="Post" class="primery-button" style="margin-left:auto">
       </div>
       
       <div id="text-input" contenteditable="true"></div>
-      <input type="submit" value="Post" class="primery-button">
+    
     </div>
-
+    </form> 
     <?php
 include("footer.php");?>

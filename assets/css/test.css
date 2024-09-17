@@ -11,6 +11,7 @@ html {
 
 *{
   scrollbar-width: none;
+  box-sizing: border-box;
 }
 
 body {
@@ -42,6 +43,8 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 15px;
+  width: 100%;
+  margin-top: 20px;
 }
 button {
   height: 40px;
@@ -65,14 +68,19 @@ select {
   gap: 8px;
 }
 
-#text-input {
-  margin-top: 10px;
+#text-input,#book-input {
+  margin: 10px 20px;
   border: 1px solid #3d3d3d;
   padding: 20px;
-  height:60%;
+  min-height:60%;
+  max-height: 100%;
+  overflow-y: scroll;
   width: 100%;
   color: #e2e2e2;
 }
+
+
+
 .active {
   background-color: #741bc250;
   color: #f0f0f0;
@@ -105,7 +113,6 @@ select {
 }
 
 .side-bar {
-  box-sizing: border-box;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -209,7 +216,6 @@ select {
 
 .book-suggestion .book-thumbnail{
   width: 100%;
-  box-sizing: border-box;
 }
 
 .profile-list {
@@ -233,7 +239,6 @@ select {
   padding: 10px;
   display: flex;
   overflow: visible;
-  box-sizing: border-box;
 }
 
 .link-block {
@@ -302,7 +307,6 @@ select {
   position: fixed;
   inset: 0% 0% auto;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 .utility-page-wrap {
@@ -491,7 +495,6 @@ select {
   overflow: visible;
 }
 .book-details {
-  box-sizing: border-box;
   grid-column-gap: 5px;
   grid-row-gap: 5px;
   flex-flow: column;
@@ -647,7 +650,6 @@ select {
   background-color: #000;
 }
 .log-reg-field {
-  box-sizing: border-box;
   background-color: #1b1b1b;
   border: 1px solid rgb(55, 55, 55);
   color: #f3f3f3;
@@ -683,7 +685,6 @@ select {
   align-items: center;
   width: 100%;
   display: flex;
-  box-sizing: border-box;
 }
 .lr-field-box.lr-fb-2 {
   padding-left: 10px;
@@ -879,7 +880,6 @@ option {
   display: flex;
   position: absolute;
   inset: 0% 0% auto;
-  box-sizing: border-box;
 }
 .action-button {
   background-color: #30303033;
@@ -899,7 +899,6 @@ option {
   position: absolute;
   inset: 50px 0% 0%;
   overflow: auto;
-  box-sizing: border-box;
 }
 .post-section {
   grid-column-gap: 12px;
@@ -999,7 +998,6 @@ option {
   width: 100%;
   padding: 10px 20px;
   display: flex;
-  box-sizing: border-box;
 }
 
 .book-page {
@@ -1026,7 +1024,6 @@ option {
   margin-top: 60px;
   margin-bottom: 40px;
   padding: 20px;
-  box-sizing: border-box;
 }
 
 .image-5 {
