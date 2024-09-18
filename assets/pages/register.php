@@ -9,7 +9,7 @@ include_once('assets/pages/header.php');?>
           <h2 class="secondary-heading"> Create Account</h2>
         </div>
         <div class="form-block w-form">
-          <form method="post" class="register-form" action="assets/php/action.php?register">
+          <form method="post" class="register-form" action="assets/php/action.php?register" enctype="multipart/form-data">
             <a class="reg-edit-img-in w-inline-block">
               <img src="assets/images/site-meta/typcn_plus.svg" alt="" class="image-2" /></a>
             <div class="pop-up-window add-img hide" >

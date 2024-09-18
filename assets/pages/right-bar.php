@@ -1,4 +1,4 @@
-
+<?global $user?>
 <div class="right-panel">
   <div class="side-bar follow-suggestions">
     <h2 class="heading">Suggestions for you</h2>

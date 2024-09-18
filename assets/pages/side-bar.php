@@ -3,13 +3,13 @@
     <div class="w-layout-vflex side-bar">
       <div class="w-layout-vflex side-bar-top">
         <img src="images/logo.svg" loading="eager" width="32" height="32" alt="" id="logo"/>
-        <a href="#" class="side-bar-heading">Aroma</a>
+        <a href="?post-wall" class="side-bar-heading">Aroma</a>
       </div>
       <div class="w-layout-vflex side-bar-nav">
         <div class="w-layout-hflex flex-block">
           <a href="casual-post-wall.php">
           <img src="images/ic_outline-home.svg" loading="eager" width="24" height="24" alt="" id="logo"/></a>
-          <a href="casual-post-wall.php" class="side-bar-heading">Home</a>
+          <a href="?post-wall" class="side-bar-heading">Home</a>
         </div>
         <div class="w-layout-hflex flex-block">
           <a href="">
@@ -27,7 +27,7 @@
         <div class="w-layout-hflex flex-block">
           <a href="profile-page.php">
           <img src="images/material-symbols_person-outline.svg" loading="eager" width="24" height="24" alt="" id="logo"/></a>
-          <a href="profile-page.php" class="side-bar-heading">Profile</a>
+          <a href="?profile-section" class="side-bar-heading">Profile</a>
         </div>
       </div>
       <div class="w-layout-vflex side-bar-bottom">

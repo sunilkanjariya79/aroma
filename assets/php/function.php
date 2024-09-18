@@ -88,6 +88,15 @@ function checkUser($login_data){
     }
     return $data;
 }
+//for getting userdata by id
+function getUser($uid){
+    global $db;
+ $query = "SELECT * FROM users WHERE uid=".$uid;
+ $run = mysqli_query($db,$query);
+ return mysqli_fetch_assoc($run);
+
+}
+
 //function for show error
 function showError($field){
     if(isset($_SESSION['error'])){
@@ -137,10 +146,6 @@ function createuser($data){
     $upassword = mysqli_real_escape_string($db, $data['upassword']);
     $profile_pic = mysqli_real_escape_string($db, $data['uprofile_pic']);
     $query="insert into users(uprofile_photo,umail,uname,username,gender,uabout,udate,upassword) values('".$profile_pic."','".$umail."','".$uname."','".$username."','".$gender."','".$uabout."','".$udate."','".$upassword."')";
-    $run = mysqli_query($db,$query);
-    if (!$run) {
-        echo "Query error: " . mysqli_error($db);
-    }
     return mysqli_query($db,$query);
 }
 ?>
