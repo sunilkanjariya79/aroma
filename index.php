@@ -12,6 +12,13 @@ elseif(isset($_GET['login'])){
     showPage('login');
 }
 
+if(isset($_GET['post-wall']) && isset($_SESSION['auth'])){
+    showPage('header',['page_title'=>'Main wall']);
+    showPage('side-bar');
+    showPage('right-bar');
+    showPage('top');
+    showPage('post-wall');
+}
 
 
 showPage('footer');

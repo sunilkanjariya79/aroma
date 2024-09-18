@@ -178,7 +178,7 @@
         <div class="p-tab-content w-tab-pane hide" id="books-container">
           <div class="book-card tab-details">
             <div class="book-thumbnail">
-              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
+              <img src="assets/images/book-cover/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">
@@ -204,7 +204,7 @@
           </div>
           <div class="book-card tab-details">
             <div class="book-thumbnail">
-              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
+              <img src="assets/images/book-cover//Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">
@@ -230,7 +230,7 @@
           </div>
           <div class="book-card tab-details ">
             <div class="book-thumbnail">
-              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
+              <img src="assets/images/book-cover//Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">
@@ -256,7 +256,7 @@
           </div>
           <div class="book-card tab-detils">
             <div class="book-thumbnail">
-              <img src="images/Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
+              <img src="assets/images/book-cover//Rectangle-39.png" loading="lazy" width="Auto" height="200" alt="" class="image"/>
             </div>
             <div class="book-details">
               <div class="book-title-container">
