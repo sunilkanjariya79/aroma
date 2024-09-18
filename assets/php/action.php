@@ -21,8 +21,8 @@ if(isset($_GET['register'])){
 if(isset($_GET['login'])){
     $response=validateLoginForm($_POST);
     if($response['status']){
-       $_SESSION['auth']=true;
-       $_SESSION['uid']=$response['user'];
+       $_SESSION['Auth']=true;
+       $_SESSION['userdata']=$response['user'];
        header("location:../../?post-wall");
     }
     else{
@@ -30,5 +30,26 @@ if(isset($_GET['login'])){
         $_SESSION['formdata']=$_POST;
         header("location:../../?login");
     }
+}
+
+if(isset($_GET['updateprofile'])){
+
+    $response=validateUpdateForm($_POST,$_FILES['uprofile_pic']);
+
+    if($response['status']){
+       
+        if(updateProfile($_POST,$_FILES['uprofile_pic'])){
+            header("location:../../?edit-profile&success");
+
+        }else{
+            echo "something is wrong";
+        }
+       
+    
+    }else{
+        $_SESSION['error']=$response;
+        header("location:../../?edit-profile");
+    }
+     
 }
 ?>

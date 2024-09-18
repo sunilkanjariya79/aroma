@@ -1,8 +1,7 @@
 <?php
 require_once 'assets/php/function.php';
-
 if(isset($_SESSION['Auth'])){
-    $user = getUser($_SESSION['uid']);
+    $user = getUser($_SESSION['userdata']['uid']);
 }
 //open register page
 if(isset($_GET['register'])){
@@ -14,13 +13,13 @@ elseif(isset($_GET['login'])){
     showPage('header',['page_title'=>'aroma-Log-In']);
     showPage('login');
 }
-elseif(isset($_GET['profile-section']) && isset($_SESSION['auth'])){
+elseif(isset($_GET['profile-section']) && isset($_SESSION['Auth'])){
     showPage('header',['page_title'=>'profile page']);
     showPage('profile-section');
     showPage('side-bar');
 }
 
-elseif(isset($_GET['post-wall']) && isset($_SESSION['auth'])){
+elseif(isset($_GET['post-wall']) && isset($_SESSION['Auth'])){
     showPage('header',['page_title'=>'Main wall']);
     showPage('side-bar');
     showPage('right-bar');
@@ -29,9 +28,9 @@ elseif(isset($_GET['post-wall']) && isset($_SESSION['auth'])){
 }
 
 
-elseif(isset($_GET['edit-profile']) && isset($_SESSION['auth'])){
+elseif(isset($_GET['edit-profile']) && isset($_SESSION['Auth'])){
     showPage('header',['page_title'=>'Edit Profile']);
-    // showPage('side-bar');
+    showPage('side-bar');
     showPage('edit-profile');
 }
 else{
