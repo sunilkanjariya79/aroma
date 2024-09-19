@@ -228,13 +228,34 @@ function validateUpdateForm($form_data,$image_data){
             move_uploaded_file($imagedata['tmp_name'],$image_dir);
             $profile_pic=", uprofile_photo='$image_name'";
         }
-       
-      
-    
         $query = "UPDATE users SET uname = '".$name."', uabout='".$about."',username='".$username."'". $profile_pic ."WHERE uid=".$_SESSION['userdata']['uid'];
-return mysqli_query($db,$query);
+        return mysqli_query($db,$query);
 
     }
+   //for creating new post
+   function createPost($text,$image){
+    global $db;
+    $post_text = mysqli_real_escape_string($db,$text['post_text']);
+    $user_id=$_SESSION['userdata']['uid'];
 
+        $image_name = time().basename($image['name']);
+        $image_dir="../images/posts/$image_name";
+        move_uploaded_file($image['tmp_name'],$image_dir);
+    
+
+    $query = "INSERT INTO posts(user_id,post_text,post_img)";
+    $query.="VALUES ($user_id,'$post_text','$image_name')"; 
+    return mysqli_query($db,$query);
+   }
+   
+   /for getting posts
+   function getPost(){
+       global $db;
+    $query = "SELECT casual-post.pid,casual-post.ptitle,casual-post.pcontent,casual-post.pdate,users.uname,users.username,users.uprofile_photo from casual-post join users on users.uid=casual-post.uid";
+   
+    $run = mysqli_query($db,$query);
+    return mysqli_fetch_all($run,true);
+   
+   }
 
 ?>

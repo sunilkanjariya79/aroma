@@ -18,7 +18,7 @@
         </div>
         <div class="w-layout-hflex flex-block">
           <img src="images/typcn_plus.svg" loading="eager" width="24" height="24" alt="" id="logo" />
-          <a href="#" class="side-bar-heading">Create Post</a>
+          <a href="?create-post" class="side-bar-heading">Create Post</a>
         </div>
         <div class="w-layout-hflex flex-block">
           <img src="images/mdi_heart-outline.svg" loading="eager" width="24" height="24" alt="" id="logo"/>

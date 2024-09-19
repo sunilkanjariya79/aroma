@@ -3,6 +3,10 @@ require_once 'assets/php/function.php';
 if(isset($_SESSION['Auth'])){
     $user = getUser($_SESSION['userdata']['uid']);
 }
+if(isset($_SESSION['Auth'])){
+    $user = getUser($_SESSION['userdata']['id']);
+    $posts = getPost();
+}
 //open register page
 if(isset($_GET['register'])){
 showPage('header',['page_title'=>'aroma-register']);
@@ -26,7 +30,10 @@ elseif(isset($_GET['post-wall']) && isset($_SESSION['Auth'])){
     showPage('top');
     showPage('post-wall');
 }
-
+elseif(isset($_GET['create-post']) && isset($_SESSION['Auth'])){
+    showPage('header',['page_title'=>'Create post']);
+    showPage('create-post');
+}
 
 elseif(isset($_GET['edit-profile']) && isset($_SESSION['Auth'])){
     showPage('header',['page_title'=>'Edit Profile']);

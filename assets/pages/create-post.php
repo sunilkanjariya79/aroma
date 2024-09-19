@@ -1,10 +1,6 @@
 <?php
-include("header.php");?>
-
-
-
-
-    <form action="" method="post" class="main-content" style= "padding: 0px 20px;">
+include("assets/pages/header.php");?>
+    <form action="assets/php/action.php?addpost" method="post" class="main-content" style= "padding: 0px 20px;">
     <h2 class="secondary-heading" style="margin-right:auto"> Create Post</h2>
     <input type="text" name="title" id="title" placeholder="Title" class="log-reg-field">
       <div class="options">
@@ -51,4 +47,4 @@ include("header.php");?>
     </div>
     </form> 
     <?php
-include("footer.php");?>
+include("assets/pages/footer.php");?>
