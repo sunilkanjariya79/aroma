@@ -123,3 +123,13 @@ $(document).ready(function() {
 });
 
 
+//to get text of post
+
+document.getElementById('add-post-form').addEventListener('submit', function (e) {
+  // Get the content of the contenteditable div
+  var editableContent = document.getElementById('text-input').innerHTML;
+
+  // Set the value of the hidden input field
+  document.getElementById('hidden-input').value = editableContent;
+});
+

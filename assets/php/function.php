@@ -232,30 +232,67 @@ function validateUpdateForm($form_data,$image_data){
         return mysqli_query($db,$query);
 
     }
+
+
+    function validatePostDetails($post_data){
+        $response=array();
+        $response['status']=true;
+          
+    
+            if(!$post_data['hidden-input']){
+                $response['msg']="you don't have any text to post here";
+                $response['status']=false;
+                $response['field']='hidden-input';
+            }
+            if(!$post_data['title']){
+                $response['msg']="Please add Title";
+                $response['status']=false;
+                $response['field']='title';
+            }
+            if(!$post_data['tag']){
+                $response['msg']="Please add Tag";
+                $response['status']=false;
+                $response['field']='tag';
+            }
+            return $response;
+        
+        }
+
+
    //for creating new post
-   function createPost($text,$image){
+   function createPost($post){
     global $db;
-    $post_text = mysqli_real_escape_string($db,$text['post_text']);
+    $title = mysqli_real_escape_string($db,$post['title']);
+    $tag = mysqli_real_escape_string($db,$post['tag']);
+    $post_content = $post['hidden-input'];
     $user_id=$_SESSION['userdata']['uid'];
 
-        $image_name = time().basename($image['name']);
-        $image_dir="../images/posts/$image_name";
-        move_uploaded_file($image['tmp_name'],$image_dir);
-    
-
-    $query = "INSERT INTO posts(user_id,post_text,post_img)";
-    $query.="VALUES ($user_id,'$post_text','$image_name')"; 
-    return mysqli_query($db,$query);
+    $randomFileName = uniqid() . '.html';
+    $filePath = '../post_data/casual/' . $randomFileName;
+    if (file_put_contents($filePath, $post_content)) {
+        // Prepare an SQL statement to save title, tags, and filename
+        $query = "insert into casual_post (uid,ptitle,ptag,pcontent) values(".$user_id.",'".$title."','".$tag."','".$randomFileName."')";
+    return mysqli_query($db,$query) or die(mysqli_error($db));
+    }
+    else{
+        print_r("not done");
+    }
    }
    
-   /for getting posts
+   //for getting posts
    function getPost(){
        global $db;
-    $query = "SELECT casual-post.pid,casual-post.ptitle,casual-post.pcontent,casual-post.pdate,users.uname,users.username,users.uprofile_photo from casual-post join users on users.uid=casual-post.uid";
+    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent,casual_post.pdate,users.uname,users.username,users.uprofile_photo from casual_post join users on users.uid=casual_post.uid";
    
     $run = mysqli_query($db,$query);
+    if (!$run) {
+        // If query fails, output error details
+        die("Query Failed: " . mysqli_error($db));
+    }
     return mysqli_fetch_all($run,true);
    
    }
+
+
 
 ?>

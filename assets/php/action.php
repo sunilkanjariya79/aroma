@@ -55,10 +55,9 @@ if(isset($_GET['updateprofile'])){
 
 //for managing add post
 if(isset($_GET['addpost'])){
-    $response = validatePostImage($_FILES['post_img']);
- 
+    $response = validatePostDetails($_POST);
     if($response['status']){
- if(createPost($_POST,$_FILES['post_img'])){
+ if(createPost($_POST)){
      header("location:../../?new_post_added");
  }else{
      echo "something went wrong";

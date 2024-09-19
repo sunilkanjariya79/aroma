@@ -2,9 +2,6 @@
 require_once 'assets/php/function.php';
 if(isset($_SESSION['Auth'])){
     $user = getUser($_SESSION['userdata']['uid']);
-}
-if(isset($_SESSION['Auth'])){
-    $user = getUser($_SESSION['userdata']['id']);
     $posts = getPost();
 }
 //open register page
