@@ -233,7 +233,7 @@ function validateUpdateForm($form_data,$image_data){
 
     }
 
-
+//for post
     function validatePostDetails($post_data){
         $response=array();
         $response['status']=true;
@@ -244,21 +244,72 @@ function validateUpdateForm($form_data,$image_data){
                 $response['status']=false;
                 $response['field']='hidden-input';
             }
-            if(!$post_data['title']){
-                $response['msg']="Please add Title";
-                $response['status']=false;
-                $response['field']='title';
-            }
             if(!$post_data['tag']){
                 $response['msg']="Please add Tag";
                 $response['status']=false;
                 $response['field']='tag';
             }
+            if(!$post_data['title']){
+                $response['msg']="Please add Title";
+                $response['status']=false;
+                $response['field']='title';
+            }
             return $response;
         
         }
 
+//for book
 
+        function validateBookDetails($book_data,$image_data){
+            $response=array();
+            $response['status']=true;
+            if(!$book_data['hidden-input']){
+                $response['msg']="you don't have any text to post here";
+                $response['status']=false;
+                $response['field']='hidden-input';
+            }
+            if(!$book_data['babout']){
+                $response['msg']="Please add Tag";
+                $response['status']=false;
+                $response['field']='babout';
+            }
+                if(!$book_data['btag']){
+                    $response['msg']="Please add Tag";
+                    $response['status']=false;
+                    $response['field']='btag';
+                }
+                if(!$book_data['btitle']){
+                    $response['msg']="Please add Title";
+                    $response['status']=false;
+                    $response['field']='btitle';
+                }
+          if(!$image_data['name']){
+            $response['msg']="no image is selected";
+            $response['status']=false;
+            $response['field']='bcover';
+        }  
+       if($image_data['name']){
+           $image = basename($image_data['name']);
+           $type = strtolower(pathinfo($image,PATHINFO_EXTENSION));
+           $size = $image_data['size']/1000;
+
+           if($type!='jpg' && $type!='jpeg' && $type!='png'){
+            $response['msg']="only jpg,jpeg,png images are allowed";
+            $response['status']=false;
+            $response['field']='bcover';
+        }
+
+        if($size>5000){
+            $response['msg']="upload image less then 1 mb";
+            $response['status']=false;
+            $response['field']='bcover';
+        }
+       }
+        return $response;
+            
+    }
+    
+    
    //for creating new post
    function createPost($post){
     global $db;
@@ -278,6 +329,32 @@ function validateUpdateForm($form_data,$image_data){
         print_r("not done");
     }
    }
+      
+   //for creating new book
+   function createBook($post,$image){
+    global $db;
+    
+    $title = mysqli_real_escape_string($db,$post['btitle']);
+    $tag = mysqli_real_escape_string($db,$post['btag']);
+    $about = mysqli_real_escape_string($db,$post['babout']);
+    $post_content = $post['hidden-input'];
+    $user_id=$_SESSION['userdata']['uid'];
+
+    $image_name = time().basename($image['name']);
+        $image_dir="../images/book-cover/$image_name";
+        move_uploaded_file($image['tmp_name'],$image_dir);
+    $randomFileName = uniqid() . '.html';
+    $filePath = '../post_data/books/' . $randomFileName;
+    if (file_put_contents($filePath, $post_content)) {
+        // Prepare an SQL statement to save title, tags, and filename
+        $query = "insert into book_post (uid,btitle,btag,babout,bcover,bcontent) values(".$user_id.",'".$title."','".$tag."','".$about."','".$image_name."','".$randomFileName."')";
+        return mysqli_query($db,$query) or die(mysqli_error($db));
+    }
+    else{
+        print_r("not done");
+    }
+   }
+       
    
    //for getting posts
    function getPost(){

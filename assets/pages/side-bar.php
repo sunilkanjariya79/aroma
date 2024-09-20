@@ -14,7 +14,7 @@
         <div class="w-layout-hflex flex-block">
           <a href="">
           <img src="images/tabler_message.svg" loading="eager" width="24" height="24" alt="" id="logo"/></a>
-          <a href="#" class="side-bar-heading">Messages</a>
+          <a href="?create-book" class="side-bar-heading">Messages</a>
         </div>
         <div class="w-layout-hflex flex-block">
           <img src="images/typcn_plus.svg" loading="eager" width="24" height="24" alt="" id="logo" />

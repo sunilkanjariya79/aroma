@@ -29,7 +29,13 @@ elseif(isset($_GET['post-wall']) && isset($_SESSION['Auth'])){
 }
 elseif(isset($_GET['create-post']) && isset($_SESSION['Auth'])){
     showPage('header',['page_title'=>'Create post']);
+    showPage('side-bar');
     showPage('create-post');
+}
+elseif(isset($_GET['create-book']) && isset($_SESSION['Auth'])){
+    showPage('header',['page_title'=>'Create Book']);
+    showPage('side-bar');
+    showPage('create-book');
 }
 
 elseif(isset($_GET['edit-profile']) && isset($_SESSION['Auth'])){

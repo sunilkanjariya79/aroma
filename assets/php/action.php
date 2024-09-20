@@ -67,4 +67,21 @@ if(isset($_GET['addpost'])){
      header("location:../../");
     }
  }
+
+ //for managing add book
+if(isset($_GET['addbook'])){
+    $response = validateBookDetails($_POST,$_FILES['bcover']);
+    
+    if($response['status']){
+ if(createBook($_POST,$_FILES['bcover'])){
+    
+     header("location:../../?new_book_added");
+ }else{
+     echo "something went wrong";
+ }
+    }else{
+     $_SESSION['error']=$response;
+     header("location:../../");
+    }
+ }
 ?>
