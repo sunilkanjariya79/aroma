@@ -405,7 +405,36 @@ function validateUpdateForm($form_data,$image_data){
            return $string;
        }
    }
+   function timeAgo($saved_date) {
+       date_default_timezone_set('Asia/Kolkata');
+       $saved_timestamp = strtotime($saved_date);
+       $current_timestamp = time();
+       $time_diff = $current_timestamp - $saved_timestamp;
+       $minute = 60; // 60 seconds
+       $hour = 3600; // 60 minutes * 60 seconds
+       $day = 86400; // 24 hours * 60 minutes * 60 seconds
+       $week = 604800; // 7 days * 24 hours * 60 minutes * 60 seconds
    
-
-
-?>
+       if ($time_diff < $minute) {
+           return "Just now";
+       } elseif ($time_diff < $hour) {
+           $minutes_diff = floor($time_diff / $minute);
+           return $minutes_diff . " minute" . ($minutes_diff > 1 ? "s" : "") . " ago";
+       } elseif ($time_diff < $day) {
+           $hours_diff = floor($time_diff / $hour);
+           return $hours_diff . " hour" . ($hours_diff > 1 ? "s" : "") . " ago";
+       } elseif ($time_diff < $week) {
+           $days_diff = floor($time_diff / $day);
+           return $days_diff . " day" . ($days_diff > 1 ? "s" : "") . " ago";
+       } elseif ($time_diff < 2 * $week) {
+           return "1 week ago";
+       }
+       $saved_year = date('Y', $saved_timestamp);
+       $current_year = date('Y', $current_timestamp);
+       
+       if ($saved_year == $current_year) {
+           return date('F j', $saved_timestamp);
+       } else {
+           return date('Y-m-d', $saved_timestamp);
+       }
+   }

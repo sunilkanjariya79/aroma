@@ -58,7 +58,7 @@
                 </div>
                 <div class="post-details">
                   <p class="pcm-text pcm-username">u/<?=$post_details['username']?></p>
-                  <p class="pcm-text">12-08-<?=$post_details['pdate']?></p>
+                  <p class="pcm-text"><?=timeAgo($post_details['pdate'])?></p>
                 </div>
               </div>
             </div>
