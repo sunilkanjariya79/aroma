@@ -32,9 +32,9 @@
       </div>
       <div class="w-layout-vflex side-bar-bottom">
         <div class="w-layout-hflex flex-block">
-          <a href="login.php">
+          <a href="assets/php/action.php?logout">
           <img src="images/basil_logout-outline.svg" loading="eager" width="24" height="24" alt="" id="logo"/></a>
-          <a href="login.php" class="side-bar-heading">Log Out</a>
+          <a href="assets/php/action.php?logout" class="side-bar-heading">Log Out</a>
         </div>
       </div>
     </div>

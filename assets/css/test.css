@@ -396,9 +396,7 @@ select {
   grid-auto-columns: 1fr;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 25px;
+  padding: 20px 25px 20px 20px;
   display: flex;
 }
 
@@ -469,6 +467,7 @@ select {
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+  width: 100%;
 }
 .book-card {
   /* background-color: #181818; */
@@ -848,6 +847,7 @@ option {
 }
 .tabs-content {
   height: 100%;
+  width: 100%;
   top: 50px;
   position: relative;
 }

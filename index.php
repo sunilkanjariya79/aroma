@@ -1,8 +1,10 @@
 <?php
 require_once 'assets/php/function.php';
-if(isset($_SESSION['Auth'])){
+if(isset($_SESSION['auth'])){
     $user = getUser($_SESSION['userdata']['uid']);
     $posts = getPost();
+    $books = getBook();
+
 }
 //open register page
 if(isset($_GET['register'])){
@@ -44,10 +46,12 @@ elseif(isset($_GET['edit-profile']) && isset($_SESSION['Auth'])){
     showPage('edit-profile');
 }
 else{
-        if(isset($_SESSION['Auth'])){
+        if(isset($_SESSION['auth'])){
         showPage('header',['page_title'=>'Main wall']);
-        showPage('navbar');
-        showPage('wall');
+        showPage('side-bar');
+        showPage('top');
+        showPage('post-wall');
+        showPage('right-bar');
         }else{
             showPage('header',['page_title'=>'aroma-Log-In']);
             showPage('login');

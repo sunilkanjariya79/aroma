@@ -18,10 +18,10 @@ if(isset($_GET['register'])){
 }
 
 //for managing login
-if(isset($_GET['login'])){
+if(isset($_GET['login']) ){
     $response=validateLoginForm($_POST);
     if($response['status']){
-       $_SESSION['Auth']=true;
+       $_SESSION['auth']=true;
        $_SESSION['userdata']=$response['user'];
        header("location:../../?post-wall");
     }
@@ -30,6 +30,12 @@ if(isset($_GET['login'])){
         $_SESSION['formdata']=$_POST;
         header("location:../../?login");
     }
+}
+
+if(isset($_GET['logout'])){
+    session_destroy();
+    header('location:../../');
+
 }
 
 if(isset($_GET['updateprofile'])){

@@ -2,7 +2,9 @@
     <form action="assets/php/action.php?addpost" method="post" class="main-content" style= "padding: 0px 20px;" id="add-post-form">
     <h2 class="secondary-heading" style="margin-right:auto"> Create Post</h2>
     <input type="text" name="title" id="title" placeholder="Title" class="log-reg-field">
+    <?=showError('title')?>
     <input type="text" name="tag" id="tag" placeholder="tag" class="log-reg-field">
+    <?=showError('tag')?>
 
       <div class="options">
         <!-- Text Format -->
@@ -42,7 +44,7 @@
         </button>
         <input type="submit" value="Post" class="primery-button" style="margin-left:auto">
       </div>
-      
+      <?=showError('hidden-input')?>
       <div id="text-input" contenteditable="true"></div>
       <input type="hidden" id="hidden-input" name="hidden-input">
       

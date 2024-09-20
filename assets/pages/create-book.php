@@ -60,7 +60,11 @@
         <a class="secondary-button show-book-input" style="margin-left:auto"> Add Details </a>
         <input type="submit" value="Post" class="primery-button" >
       </div>
-      
+      <?=showError('btitle')?>
+      <?=showError('btag')?>
+      <?=showError('babout')?>
+      <?=showError('bcover')?>
+      <?=showError('hidden-input')?>
       <div id="text-input"  contenteditable="true"></div>
       <input type="hidden" id="hidden-input" name="hidden-input">
       
