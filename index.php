@@ -16,8 +16,10 @@ elseif(isset($_GET['login'])){
     showPage('header',['page_title'=>'aroma-Log-In']);
     showPage('login');
 }
-elseif(isset($_GET['profile-section']) && isset($_SESSION['auth'])){
-    showPage('header',['page_title'=>'profile page']);
+elseif(isset($_GET['u']) && isset($_SESSION['auth'])){
+    $profile = getUserByUsername($_GET['u']);
+    $profile_post = getPostById($profile['uid']);
+    showPage('header',['page_title'=>$profile['username']]);
     showPage('profile-section');
     showPage('side-bar');
 }

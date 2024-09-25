@@ -96,6 +96,32 @@ function getUser($uid){
  return mysqli_fetch_assoc($run);
 
 }
+//for getting userdata by username
+function getUserByUsername($username){
+    global $db;
+ $query = "SELECT * FROM users WHERE username='".$username."'";
+ $run = mysqli_query($db,$query);
+ $u = mysqli_fetch_assoc($run);
+if(!empty($u)){
+    return $u;
+}else{
+    showPage('header',['page_title'=>'Main wall']);
+        showPage('side-bar');
+        showPage('top');
+        showPage('post-wall');
+        showPage('right-bar');
+        exit;
+}
+
+}
+//for getting posts by id
+function getPostById($uid){
+    global $db;
+ $query = "SELECT * FROM casual_post WHERE uid=$uid ORDER BY id DESC";
+ $run = mysqli_query($db,$query);
+ return mysqli_fetch_all($run,true);
+
+}
 
 //function for show error
 function showError($field){
@@ -107,6 +133,15 @@ function showError($field){
             <?php
         }
     }
+}
+//for getting users for follow suggestions
+function getFollowSuggestions(){
+    global $db;
+
+    $current_user = $_SESSION['userdata']['id'];
+    $query = "SELECT * FROM users WHERE uid!=$current_user";
+    $run = mysqli_query($db,$query);
+    return mysqli_fetch_all($run,true);
 }
 //function for showing pervious form data
 function showFormaData($field){

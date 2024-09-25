@@ -4,7 +4,7 @@ $(document).ready(function() {
     //to change to casual posts tab
     $('#casuals').click(function(event) {
         event.preventDefault(); // Prevent the default link behavior
-        
+        $('#books-container').removeClass('fade-in show').addClass('fade-out hide');
         $('#casuals-container').addClass('show').removeClass('hide');
         $('#books-container').addClass('hide').removeClass('show');
         $('#casuals').addClass('w--current');

@@ -8,6 +8,10 @@
       $display_posts = $posts;
       $display_books = $books;
      }
+     if(isset($_GET['u'])){
+      $display_posts = $posts;
+      $display_books = $books;
+     }
 ?>
 
 
@@ -29,26 +33,25 @@
         if(count($display_posts)<1){
             echo "<p style='width:93vw' class='heading-2'>Follow Someone or Add a new post</p>";
         }
-
         foreach($display_posts as $post_details){
         ?>
           <a href="?post-page&post_id="<?=$post_details['pid']?> class="post-thumbnail tab-details w-inline-block">
             <div class="post-controls">
               <div class="pc-option">
-                <img src="images/mdi_heart-outline.svg" alt="" width="24" height="24"/>
+                <img src="assets/images/site-meta/mdi_heart-outline.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
               <div class="pc-option">
-                <img src="images/uil_comment.svg" alt="" width="24" height="24"/>
+                <img src="assets/images/site-meta/uil_comment.svg" alt="" width="24" height="24"/>
                 <div class="pco-count">1280</div>
               </div>
-              <img src="images/uil_share.svg" alt="" width="24" height="24"/>
-              <img src="images/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24"/>
+              <img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" height="24"/>
+              <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24"/>
             </div>
             <div class="post-content-container">
               <div class="pc-title-container">
                 <h1 class="heading-2"><?=$post_details['ptitle']?></h1>
-                <p class="pcm-text pcm-username"><?=$post_details['ptag']?></p>
+                <p class="pcm-text  tags"><?=$post_details['ptag']?></p>
               </div>
               <div class="pc-container">
                 <div class="post-content">
@@ -85,7 +88,7 @@
             <div class="book-details">
               <div class="book-title-container">
                 <h1 class="book-title"><?=$book_details['btitle']?></h1>
-                <p class="pcm-text pcm-username"><?=$book_details['btag']?></p>
+                <p class="pcm-text tags"><?=$book_details['btag']?></p>
               </div>
               <div class="book-description">
                 <a class="book-description-text">

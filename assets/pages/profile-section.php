@@ -1,11 +1,12 @@
+<?php global $profile;?>
 <div class="profile-panel">
   <div class="profile-card">
-    <img src="assets/images/profile/profile.jpeg" loading="lazy" alt="" class="profile-picture" />
+    <img src="assets/images/profile/<?=$profile['uprofile_photo']?>" loading="lazy" alt="" class="profile-picture" />
     <div class="profile-information">
       <div class="profile-info-1">
         <div class="profile-identity">
-          <div class="text-block">u/username_someone</div>
-          <div class="text-block-2">Name</div>
+          <div class="text-block">u/<?=$profile['username']?></div>
+          <div class="text-block-2"><?=$profile['uname']?></div>
         </div>
         <a href="?edit-profile" class="secondary-button profile-s-button">Edit Profile</a>
         <a href="login.php" class="secondary-button profile-s-button">Log out</a>

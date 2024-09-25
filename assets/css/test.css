@@ -16,16 +16,19 @@ html {
 
 body {
   font-family: Verdana, Geneva, sans-serif;
-  font-weight: 400;
   margin: 0px;
   color: #e4e4e4;
-  background-color: #19181a;
+  background-color: #1a161c;
   height: 100vh;
   line-height: 24px;
   overflow: auto;
-  -ms-overflow-style: none;
 }
 
+::selection{
+  color: white;
+  background-color: purple;
+  padding: 5px;
+}
 
 /* create post page */
 
@@ -100,14 +103,14 @@ select {
 }
 .left-panel {
   z-index: auto;
-  background-color: #1b1b1b;
+  background-color: #f5f5fc04;
   background-clip: border-box;
   flex-flow: column;
   justify-content: center;
   align-items: flex-start;
   width: 20%;
   height: 100%;
-  display: block;
+  display: flex;
   position: fixed;
   right: auto;
 }
@@ -170,6 +173,7 @@ select {
   width: 100%;
 }
 
+
 .secondary-button {
   background-color: rgba(114, 85, 143, 0.05);
   border-radius: 15px;
@@ -195,11 +199,10 @@ select {
   align-items: center;
   width: 20%;
   height: 100vh;
-  display: flex;
   position: fixed;
   left: auto;
   right: 0%;
-  padding-inline: 20px;
+  display: none;
 }
 
 .heading {
@@ -219,6 +222,9 @@ select {
 }
 
 .profile-list {
+  background-color: #f2f2f208;
+  padding: 20px 4px;
+  border-radius: 25px;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   flex-flow: column;
@@ -230,12 +236,12 @@ select {
 }
 
 .profile-card-min {
+
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  border-radius: 15px;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  min-width: 100%;
   padding: 10px;
   display: flex;
   overflow: visible;
@@ -281,13 +287,24 @@ select {
   line-height: 18px;
 }
 
+.tags{
+  background-color: #7918c4;
+  font-weight: 500;
+  color: white;
+  padding: 2px 5px;
+  line-height: 1.2em;
+  border-radius: 10px ;
+  margin-top: 4px;
+
+}
 .primery-button {
   color: #e4e4e4;
+  font-weight: 500;
   border: 0px solid;
   text-decoration: none;
-  background-color: #730ac2;
-  border-radius: 10px;
-  padding: 10px 20px;
+  background-color: #7918c4;
+  border-radius: 15px;
+  padding: 10px 30px;
   font-size: 16px;
   line-height: 24px;
 }
@@ -302,7 +319,7 @@ select {
   height: 60px;
   margin-left: auto;
   margin-right: auto;
-  padding: 10px 0px;
+  padding: 10px 20px;
   display: flex;
   position: fixed;
   inset: 0% 0% auto;
@@ -332,20 +349,13 @@ select {
   display: flex;
 }
 
-.search-area {
-  flex-flow: row;
-  width: 60%;
-  display: flex;
-  border: 0px solid black;
-}
+
 
 .search-bar {
   color: #f0f0f0;
-  border-radius: 15px;
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap:10px;
   display: flex;
   margin:0;
 }
@@ -359,11 +369,7 @@ select {
   margin-bottom: 0;
 }
 
-.search-button {
-  background-color: #730ac2;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
+
 
 /* main page/wall */
 .main-content {
@@ -382,9 +388,15 @@ select {
 .post-thumbnail {
   justify-content: center;
   align-items: flex-start;
-  width: 100%;
+  width: 90%;
   text-decoration: none;
   display: flex;
+  border-radius: 15px;
+}
+
+.post-thumbnail:hover{
+  background-color: #fdf3ff07;
+  border: 1px solid rgba(237, 181, 252, 0.704)
 }
 
 .post-controls {
@@ -435,7 +447,7 @@ select {
 
 .heading-2 {
   color: #f3f3f3;
-  font-weight: 700;;
+  font-weight: 600;
   text-align: left;
   margin-top: 0;
   margin-bottom: 0;
@@ -448,11 +460,15 @@ select {
 }
 
 .pc-text {
-  color: #adadad;
+  color: #f1f1f1;
+  opacity: 70%;
+  font-weight:lighter;
   text-align: left;
   margin-bottom: 20px;
   line-height: 24px;
 }
+
+
 
 .post-details {
   flex-flow: column;
@@ -624,6 +640,7 @@ select {
   left: auto;
   right: 0;
   overflow: scroll;
+  
 }
 .log-reg-form {
   flex-flow: column;
@@ -635,6 +652,7 @@ select {
   margin-top: auto;
   margin-bottom: auto;
   display: flex;
+  padding-inline: 10px;
 }
 .register-form {
   grid-column-gap: 20px;
@@ -649,9 +667,9 @@ select {
   background-color: #000;
 }
 .log-reg-field {
-  background-color: #1b1b1b;
-  border: 1px solid rgb(55, 55, 55);
+  background-color: #fdf6ff08;
   color: #f3f3f3;
+  border: 0px;
   border-radius: 15px;
   width: 100%;
   height: auto;
@@ -662,10 +680,20 @@ select {
   padding-left: 18px;
 }
 
-.log-reg-field option{
-  padding: 5px 200px;
-  color:blue;
-  background-color: blue;
+.log-reg-field:focus{
+  border: 1px solid #7918c4;
+  outline: none;
+}
+
+.search-area {
+  flex-flow: row;
+  width: 70%;
+  display: flex;
+  border-radius: 15px 0px 0px 15px;
+  height: 44px;
+}
+.search-button{
+  border-radius: 0px 15px 15px 0px;
 }
 .log-reg-field.lg-field {
   width: 45%;
@@ -704,7 +732,7 @@ option {
 }
 
 .lr-link {
-  color: #cc99f4;
+  color: #8019ce;
 }
 .reg-edit-img-in {
   background-color: rgba(54, 54, 54, 0.2);
@@ -844,6 +872,8 @@ option {
   height: 100%;
   overflow: auto;
   padding-bottom: 80px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .tabs-content {
   height: 100%;
@@ -1079,6 +1109,10 @@ option {
     width: 20%;
   }
 
+  .right-panel{
+    display: flex;
+  }
+
   .side-bar.follow-suggestions {
     padding-right: 20px;
   }
@@ -1108,10 +1142,6 @@ option {
     margin-top: 10px;
     align-self: flex-start;
   }
-  .primery-button.pcm-btn {
-    border-radius: 10px;
-    font-size: 12px;
-  }
 
   .post-thumbnail,
   .book-card {
@@ -1137,7 +1167,7 @@ option {
   }
 
   .profile-card-min {
-    padding: 10px 15px 10px 10px;
+    padding: 10px 10px 10px 10px;
   }
 
   .link-block {
@@ -1166,7 +1196,10 @@ option {
 }
 
 @media screen and (max-width: 1280px) {
-  .right-panel {
+  .post-thumbnail{
+    width: 90%;
+  }
+  .right-panel{
     display: none;
   }
   .bd-bottom .primery-button {
@@ -1186,7 +1219,7 @@ option {
   .side-bar {
     justify-content: space-between;
     align-items: center;
-    width: auto;
+    width: 100%;
     padding-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
@@ -1204,6 +1237,10 @@ option {
 
   .side-bar-heading {
     display: none;
+  }
+
+  .lr-link{
+    display: block;
   }
 
   .flex-block {
@@ -1409,6 +1446,10 @@ option {
 }
 
 @media screen and (max-width: 479px) {
+  .main-content{
+    left: 0px;
+    right: 0px;
+  }
   .pcm-text,
   .pcm-text.pcm-username {
     font-size: 10px;
@@ -1419,6 +1460,9 @@ option {
     flex-flow: column-reverse;
     justify-content: flex-start;
     align-items: flex-start;
+    width: 100%;
+    padding-inline: 8px;
+    border-radius: 0px;
   }
 
   .post-controls {
@@ -1573,3 +1617,5 @@ option {
 .show {
   display: block;
 }
+
+
