@@ -299,6 +299,7 @@ select {
 }
 .primery-button {
   color: #e4e4e4;
+  text-align: center;
   font-weight: 500;
   border: 0px solid;
   text-decoration: none;
@@ -495,6 +496,12 @@ select {
   border-radius: 5px;
   margin-inline: auto;
 }
+.book-card:hover{
+  background-color: #fdf3ff07;
+  border: 1px solid rgba(237, 181, 252, 0.704);
+
+}
+
 
 .book-card.book-suggestion{
   border-radius: 5px;
@@ -528,8 +535,9 @@ select {
   
 }
 .image {
-  max-width: 240%;
+  width: 240px;
   height: 300px;
+  object-fit: cover;
   overflow: scroll;
 }
 
@@ -539,8 +547,8 @@ select {
 }
 .book-title-container {
   flex-flow: column;
-  justify-content: stretch;
-  align-items: stretch;
+  justify-content:flex-start;
+  align-items: flex-start;
   display: flex;
 }
 .book-title {
@@ -613,7 +621,12 @@ select {
 }
 
 .pop-up {
+  min-width: 200px;
+  max-width: 60%;
+  box-shadow: 0px 5px 15px #0c0c0c;
   background-color: #0c0c0c;
+  border-radius: 15px;
+  padding: 20px;
   flex-flow: column;
   align-items: center;
   display: flex;
@@ -622,14 +635,47 @@ select {
 .pop-up-heading {
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 15px;
   padding-bottom: 20px;
   display: flex;
+  width: 100%;
+}
+
+.pop-up .primery-button{
+  display: block;
+  width: max-content;
+}
+
+.pop-up .log-reg-field{
+  width: 40vw;
 }
 .close {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
+
+input[type="file"]{
+  display: none;
+}
+
+.custom-file-upload{
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 50%;
+  gap: 8fipx;
+  width: max-content;
+}
+
+.pop-up-content {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .log-reg-form-container {
   flex-flow: column;
   align-items: flex-start;
@@ -790,8 +836,8 @@ option {
   flex-flow: column;
   justify-content: center;
   align-items: flex-start;
-  width: -webkit-min-content;
-  width: min-content;
+  min-width: min-content;
+  max-width: 40%;
   display: flex;
 }
 .profile-info-1 {
@@ -882,7 +928,7 @@ option {
   position: relative;
 }
 .profile-action {
-  display: none;
+  display: block;
   width: 24px;
 }
 .image-3 {
@@ -914,8 +960,6 @@ option {
   inset: 0% 0% auto;
 }
 .action-button {
-  background-color: #30303033;
-  border-radius: 50%;
   justify-content: center;
   align-items: center;
   margin-top: auto;
@@ -933,6 +977,7 @@ option {
   overflow: auto;
 }
 .post-section {
+  width: 100%;
   grid-column-gap: 12px;
   grid-row-gap: 12px;
   background-color: #181718;
@@ -1389,13 +1434,12 @@ option {
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     flex-flow: row;
-    height: 25vh;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
   }
   .profile-picture {
-    width: 100px;
+    width: 150px;
   }
   .profile-information {
     grid-column-gap: 6px;
@@ -1516,6 +1560,8 @@ option {
     align-items: center;
     width: 100%;
   }
+
+ 
   .book-thumbnail,
   .image {
     width: 100%;
@@ -1546,7 +1592,7 @@ option {
     padding-left: 0;
   }
   .profile-information {
-    width: 90%;
+    max-width: 90%;
   }
   .profile-info-1 {
     justify-content: space-between;
@@ -1554,6 +1600,7 @@ option {
   }
   .profile-states {
     align-items: center;
+    width: 100%;
   }
   .profile-about {
     width: 100%;

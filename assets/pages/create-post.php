@@ -9,16 +9,16 @@
       <div class="options">
         <!-- Text Format -->
         <button type="button" id="bold" class="option-button format">
-          <i class="fa-solid fa-bold"></i>
+          <img src="assets/images/site-meta/bold.svg" alt="B">
         </button>
         <button type="button" id="italic" class="option-button format">
-          <i class="fa-solid fa-italic"></i>
+        <img src="assets/images/site-meta/italic.svg" alt="B">
         </button>
         <button type="button" id="underline" class="option-button format">
           <i class="fa-solid fa-underline"></i>
         </button>
         <button type="button" id="strikethrough" class="option-button format">
-          <i class="fa-solid fa-strikethrough"></i>
+        <img src="assets/images/site-meta/strikethrough.svg" alt="B">
         </button>
         <button type="button" id="superscript" class="option-button script">
           <i class="fa-solid fa-superscript"></i>

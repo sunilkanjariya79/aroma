@@ -10,8 +10,11 @@
                 <input type="text" name="btitle" id="btitle" placeholder="Title" class="log-reg-field">
                 <input type="text" name="btag" id="btag" placeholder="tag" class="log-reg-field">
                 <textarea placeholder="What's this book about" maxlength="220" name="babout" class="log-reg-field reg-edit-about w-input"></textarea>
-                Add Book Cover <input type="file" name="bcover" id="bcover"></div>
+                <label for="file-upload" class="custom-file-upload">Add Book Cover   <img src="assets/images/site-meta/plus-circle.svg" alt=""  /></a></label>
+                <input id="file-upload" type="file" name="bcover" id="bcover"/> 
                 <a onClick class="primery-button"> Add</a>
+              </div>
+                
                 </div>
               </div>
     

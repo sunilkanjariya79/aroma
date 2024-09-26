@@ -8,11 +8,8 @@
           <div class="text-block">u/<?=$profile['username']?></div>
           <div class="text-block-2"><?=$profile['uname']?></div>
         </div>
-        <a href="?edit-profile" class="secondary-button profile-s-button">Edit Profile</a>
-        <a href="login.php" class="secondary-button profile-s-button">Log out</a>
-        <a href="#" class="secondary-button profile-s-button">Report</a>
         <a href="#" class="profile-action w-inline-block">
-          <img src="images/zondicons_dots-horizontal-triple.svg" loading="lazy" alt="" class="image-3"/></a>
+          <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg" loading="lazy" alt="" class="image-3"/></a>
       </div>
       <div class="profile-states">
         <div class="profile-status-text">12 Posts</div>

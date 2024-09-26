@@ -19,8 +19,16 @@ elseif(isset($_GET['login'])){
 elseif(isset($_GET['u']) && isset($_SESSION['auth'])){
     $profile = getUserByUsername($_GET['u']);
     $profile_post = getPostById($profile['uid']);
+    $profile_books = getBookById($profile['uid']);
     showPage('header',['page_title'=>$profile['username']]);
+    showPage('side-bar');
     showPage('profile-section');
+}
+
+elseif(isset($_GET['post']) && isset($_SESSION['auth'])){
+    $post_data = getSinglePost($_GET['post']);
+    showPage('header',['page_title'=>'post']);
+    showPage('casual-post-section');
     showPage('side-bar');
 }
 

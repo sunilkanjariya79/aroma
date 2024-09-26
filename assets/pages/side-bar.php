@@ -27,7 +27,7 @@
         <div class="w-layout-hflex flex-block">
           <a href="profile-page.php">
           <img src="assets/images/site-meta/profile-circle.svg" loading="eager" width="24" height="24" alt="" id="logo"/></a>
-          <a href="?u" class="side-bar-heading">Profile</a>
+          <a href="?u=<?=$_SESSION['userdata']['username']?>" class="side-bar-heading">Profile</a>
         </div>
       </div>
       <div class="w-layout-vflex side-bar-bottom">

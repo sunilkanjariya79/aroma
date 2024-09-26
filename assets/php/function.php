@@ -117,11 +117,26 @@ if(!empty($u)){
 //for getting posts by id
 function getPostById($uid){
     global $db;
- $query = "SELECT * FROM casual_post WHERE uid=$uid ORDER BY id DESC";
- $run = mysqli_query($db,$query);
+ $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid WHERE users.uid=".$uid." ORDER BY casual_post.pid DESC";
+ $run = mysqli_query($db, $query) or die(mysqli_error($db));
+ return mysqli_fetch_all($run,true);
+}
+
+function getSinglePost($pid){
+    global $db;
+    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid WHERE casual_post.pid=".$pid;
+    $run = mysqli_query($db, $query) or die(mysqli_error($db));
+    return mysqli_fetch_all($run,true);
+}
+
+function getBookById($uid){
+    global $db;
+ $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid WHERE users.uid=".$uid." ORDER BY book_post.bid DESC";
+ $run = mysqli_query($db, $query) or die(mysqli_error($db));
  return mysqli_fetch_all($run,true);
 
 }
+
 
 //function for show error
 function showError($field){
@@ -394,7 +409,7 @@ function validateUpdateForm($form_data,$image_data){
    //for getting posts
    function getPost(){
        global $db;
-    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username from casual_post join users on users.uid=casual_post.uid";
+    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username from casual_post join users on users.uid=casual_post.uid ORDER BY casual_post.pid DESC";
     $run = mysqli_query($db,$query);
     if (!$run) {
         // If query fails, output error details
@@ -405,7 +420,7 @@ function validateUpdateForm($form_data,$image_data){
    }
 
    //to display content of post in short
-   function getPostContent($post_file){
+   function getPostContentWithoutFormating($post_file){
     $file_path = 'assets/post_data/casual/'.$post_file;
     $html_content = file_get_contents($file_path);
     if (preg_match('/<[^>]+>/', $html_content)) {
@@ -417,9 +432,15 @@ function validateUpdateForm($form_data,$image_data){
     return $html_content;
    }
 
+   function getPostContent($post_file){
+    $file_path = 'assets/post_data/casual/'.$post_file;
+    $html_content = file_get_contents($file_path);
+    return $html_content;
+   }
+
    function getBook(){
     global $db;
-    $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid";
+    $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid ORDER BY book_post.bid DESC";
     $run = mysqli_query($db,$query);
     if (!$run) {
         // If query fails, output error details

@@ -4,13 +4,14 @@
      global $user;
      global $posts;
      global $books;
-     if(isset($_GET['post-wall']) || empty($_GET)){
+     global $profile_post;
+     global $profile_books;
       $display_posts = $posts;
       $display_books = $books;
-     }
+     
      if(isset($_GET['u'])){
-      $display_posts = $posts;
-      $display_books = $books;
+      $display_posts = $profile_post;
+      $display_books = $profile_books;
      }
 ?>
 
@@ -35,7 +36,7 @@
         }
         foreach($display_posts as $post_details){
         ?>
-          <a href="?post-page&post_id="<?=$post_details['pid']?> class="post-thumbnail tab-details w-inline-block">
+          <a href="?post=<?=$post_details['pid']?>" class="post-thumbnail tab-details w-inline-block">
             <div class="post-controls">
               <div class="pc-option">
                 <img src="assets/images/site-meta/mdi_heart-outline.svg" alt="" width="24" height="24"/>
@@ -56,7 +57,7 @@
               <div class="pc-container">
                 <div class="post-content">
                   <p class="pc-text">
-                  <?php echo cutString(getPostContent($post_details['pcontent']),200)?>
+                  <?php echo cutString(getPostContentWithoutFormating($post_details['pcontent']),200)?>
                   </p>
                 </div>
                 <div class="post-details">
