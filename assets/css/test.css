@@ -15,13 +15,25 @@ html {
 }
 
 body {
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Verdana, Arial, sans-serif; 
+  line-height: 1.6;
   margin: 0px;
   color: #e4e4e4;
   background-color: #1a161c;
   height: 100vh;
   line-height: 24px;
   overflow: auto;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arial, Tahoma, sans-serif; 
+  line-height: 1.3;
+}
+
+p, li {
+  font-size: 1rem;
+  margin-bottom: 20px;
 }
 
 ::selection{
@@ -262,6 +274,7 @@ select {
   border-radius: 50%;
   width: 44px;
   height: 44px;
+  object-fit: cover;
 }
 
 .pcm-details {
@@ -298,6 +311,7 @@ select {
 
 }
 .primery-button {
+  font-family: Arial, sans-serif;
   color: #e4e4e4;
   text-align: center;
   font-weight: 500;
@@ -308,6 +322,7 @@ select {
   padding: 10px 30px;
   font-size: 16px;
   line-height: 24px;
+  cursor: pointer;
 }
 
 /* top panel */
@@ -448,6 +463,7 @@ select {
 
 .heading-2 {
   color: #f3f3f3;
+  letter-spacing: .05em;
   font-weight: 600;
   text-align: left;
   margin-top: 0;
@@ -544,6 +560,7 @@ select {
 .image.bs{
   width: 100%;
   height: auto;
+  aspect-ratio: 4/5;
 }
 .book-title-container {
   flex-flow: column;
@@ -1028,9 +1045,10 @@ option {
   display: flex;
 }
 .main-text {
-  color: #d4d4d4;
-  font-size: 14px;
-  line-height: 20px;
+  color: #eeeeee;
+  font-size: 16px;
+  line-height: 24px;
+  word-spacing: .2em;
 }
 .ps-controls {
   grid-column-gap: 25px;
@@ -1100,11 +1118,13 @@ option {
   width: 100%;
   margin-top: 60px;
   margin-bottom: 40px;
-  padding: 20px;
+  padding-bottom: 20px;
 }
 
 .image-5 {
   width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
 }
 
 .book-page-content {
@@ -1124,12 +1144,10 @@ option {
 }
 
 .book-main-text {
-  text-align: justify;
   letter-spacing: .05em;
   flex-flow: column;
   align-items: flex-start;
-  font-family: Times New Roman, TimesNewRoman, Times, Baskerville, Georgia, serif;
-  line-height: 24px;
+  font-family:Arial, Helvetica, sans-serif;
   display: flex;
 }
 
@@ -1149,6 +1167,10 @@ option {
   display: flex;
   overflow: auto;
 }
+
+.side-bar.follow-suggestions {
+  justify-content: flex-start;
+}
 @media screen and (min-width: 1440px) {
   .left-panel {
     width: 20%;
@@ -1160,6 +1182,7 @@ option {
 
   .side-bar.follow-suggestions {
     padding-right: 20px;
+    justify-content: flex-start;
   }
 
   .profile-list {
@@ -1169,6 +1192,7 @@ option {
   .pcm-img {
     width: 44px;
     height: 44px;
+   
   }
 
   .pcm-details {

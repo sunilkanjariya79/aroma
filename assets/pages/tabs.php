@@ -97,10 +97,10 @@
                 </a>
               </div>
               <div class="bd-bottom">
-                <a href="#" class="primery-button">Read Now</a>
+                <a href="?book=<?=$book_details['bid']?>" class="primery-button">Read Now</a>
                 <div class="post-details">
                   <p class="pcm-text pcm-username">U/<?=$book_details['username']?></p>
-                  <p class="pcm-text"><?=$book_details['bdate']?></p>
+                  <p class="pcm-text"><?=timeAgo($book_details['bdate'])?></p>
                 </div>
               </div>
             </div>

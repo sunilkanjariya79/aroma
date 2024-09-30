@@ -1,58 +1,28 @@
-<?global $user?>
+<?php global $user;
+    global $followSuggestions;
+?>
 <div class="right-panel">
   <div class="side-bar follow-suggestions">
     <h2 class="heading">Suggestions for you</h2>
     <div class="profile-list">
+      <?php foreach($followSuggestions as $usercard){?>
       <div class="profile-card-min">
-        <a href="profile-page.php" class="link-block w-inline-block">
-          <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="pcm-img" />
+        <a href="?u=<?=$usercard['username']?>" class="link-block w-inline-block">
+          <img src="assets/images/profile/<?=$usercard['uprofile_photo']?>" loading="lazy" alt="" class="pcm-img" />
           <div class="pcm-details">
-            <p class="pcm-text pcm-username">u/username</p>
-            <p class="pcm-text">Name</p>
+            <p class="pcm-text pcm-username">u/<?=$usercard['username']?></p>
+            <p class="pcm-text"><?=$usercard['uname']?></p>
           </div>
         </a>
-        <a href="#" class="primery-button pcm-btn w-button">Follow</a>
+        <a class="primery-button pcm-btn w-button followbtn" data-user-id=<?=$usercard['uid']?>>Follow</a>
       </div>
-      <div class="profile-card-min">
-        <a href="profile-page.php" class="link-block w-inline-block">
-          <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="pcm-img" />
-          <div class="pcm-details">
-            <p class="pcm-text pcm-username">u/username</p>
-            <p class="pcm-text">Name</p>
-          </div>
-        </a>
-        <a href="#" class="primery-button pcm-btn w-button">Follow</a>
-      </div>
-      <div class="profile-card-min">
-        <a href="profile-page.php" class="link-block w-inline-block">
-          <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="pcm-img" />
-          <div class="pcm-details">
-            <p class="pcm-text pcm-username">u/username</p>
-            <p class="pcm-text">Name</p>
-          </div>
-        </a>
-        <a href="#" class="primery-button pcm-btn w-button">Follow</a>
-      </div>
-      <div class="profile-card-min">
-        <a href="profile-page.php" class="link-block w-inline-block">
-          <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="pcm-img" />
-          <div class="pcm-details">
-            <p class="pcm-text pcm-username">u/username</p>
-            <p class="pcm-text">Name</p>
-          </div>
-        </a>
-        <a href="#" class="primery-button pcm-btn w-button">Follow</a>
-      </div>
-      <div class="profile-card-min">
-        <a href="profile-page.php" class="link-block w-inline-block">
-          <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="pcm-img" />
-          <div class="pcm-details">
-            <p class="pcm-text pcm-username">u/username</p>
-            <p class="pcm-text">Name</p>
-          </div>
-        </a>
-        <a href="#" class="primery-button pcm-btn w-button">Follow</a>
-      </div>
+      <?php }
+      
+if(count($followSuggestions)<1){
+  echo "<p>No Suggestions For You</p>";
+}
+
+      ?>
     </div>
   </div>
 </div>

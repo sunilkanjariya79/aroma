@@ -16,7 +16,7 @@ include_once('assets/pages/header.php');?>
               <?=showError('upassword')?>
               <?=showError('checkuser')?>
               <div class="lr-field-box lr-fb-2">
-                <a href="#/register" class="side-bar-heading lr-link">New user? Register</a>
+                <a href="?register" class="side-bar-heading lr-link">New user? Register</a>
                 <input type="submit" class="primery-button lr-btn w-button" value="Log In" />
               </div>
             </form>

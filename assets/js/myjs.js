@@ -1,6 +1,24 @@
     // script.js
 $(document).ready(function() {
 
+    //opening last opened tab
+      // Check the stored value in localStorage
+      var activeTab = localStorage.getItem('active');
+  
+      // If no tab is set, default to casuals
+      if (activeTab === 'books') {
+          $('#casuals-container').addClass('hide').removeClass('show');
+          $('#books-container').addClass('show').removeClass('hide');
+          $('#books').addClass('w--current');
+          $('#casuals').removeClass('w--current');
+      } else {
+          $('#books-container').addClass('hide').removeClass('show');
+          $('#casuals-container').addClass('show').removeClass('hide');
+          $('#casuals').addClass('w--current');
+          $('#books').removeClass('w--current');
+      }
+  
+
     //to change to casual posts tab
     $('#casuals').click(function(event) {
         event.preventDefault(); // Prevent the default link behavior
@@ -9,6 +27,7 @@ $(document).ready(function() {
         $('#books-container').addClass('hide').removeClass('show');
         $('#casuals').addClass('w--current');
         $('#books').removeClass('w--current');
+        localStorage.setItem('active','casuals');
     });
 
     //to change to books tab
@@ -19,7 +38,11 @@ $(document).ready(function() {
         $('#books-container').addClass('show').removeClass('hide');
         $('#books').addClass('w--current');
         $('#casuals').removeClass('w--current');
+        localStorage.setItem('active','books');
+
     });
+
+    
 
     //to show add photo menu on register and update page
     $('.reg-edit-img-in').click(function(event) {
@@ -120,6 +143,42 @@ $(document).ready(function() {
   
     // Initialize on page load
     initializer();
+});
+
+
+//for follow the user
+$(".followbtn").click(function(){
+var user_id_r = $(this).data('userId');
+var button = this;
+$(button).attr('disabled', true);
+  $.ajax({
+    url:'assets/php/ajax.php',
+    method:'POST',
+    dataType: 'json',
+    data: { follow: true, user_id : user_id_r},
+    success: function (response) {
+      console.log(response);
+      if (response.status) {
+          $(button).data('userId', 0);
+          $(button).html('Followed');
+          $(button).removeClass('primery-button');
+          $(button).addClass('secondary-button');
+
+
+      } else {
+          $(button).attr('disabled', false);
+
+          alert('something is wrong,try again after some time');
+      }
+  },
+  error: function(xhr, status, error) {
+    // Handle errors
+    console.error("AJAX Error: ", status, error);
+    alert('An error occurred. Please try again later.');
+    $(button).attr('disabled', false);  // Re-enable button on error
+}
+});
+
 });
 
 

@@ -20,6 +20,7 @@ include_once('assets/pages/header.php');?>
                 </div>
                 <div class="pop-up-content">
                   <input type="file" name="uprofile_pic" id="uprofile_photo">
+                  <label for="uprofile_photo" class="custom-file-upload">Add Book Cover   <img src="assets/images/site-meta/plus-circle.svg" alt=""  /></a></label>
                   <a onClick class="primery-button"> Add</a>
                 </div>
               </div>

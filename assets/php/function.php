@@ -96,6 +96,73 @@ function getUser($uid){
  return mysqli_fetch_assoc($run);
 
 }
+
+//function for follow the user
+function followUser($user_id){
+    global $db;
+    // $cu = getUser($_SESSION['userdata']['uid']);
+    $current_user=$_SESSION['userdata']['uid'];
+    $query="insert into follower (uid,follower) values('".$user_id."','".$current_user."')";
+    // createNotification($cu['id'],$user_id,"started following you !");
+    return mysqli_query($db,$query) ;
+    
+}
+function unfollowUser($user_id){
+    global $db;
+    $current_user=$_SESSION['userdata']['id'];
+    $query="DELETE FROM follower WHERE uid=$current_user && uid=$uid";
+    return mysqli_query($db,$query);
+ 
+    
+}
+
+//for filtering the suggestion list
+function filterFollowSuggestion(){
+    $list = getFollowSuggestions();
+    $filter_list  = array();
+    foreach($list as $user){
+        if(!checkFollowStatus($user['uid']) && count($filter_list)<10){
+         $filter_list[]=$user;
+        }
+    }
+    
+    return $filter_list;
+}
+
+//for checking the user is followed by current user or not
+function checkFollowStatus($user_id){
+    global $db;
+    $current_user = $_SESSION['userdata']['uid'];
+    $query="SELECT count(*) as r FROM follower WHERE follower=".$current_user." && uid=".$user_id;
+    $run = mysqli_query($db,$query);
+    return mysqli_fetch_assoc($run)['r'];
+}
+    
+
+// for getting follow suggestions
+function getFollowSuggestions(){
+    global $db;
+    $current_user = $_SESSION['userdata']['uid'];
+    $query = "SELECT * FROM users WHERE uid!=".$current_user." LIMIT 10";
+    $run = mysqli_query($db,$query)or die(mysqli_error($db));
+    return mysqli_fetch_all($run,true);
+}
+
+//get followers count
+function getFollowers($uid){
+    global $db;
+    $query = "SELECT * FROM follower WHERE uid=".$uid;
+    $run = mysqli_query($db,$query);
+    return mysqli_fetch_all($run);
+}
+
+//get following count
+function getFollowing($uid){
+    global $db;
+    $query = "SELECT * FROM follower WHERE  follower=".$uid;
+    $run = mysqli_query($db,$query);
+    return mysqli_fetch_all($run);
+}
 //for getting userdata by username
 function getUserByUsername($username){
     global $db;
@@ -129,6 +196,13 @@ function getSinglePost($pid){
     return mysqli_fetch_all($run,true);
 }
 
+function getSingleBook($bid){
+    global $db;
+    $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username ,users.uprofile_photo from book_post join users on users.uid=book_post.uid WHERE book_post.bid=".$bid;
+    $run = mysqli_query($db, $query) or die(mysqli_error($db));
+    return mysqli_fetch_all($run,true);
+}
+
 function getBookById($uid){
     global $db;
  $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid WHERE users.uid=".$uid." ORDER BY book_post.bid DESC";
@@ -149,15 +223,7 @@ function showError($field){
         }
     }
 }
-//for getting users for follow suggestions
-function getFollowSuggestions(){
-    global $db;
 
-    $current_user = $_SESSION['userdata']['id'];
-    $query = "SELECT * FROM users WHERE uid!=$current_user";
-    $run = mysqli_query($db,$query);
-    return mysqli_fetch_all($run,true);
-}
 //function for showing pervious form data
 function showFormaData($field){
     if(isset($_SESSION['formdata'])){
@@ -409,7 +475,7 @@ function validateUpdateForm($form_data,$image_data){
    //for getting posts
    function getPost(){
        global $db;
-    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username from casual_post join users on users.uid=casual_post.uid ORDER BY casual_post.pid DESC";
+    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uid from casual_post join users on users.uid=casual_post.uid ORDER BY casual_post.pid DESC";
     $run = mysqli_query($db,$query);
     if (!$run) {
         // If query fails, output error details
@@ -418,6 +484,19 @@ function validateUpdateForm($form_data,$image_data){
     return mysqli_fetch_all($run,true);
    
    }
+
+   //for getting posts dynamically
+    function filterPosts(){
+    $list = getPost();
+    $filter_list  = array();
+    foreach($list as $post){
+        if(checkFollowStatus($post['uid']) || $post['uid']==$_SESSION['userdata']['uid']){
+         $filter_list[]=$post;
+        }
+    }
+    
+    return $filter_list;
+    }
 
    //to display content of post in short
    function getPostContentWithoutFormating($post_file){
@@ -440,7 +519,7 @@ function validateUpdateForm($form_data,$image_data){
 
    function getBook(){
     global $db;
-    $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid ORDER BY book_post.bid DESC";
+    $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username, users.uprofile_photo, users.uid from book_post join users on users.uid=book_post.uid ORDER BY book_post.bid DESC";
     $run = mysqli_query($db,$query);
     if (!$run) {
         // If query fails, output error details
@@ -449,6 +528,24 @@ function validateUpdateForm($form_data,$image_data){
     return mysqli_fetch_all($run,true);
 
     }
+       //for getting posts dynamically
+       function filterBooks(){
+        $list = getBook();
+        $filter_list  = array();
+        foreach($list as $book){
+            if(checkFollowStatus($book['uid']) || $book['uid']==$_SESSION['userdata']['uid']){
+             $filter_list[]=$book;
+            }
+        }
+        
+        return $filter_list;
+        }
+
+    function getBookContent($post_file){
+        $file_path = 'assets/post_data/books/'.$post_file;
+        $html_content = file_get_contents($file_path);
+        return $html_content;
+       }
 
    // to return the string in given limit
    function cutString($string, $limit) {
