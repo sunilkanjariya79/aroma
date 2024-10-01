@@ -64,6 +64,16 @@ $(document).ready(function() {
       $('.pop-up-window').addClass('hide');
       });
 
+      //to show add details menu in follow section
+    $('.show-follow-input').click(function(event) {
+      $('.pop-up-window').removeClass('hide');
+    });
+
+    //to close pop up manu on page
+     $('.close').click(function(event) {
+      $('.pop-up-window').addClass('hide');
+      });
+
 
     // create post, books and casual posts both
     let optionsButtons = $(".option-button");
@@ -180,6 +190,42 @@ $(button).attr('disabled', true);
 });
 
 });
+
+
+//for unfollow the user
+$(".unfollowbtn").click(function(){
+  var user_id_r = $(this).data('userId');
+  var button = this;
+  $(button).attr('disabled', true);
+    $.ajax({
+      url:'assets/php/ajax.php',
+      method:'POST',
+      dataType: 'json',
+      data: { unfollow: true, user_id : user_id_r},
+      success: function (response) {
+        console.log(response);
+        if (response.status) {
+            $(button).data('userId', 0);
+            $(button).html('Unfollowed');
+            $(button).addClass('primery-button');
+            $(button).removeClass('secondary-button');
+  
+  
+        } else {
+            $(button).attr('disabled', false);
+  
+            alert('something is wrong,try again after some time');
+        }
+    },
+    error: function(xhr, status, error) {
+      // Handle errors
+      console.error("AJAX Error: ", status, error);
+      alert('An error occurred. Please try again later.');
+      $(button).attr('disabled', false);  // Re-enable button on error
+  }
+  });
+  
+  });
 
 
 //to get text of post

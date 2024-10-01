@@ -109,8 +109,8 @@ function followUser($user_id){
 }
 function unfollowUser($user_id){
     global $db;
-    $current_user=$_SESSION['userdata']['id'];
-    $query="DELETE FROM follower WHERE uid=$current_user && uid=$uid";
+    $current_user=$_SESSION['userdata']['uid'];
+    $query="DELETE FROM follower WHERE follower=$current_user and uid=$user_id";
     return mysqli_query($db,$query);
  
     

@@ -4,6 +4,7 @@ if(isset($_SESSION['auth'])){
     $user = getUser($_SESSION['userdata']['uid']);
     $posts = filterPosts();
     $books = filterBooks();
+    
     $followSuggestions = filterFollowSuggestion();
 }
 //open register page
