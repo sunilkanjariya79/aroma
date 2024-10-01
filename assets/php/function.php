@@ -156,6 +156,11 @@ function getFollowers($uid){
     return mysqli_fetch_all($run);
 }
 
+function getFollowersDetials($uid){
+    $list = getFollowers($uid);
+    
+}
+
 //get following count
 function getFollowing($uid){
     global $db;
