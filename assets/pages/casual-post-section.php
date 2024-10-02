@@ -36,7 +36,21 @@
 </div>
         <div class="ps-controls">
           <div class="pc-option">
-            <img src="assets/images/site-meta/mdi_heart-outline.svg" alt="" width="24" height="24" class="image-4"/>
+          <?php
+if(checkPostLikeStatus($post_data[0]['pid'])){
+$like_btn_display='hide';
+$unlike_btn_display='';
+}else{
+    $like_btn_display='';
+    $unlike_btn_display='hide';  
+}
+    ?>
+             <img src="assets/images/site-meta/heart.svg " class="likepostbtn <?=$like_btn_display?>"
+                data-post-id="<?= $post_data[0]['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+                width="24" height="24" />
+                <img src="assets/images/site-meta/heart-solid.svg " class="likepostbtn <?=$unlike_btn_display?>"
+                data-post-id="<?= $post_data[0]['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+                width="24" height="24" />
           </div>
           <img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" height="24" />
           <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24"/>

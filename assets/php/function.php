@@ -552,6 +552,62 @@ function validateUpdateForm($form_data,$image_data){
         return $html_content;
        }
 
+       function checkPostLikeStatus($post_id){
+        global $db;
+        $current_user = $_SESSION['userdata']['uid'];
+        $query="SELECT count(*) as r FROM likes WHERE uid=".$current_user." and lpost=".$post_id;
+        $run = mysqli_query($db,$query);
+        return mysqli_fetch_assoc($run)['r'];
+
+    }
+
+    function checkBookLikeStatus($book_id){
+        global $db;
+        $current_user = $_SESSION['userdata']['uid'];
+        $query="SELECT count(*) as r FROM likes WHERE uid=".$current_user." and lbook=".$book_id;
+        $run = mysqli_query($db,$query);
+        return mysqli_fetch_assoc($run)['r'];
+
+    }
+
+    function likePost($post_id){
+        global $db;
+        $current_user=$_SESSION['userdata']['uid'];
+        $query="INSERT INTO likes(lpost,uid) VALUES(".$post_id.",".$current_user.")";
+    //    $poster_id = getPosterId($post_id);
+       
+    //    if($poster_id!=$current_user){
+    //     createNotification($current_user,$poster_id,"liked your post !",$post_id);
+    //    }
+       
+    
+        return mysqli_query($db,$query);
+        
+    }
+
+    function likebook($book_id){
+        global $db;
+        $current_user=$_SESSION['userdata']['uid'];
+        $query="INSERT INTO likes(lbook,uid) VALUES(".$book_id.",".$current_user.")";
+    //    $poster_id = getPosterId($post_id);
+       
+    //    if($poster_id!=$current_user){
+    //     createNotification($current_user,$poster_id,"liked your post !",$post_id);
+    //    }
+       
+    
+        return mysqli_query($db,$query);
+        
+    }
+
+    function getPosterId($post_id){
+        global $db;
+     $query = "SELECT user_id FROM posts WHERE id=$post_id";
+     $run = mysqli_query($db,$query);
+     return mysqli_fetch_assoc($run)['user_id'];
+    
+    }
+
    // to return the string in given limit
    function cutString($string, $limit) {
        // Check if the string is longer than the limit

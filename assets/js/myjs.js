@@ -66,7 +66,17 @@ $(document).ready(function() {
 
       //to show add details menu in follow section
     $('.show-follow-input').click(function(event) {
-      $('.pop-up-window').removeClass('hide');
+      $('#following').removeClass('hide');
+    });
+
+    //to close pop up manu on page
+     $('.close').click(function(event) {
+      $('.pop-up-window').addClass('hide');
+      });
+
+      //to show add details menu in followers section
+    $('.show-follower-input').click(function(event) {
+      $('#followers').removeClass('hide');
     });
 
     //to close pop up manu on page
@@ -226,6 +236,156 @@ $(".unfollowbtn").click(function(){
   });
   
   });
+
+  
+
+//for like the post
+
+
+
+$(".likepostbtn").click(function () {
+  var post_id_r = $(this).data('postId');
+  var button = this;
+  $(button).attr('disabled', true);
+  $.ajax({
+      url: 'assets/php/ajax.php',
+      method: 'POST',
+      dataType: 'json',
+      data: { likepost: true, post_id: post_id_r },
+      success: function (response) {
+          console.log(response);
+          if (response.status) {
+
+              $(button).attr('disabled', false);
+              $(button).attr('src','assets/images/site-meta/heart-solid.svg');
+              $(button).siblings('.unlike_btn').show();
+              $('#likecount' + post_id_v).text($('#likecount' + post_id_v).text() - (-1));
+              // location.reload();
+
+          } else {
+              $(button).attr('disabled', false);
+              alert('something is wrong,try again after some time');
+
+          }
+
+
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error("AJAX Error: ", status, error);
+        alert('An error occurred. Please try again later.');
+        $(button).attr('disabled', false);  // Re-enable button on error
+    }
+  });
+});
+
+
+
+$(".unlike_btn").click(function () {
+  var post_id_v = $(this).data('postId');
+  var button = this;
+  $(button).attr('disabled', true);
+  $.ajax({
+      url: 'assets/php/ajax.php?unlike',
+      method: 'post',
+      dataType: 'json',
+      data: { post_id: post_id_v },
+      success: function (response) {
+
+          if (response.status) {
+
+              $(button).attr('disabled', false);
+              $(button).hide()
+              $(button).siblings('.like_btn').show();
+              // location.reload();
+              $('#likecount' + post_id_v).text($('#likecount' + post_id_v).text() - 1);
+
+          } else {
+              $(button).attr('disabled', false);
+
+              alert('something is wrong,try again after some time');
+
+
+          }
+
+
+
+      }
+  });
+});
+
+
+
+$(".likebookbtn").click(function () {
+  var book_id_r = $(this).data('bookId');
+  var button = this;
+  $(button).attr('disabled', true);
+  $.ajax({
+      url: 'assets/php/ajax.php',
+      method: 'POST',
+      dataType: 'json',
+      data: { likebook: true, book_id: book_id_r },
+      success: function (response) {
+          console.log(response);
+          if (response.status) {
+
+              $(button).attr('disabled', false);
+              $(button).attr('src','assets/images/site-meta/heart-solid.svg');
+              $(button).siblings('.unlike_btn').show();
+              $('#likecount' + book_id_v).text($('#likecount' + post_id_v).text() - (-1));
+              // location.reload();
+
+          } else {
+              $(button).attr('disabled', false);
+              alert('something is wrong,try again after some time');
+
+          }
+
+
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error("AJAX Error: ", status, error);
+        alert('An error occurred. Please try again later.');
+        $(button).attr('disabled', false);  // Re-enable button on error
+    }
+  });
+});
+
+
+
+$(".unlike_btn").click(function () {
+  var post_id_v = $(this).data('postId');
+  var button = this;
+  $(button).attr('disabled', true);
+  $.ajax({
+      url: 'assets/php/ajax.php?unlike',
+      method: 'post',
+      dataType: 'json',
+      data: { post_id: post_id_v },
+      success: function (response) {
+
+          if (response.status) {
+
+              $(button).attr('disabled', false);
+              $(button).hide()
+              $(button).siblings('.like_btn').show();
+              // location.reload();
+              $('#likecount' + post_id_v).text($('#likecount' + post_id_v).text() - 1);
+
+          } else {
+              $(button).attr('disabled', false);
+
+              alert('something is wrong,try again after some time');
+
+
+          }
+
+
+
+      }
+  });
+});
 
 
 //to get text of post
