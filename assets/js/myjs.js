@@ -84,6 +84,16 @@ $(document).ready(function() {
       $('.pop-up-window').addClass('hide');
       });
 
+       //to show likes menu
+    $('.show-likes').click(function(event) {
+      $('#likes').removeClass('hide');
+    });
+
+    //to close pop up manu on page
+     $('.close').click(function(event) {
+      $('.pop-up-window').addClass('hide');
+      });
+
 
     // create post, books and casual posts both
     let optionsButtons = $(".option-button");
@@ -257,9 +267,9 @@ $(".likepostbtn").click(function () {
           if (response.status) {
 
               $(button).attr('disabled', false);
-              $(button).attr('src','assets/images/site-meta/heart-solid.svg');
-              $(button).siblings('.unlike_btn').show();
-              $('#likecount' + post_id_v).text($('#likecount' + post_id_v).text() - (-1));
+              $(button).hide();
+              $(button).siblings('.unlikepostbtn').show();
+              $('#likecount' + post_id_r).text($('#likecount' + post_id_r).text() - (-1));
               // location.reload();
 
           } else {
@@ -281,24 +291,24 @@ $(".likepostbtn").click(function () {
 
 
 
-$(".unlike_btn").click(function () {
-  var post_id_v = $(this).data('postId');
+$(".unlikepostbtn").click(function () {
+  var post_id_r = $(this).data('postId');
   var button = this;
   $(button).attr('disabled', true);
   $.ajax({
-      url: 'assets/php/ajax.php?unlike',
+      url: 'assets/php/ajax.php',
       method: 'post',
       dataType: 'json',
-      data: { post_id: post_id_v },
+      data: {unlikepost: true,  post_id: post_id_r },
       success: function (response) {
 
           if (response.status) {
 
               $(button).attr('disabled', false);
               $(button).hide()
-              $(button).siblings('.like_btn').show();
+              $(button).siblings('.likepostbtn').show();
               // location.reload();
-              $('#likecount' + post_id_v).text($('#likecount' + post_id_v).text() - 1);
+              $('#likecount' + post_id_r).text($('#likecount' + post_id_r).text() - 1);
 
           } else {
               $(button).attr('disabled', false);
@@ -330,9 +340,9 @@ $(".likebookbtn").click(function () {
           if (response.status) {
 
               $(button).attr('disabled', false);
-              $(button).attr('src','assets/images/site-meta/heart-solid.svg');
-              $(button).siblings('.unlike_btn').show();
-              $('#likecount' + book_id_v).text($('#likecount' + post_id_v).text() - (-1));
+              $(button).hide();
+              $(button).siblings('.unlikebookbtn').show();
+              $('#likecount' + book_id_r).text($('#likecount' + book_id_r).text() - (-1));
               // location.reload();
 
           } else {
@@ -354,24 +364,25 @@ $(".likebookbtn").click(function () {
 
 
 
-$(".unlike_btn").click(function () {
-  var post_id_v = $(this).data('postId');
+
+$(".unlikebookbtn").click(function () {
+  var book_id_r = $(this).data('bookId');
   var button = this;
   $(button).attr('disabled', true);
   $.ajax({
-      url: 'assets/php/ajax.php?unlike',
+      url: 'assets/php/ajax.php',
       method: 'post',
       dataType: 'json',
-      data: { post_id: post_id_v },
+      data: {unlikebook: true,  book_id: book_id_r },
       success: function (response) {
 
           if (response.status) {
 
               $(button).attr('disabled', false);
               $(button).hide()
-              $(button).siblings('.like_btn').show();
+              $(button).siblings('.likebookbtn').show();
               // location.reload();
-              $('#likecount' + post_id_v).text($('#likecount' + post_id_v).text() - 1);
+              $('#likecount' + book_id_r).text($('#likecount' + book_id_r).text() - 1);
 
           } else {
               $(button).attr('disabled', false);
@@ -386,6 +397,84 @@ $(".unlike_btn").click(function () {
       }
   });
 });
+
+
+//for adding comment
+$(".addpostcomment").click(function () {
+  var button = this;
+  var comment_v = $(button).siblings('.comment-box').val();
+  if (comment_v == '') {
+      return 0;
+  }
+  var post_id_r = $(this).data('postId');
+  $(button).attr('disabled', true);
+  $(button).siblings('.comment-input').attr('disabled', true);
+  $.ajax({
+      url: 'assets/php/ajax.php',
+      method: 'post',
+      dataType: 'json',
+      data: { addpostcomment: true, post_id: post_id_r, comment: comment_v },
+      success: function (response) {
+          console.log(response);
+          if (response.status) {
+
+              $(button).attr('disabled', false);
+              $(button).siblings('.comment-input').attr('disabled', false);
+              $(button).siblings('.comment-input').val('');
+                  location.reload();
+          } else {
+              $(button).attr('disabled', false);
+              $(button).siblings('.comment-input').attr('disabled', false);
+              alert('something is wrong,try again after some time');
+          }
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error("AJAX Error: ", status, error);
+        alert('An error occurred. Please try again later.');
+        $(button).attr('disabled', false);  // Re-enable button on error
+    }
+  });
+});
+
+
+$(".addbookcomment").click(function () {
+  var button = this;
+  var comment_v = $(button).siblings('.comment-box').val();
+  if (comment_v == '') {
+      return 0;
+  }
+  var book_id_r = $(this).data('bookId');
+  $(button).attr('disabled', true);
+  $(button).siblings('.comment-input').attr('disabled', true);
+  $.ajax({
+      url: 'assets/php/ajax.php',
+      method: 'post',
+      dataType: 'json',
+      data: { addbookcomment: true, book_id: book_id_r, comment: comment_v },
+      success: function (response) {
+          console.log(response);
+          if (response.status) {
+
+              $(button).attr('disabled', false);
+              $(button).siblings('.comment-box').attr('disabled', false);
+              $(button).siblings('.comment-box').val('');
+                  location.reload();
+          } else {
+              $(button).attr('disabled', false);
+              $(button).siblings('.comment-box').attr('disabled', false);
+              alert('something is wrong,try again after some time');
+          }
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error("AJAX Error: ", status, error);
+        alert('An error occurred. Please try again later.');
+        $(button).attr('disabled', false);  // Re-enable button on error
+    }
+  });
+});
+
 
 
 //to get text of post

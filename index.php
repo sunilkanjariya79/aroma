@@ -67,5 +67,5 @@ elseif (isset($_GET['login'])) {
 }
 
 showPage('footer');
-unset($_SESSION['error'])
-    ?>
+unset($_SESSION['error']);
+?>

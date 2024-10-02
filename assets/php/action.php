@@ -23,6 +23,7 @@ if(isset($_GET['login']) ){
     if($response['status']){
        $_SESSION['auth']=true;
        $_SESSION['userdata']=$response['user'];
+       $userinfo = json_encode($_SESSION['userdata']);
        header("location:../../?post-wall");
     }
     else{

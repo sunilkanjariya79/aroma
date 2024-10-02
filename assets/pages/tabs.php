@@ -32,6 +32,8 @@ if (isset($_GET['u'])) {
         echo "<p style='width:93vw' class='heading-2'>Follow Someone or Add a new post</p>";
       }
       foreach ($display_posts as $post_details) {
+        $likes = getPostLikes($post_details['pid']);
+        $comments = getPostComments($post_details['pid']);
         ?>
         <div class="post-thumbnail tab-details w-inline-block">
           <div class="post-controls">
@@ -48,14 +50,14 @@ $unlike_btn_display='';
               <img src="assets/images/site-meta/heart.svg " class="likepostbtn <?=$like_btn_display?>"
                 data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
                 width="24" height="24" />
-                <img src="assets/images/site-meta/heart-solid.svg " class="likepostbtn <?=$unlike_btn_display?>"
+                <img src="assets/images/site-meta/heart-solid.svg " class="unlikepostbtn <?=$unlike_btn_display?>"
                 data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
                 width="24" height="24" />
-              <div class="pco-count">1280</div>
+              <div class="pco-count" id="likecount<?=$post_details['pid']?>"><?=count($likes)?></div>
             </div>
             <div class="pc-option">
               <img src="assets/images/site-meta/uil_comment.svg" alt="" width="24" height="24" />
-              <div class="pco-count">1280</div>
+              <div class="pco-count"><?=count($comments)?></div>
             </div>
             <img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" height="24" />
             <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24" />

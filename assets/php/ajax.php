@@ -59,11 +59,11 @@ if(isset($_POST['likebook'])){
 }
 
 
-if(isset($_POST['unlike'])){
+if(isset($_POST['unlikepost'])){
     $post_id = $_POST['post_id'];
 
-    if(checkLikeStatus($post_id)){
-        if(unlike($post_id)){
+    if(checkPostLikeStatus($post_id)){
+        if(unlikePost($post_id)){
             $response['status']=true;
         }else{
             $response['status']=false;
@@ -73,4 +73,43 @@ if(isset($_POST['unlike'])){
     }
 
   
+}
+
+if(isset($_POST['unlikebook'])){
+    $book_id = $_POST['book_id'];
+
+    if(checkBookLikeStatus($book_id)){
+        if(unlikeBook($book_id)){
+            $response['status']=true;
+        }else{
+            $response['status']=false;
+        }
+    
+        echo json_encode($response);
+    }
+
+  
+}
+
+
+if(isset($_POST['addpostcomment'])){
+    $post_id = $_POST['post_id'];
+    $comment = $_POST['comment'];
+        if(addPostComment($post_id,$comment)){
+            $response['status']=true;
+        }else{
+            $response['status']=false;
+        }
+        echo json_encode($response); 
+}
+
+if(isset($_POST['addbookcomment'])){
+    $book_id = $_POST['book_id'];
+    $comment = $_POST['comment'];
+        if(addBookComment($book_id,$comment)){
+            $response['status']=true;
+        }else{
+            $response['status']=false;
+        }
+        echo json_encode($response); 
 }

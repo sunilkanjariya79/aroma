@@ -27,41 +27,41 @@ global $user; ?>
               <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
             </div>
             <div class="pop-up-content">
-            
-            <div class="profile-list">
-              <?php foreach ($following as $usercard) {
-                $userdata = getUser($usercard[1]) ?>
-                <div class="profile-card-min">
-                  <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
-                    <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
-                      class="pcm-img" />
-                    <div class="pcm-details">
-                      <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
-                      <p class="pcm-text"><?= $userdata['uname'] ?></p>
-                    </div>
-                  </a>
-                  <?php
-                  if ($_SESSION['userdata']['uid'] != $userdata['uid']) {
-                    ?>
+
+              <div class="profile-list">
+                <?php foreach ($following as $usercard) {
+                  $userdata = getUser($usercard[1]) ?>
+                  <div class="profile-card-min">
+                    <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
+                      <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
+                        class="pcm-img" />
+                      <div class="pcm-details">
+                        <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
+                        <p class="pcm-text"><?= $userdata['uname'] ?></p>
+                      </div>
+                    </a>
                     <?php
-                    if (checkFollowStatus($userdata['uid'])) {
+                    if ($_SESSION['userdata']['uid'] != $userdata['uid']) {
                       ?>
-                      <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
-                        data-user-id="<?= $profile['uid'] ?>">Unfollow</a>
-
                       <?php
-                    } else {
-                      ?>
-                      <a href="#" class="primery-button lr-btn w-button followbtn"
-                        data-user-id="<?= $profile['uid'] ?>">Follow</a>
+                      if (checkFollowStatus($userdata['uid'])) {
+                        ?>
+                        <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
+                          data-user-id="<?= $profile['uid'] ?>">Unfollow</a>
 
-                      <?php
+                        <?php
+                      } else {
+                        ?>
+                        <a href="#" class="primery-button lr-btn w-button followbtn"
+                          data-user-id="<?= $profile['uid'] ?>">Follow</a>
+
+                        <?php
+                      }
+
                     }
-
-                  }
-                  ?>
-                </div>
-              <?php } ?>
+                    ?>
+                  </div>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -124,7 +124,8 @@ global $user; ?>
         <?php
         if (checkFollowStatus($profile['uid'])) {
           ?>
-          <a href="#" class="secondary-button lr-btn w-button unfollowbtn" data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
+          <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
+            data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
 
           <?php
         } else {

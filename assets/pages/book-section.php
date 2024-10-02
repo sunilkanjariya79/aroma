@@ -1,6 +1,6 @@
 <?php
 global $book_data;
-
+$likes = getBookLikes($book_data[0]['bid']);
 if (empty($book_data)) {
   echo "no book saar";
   exit;
@@ -20,23 +20,71 @@ if (empty($book_data)) {
     </div>
     <div class="ps-controls">
       <div class="pc-option">
-      <?php
-if(checkBookLikeStatus($book_data[0]['bid'])){
-$like_btn_display='hide';
-$unlike_btn_display='';
-}else{
-    $like_btn_display='';
-    $unlike_btn_display='hide';  
-}
-    ?>
-             <img src="assets/images/site-meta/heart.svg " class="likebookbtn <?=$like_btn_display?>"
-                data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
-                width="24" height="24" />
-                <img src="assets/images/site-meta/heart-solid.svg " class="likebookbtn <?=$unlike_btn_display?>"
-                data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
-                width="24" height="24" />
+        <?php
+        if (checkBookLikeStatus($book_data[0]['bid'])) {
+          $like_btn_display = 'hide';
+          $unlike_btn_display = '';
+        } else {
+          $like_btn_display = '';
+          $unlike_btn_display = 'hide';
+        }
+        ?>
+        <img src="assets/images/site-meta/heart.svg " class="likebookbtn <?= $like_btn_display ?>"
+          data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+          width="24" height="24" />
+        <img src="assets/images/site-meta/heart-solid.svg " class="unlikebookbtn <?= $unlike_btn_display ?>"
+          data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+          width="24" height="24" />
       </div><img src="images/uil_share.svg" alt="" width="24" height="24"><img
         src="images/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24">
+    </div>
+    <div class="pco-count show-likes"> <span id="likecount<?= $book_data[0]['bid'] ?>"><?= count($likes) ?></span> People Liked This
+    </div>
+    <div class="pop-up-window hide" id="likes">
+      <div class="pop-up">
+        <div class="pop-up-heading">
+          <h2 class="heading-2">Likes</h2>
+          <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+        </div>
+        <div class="pop-up-content">
+
+          <div class="profile-list">
+            <?php foreach ($likes as $usercard) {
+              $userdata = getUser($usercard['uid']) ?>
+              <div class="profile-card-min">
+                <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
+                  <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
+                    class="pcm-img" />
+                  <div class="pcm-details">
+                    <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
+                    <p class="pcm-text"><?= $userdata['uname'] ?></p>
+                  </div>
+                </a>
+                <?php
+                if ($_SESSION['userdata']['uid'] != $userdata['uid']) {
+                  ?>
+                  <?php
+                  if (checkFollowStatus($userdata['uid'])) {
+                    ?>
+                    <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
+                      data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
+
+                    <?php
+                  } else {
+                    ?>
+                    <a href="#" class="primery-button lr-btn w-button followbtn"
+                      data-user-id="<?= $userdata['uid'] ?>">Follow</a>
+
+                    <?php
+                  }
+
+                }
+                ?>
+              </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="ps-info">
       <a href="#" class="link-block w-inline-block"><img
@@ -52,134 +100,34 @@ $unlike_btn_display='';
     <div class="comment-section book-comments">
       <h1 class="heading-2">Comments</h1>
       <div class="form-comment w-form">
-        <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form"
-          data-wf-page-id="669d16533b2ec3c734b481bc" data-wf-element-id="89f40168-5edc-57e8-94b1-3f8f2d62334d"><textarea
-            placeholder="Example Text" maxlength="5000" id="field-5" name="field-5" data-name="Field 5"
-            class="log-reg-field comment-box w-input"></textarea><input type="submit" data-wait="Please wait..."
-            class="primery-button w-button" value="Comment"></form>
+      <textarea placeholder="Your Comment" maxlength="5000" id="comment-box"
+      class="log-reg-field comment-box w-input"></textarea>
+          <button type="button" class="primery-button w-button addbookcomment" data-book-id="<?=$book_data[0]['bid']?>">Comment</button>
       </div>
       <div class="comments-container">
+      <?php
+      $comments = getBookComments($book_data[0]['bid']);
+      if(count($comments) <1) {
+        echo "<p>No Comments</p>";
+    }
+      foreach($comments as $comment){
+      ?>
         <div class="comment-card">
           <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
+            <a href="#" class="link-block w-inline-block"><img src="assets/images/profile/<?=$comment['uprofile_photo']?>"" loading="lazy" width="Auto" alt=""
                 class="pcm-img">
               <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
+                <p class="pcm-text pcm-username">u/<?=$comment['username']?></p>
+                <p class="pcm-text"><?=$comment['uname']?></p>
               </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
+              <p class="pcm-text pd-date"><?=timeAgo($comment['cdate'])?></p>
             </a>
           </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
+          <p class="main-text"><?=$comment['c_content']?></p>
         </div>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
-              </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
-            </a>
-          </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
-        </div>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
-              </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
-            </a>
-          </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
-        </div>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
-              </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
-            </a>
-          </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
-        </div>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
-              </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
-            </a>
-          </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
-        </div>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
-              </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
-            </a>
-          </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
-        </div>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
-              </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
-            </a>
-          </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
-        </div>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="images/php.jpeg" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/username</p>
-                <p class="pcm-text">Name</p>
-              </div>
-              <p class="pcm-text pd-date">dd-mm-yyyy</p>
-            </a>
-          </div>
-          <p class="main-text">here is nothing but something on name of nathing here is bunch of text that does not
-            matter but matters, but is just here to put something here is nothing but something on name of nathing here
-            is nothing but something on name of nathing here is bunch of text that does no</p>
-        </div>
+        <?php }?>
       </div>
+      
     </div>
   </div>
 </div>
