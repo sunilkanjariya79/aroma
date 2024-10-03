@@ -75,7 +75,7 @@ if (isset($_GET['search'])) {
             </div>
             <img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" height="24" />
             <?php
-if($post_details['uid']==$user['uid']){
+if($post_details['uid']==$_SESSION['userdata']['uid']){
     ?>
 
 <a href="assets/php/action.php/?deletepost=<?=$post_details['pid']?>"><img src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" height="24" /></a>

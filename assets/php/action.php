@@ -120,4 +120,28 @@ if(isset($_GET['addbook'])){
   
     
   }
+
+  if(isset($_GET['block'])){
+    $user_id = $_GET['block'];
+    $user = $_GET['username']; 
+      if(blockUser($user_id)){
+          header("location:../../?u=$user");
+      }else{
+          echo "something went wrong";
+      }
+  
+    
+  }
+
+  if(isset($_GET['unblock'])){
+    $user_id = $_GET['unblock'];
+    $user = $_GET['username']; 
+      if(unblockUser($user_id)){
+          header("location:../../?u=$user");
+      }else{
+          echo "something went wrong";
+      }
+  
+    
+  }
 ?>

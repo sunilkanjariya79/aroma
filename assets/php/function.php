@@ -129,8 +129,10 @@ function filterFollowSuggestion()
     $list = getFollowSuggestions();
     $filter_list = array();
     foreach ($list as $user) {
-        if (!checkFollowStatus($user['uid']) && count($filter_list) < 10) {
-            $filter_list[] = $user;
+        if (!checkBlockStatus($user['uid'], $_SESSION['userdata']['uid'])) {
+            if (!checkFollowStatus($user['uid']) && count($filter_list) < 10) {
+                $filter_list[] = $user;
+            }
         }
     }
 
@@ -200,11 +202,59 @@ function getUserByUsername($username)
     }
 
 }
+
+
+//function for blocking the user
+function blockUser($blocked_user_id)
+{
+    global $db;
+    // $cu = getUser($_SESSION['userdata']['id']);
+    $current_user = $_SESSION['userdata']['uid'];
+    $query = "INSERT INTO block(blocker,uid) VALUES(" . $current_user . "," . $blocked_user_id . ")";
+
+    // createNotification($cu['id'],$blocked_user_id,"blocked you");
+    $query2 = "DELETE FROM follower WHERE follower=$current_user && uid=$blocked_user_id";
+    mysqli_query($db, $query2);
+    $query3 = "DELETE FROM follower WHERE follower=$blocked_user_id && uid=$current_user";
+    mysqli_query($db, $query3);
+    return mysqli_query($db, $query);
+
+}
+
+//for unblocking the user
+function unblockUser($user_id)
+{
+    global $db;
+    $current_user = $_SESSION['userdata']['uid'];
+    $query = "DELETE FROM block WHERE blocker=" . $current_user . " and uid=" . $user_id;
+    // createNotification($current_user,$user_id,"Unblocked you !");
+    return mysqli_query($db, $query);
+}
+
+
+//for checking the user is followed by current user or not
+function checkBlockStatus($current_user, $user_id)
+{
+    global $db;
+    $query = "SELECT count(*) as r FROM block WHERE blocker=" . $current_user . " && uid=" . $user_id;
+    $run = mysqli_query($db, $query);
+    return mysqli_fetch_assoc($run)['r'];
+}
+
+
+function checkBS($user_id)
+{
+    global $db;
+    $current_user = $_SESSION['userdata']['uid'];
+    $query = "SELECT count(*) as r FROM block WHERE (blocker=" . $current_user . " && uid=" . $user_id . ") || (blocker=" . $user_id . " && uid=" . $current_user . ")";
+    $run = mysqli_query($db, $query);
+    return mysqli_fetch_assoc($run)['r'];
+}
 //for getting posts by id
 function getPostById($uid)
 {
     global $db;
-    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid WHERE users.uid=" . $uid . " ORDER BY casual_post.pid DESC";
+    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo,users.uid from casual_post join users on users.uid=casual_post.uid WHERE users.uid=" . $uid . " ORDER BY casual_post.pid DESC";
     $run = mysqli_query($db, $query) or die(mysqli_error($db));
     return mysqli_fetch_all($run, true);
 }
@@ -212,7 +262,7 @@ function getPostById($uid)
 function getSinglePost($pid)
 {
     global $db;
-    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid WHERE casual_post.pid=" . $pid;
+    $query = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo,users.uid from casual_post join users on users.uid=casual_post.uid WHERE casual_post.pid=" . $pid;
     $run = mysqli_query($db, $query) or die(mysqli_error($db));
     return mysqli_fetch_all($run, true);
 }
@@ -685,11 +735,12 @@ function unlikeBook($post_id)
 
 
 //function for creating comments
-function addPostComment($post_id, $comment){
+function addPostComment($post_id, $comment)
+{
     global $db;
     $comment = mysqli_real_escape_string($db, $comment);
     $current_user = $_SESSION['userdata']['uid'];
-    $query = "INSERT INTO comments (uid,cpost,c_content) VALUES(".$current_user.",".$post_id.",'".$comment."')";
+    $query = "INSERT INTO comments (uid,cpost,c_content) VALUES(" . $current_user . "," . $post_id . ",'" . $comment . "')";
     // $poster_id = getPosterId($post_id);
     // if ($poster_id != $current_user) {
     //     createNotification($current_user, $poster_id, "commented on your post", $post_id);
@@ -697,18 +748,20 @@ function addPostComment($post_id, $comment){
     return mysqli_query($db, $query) or die(mysqli_error($db));
 }
 
-function getPostComments($post_id){
+function getPostComments($post_id)
+{
     global $db;
-    $query="SELECT comments.*, users.username,users.uprofile_photo,users.uname FROM comments join users on comments.uid=users.uid WHERE cpost=".$post_id." ORDER BY cdate DESC";
-    $run = mysqli_query($db,$query);
+    $query = "SELECT comments.*, users.username,users.uprofile_photo,users.uname FROM comments join users on comments.uid=users.uid WHERE cpost=" . $post_id . " ORDER BY cdate DESC";
+    $run = mysqli_query($db, $query);
     return mysqli_fetch_all($run, true);
 }
 
-function addBookComment($book_id, $comment){
+function addBookComment($book_id, $comment)
+{
     global $db;
     $comment = mysqli_real_escape_string($db, $comment);
     $current_user = $_SESSION['userdata']['uid'];
-    $query = "INSERT INTO comments (uid,cbook,c_content) VALUES(".$current_user.",".$book_id.",'".$comment."')";
+    $query = "INSERT INTO comments (uid,cbook,c_content) VALUES(" . $current_user . "," . $book_id . ",'" . $comment . "')";
     // $poster_id = getPosterId($post_id);
     // if ($poster_id != $current_user) {
     //     createNotification($current_user, $poster_id, "commented on your post", $post_id);
@@ -716,10 +769,11 @@ function addBookComment($book_id, $comment){
     return mysqli_query($db, $query) or die(mysqli_error($db));
 }
 
-function getBookComments($book_id){
+function getBookComments($book_id)
+{
     global $db;
-    $query="SELECT comments.*, users.username,users.uprofile_photo,users.uname FROM comments join users on comments.uid=users.uid WHERE cbook=".$book_id." ORDER BY cdate DESC";
-    $run = mysqli_query($db,$query);
+    $query = "SELECT comments.*, users.username,users.uprofile_photo,users.uname FROM comments join users on comments.uid=users.uid WHERE cbook=" . $book_id . " ORDER BY cdate DESC";
+    $run = mysqli_query($db, $query);
     return mysqli_fetch_all($run, true);
 }
 
@@ -733,118 +787,144 @@ function getPosterId($post_id)
 
 }
 
-function searchPost($query){
+function searchPost($query)
+{
     global $db;
     $search = '%' . $query . '%';
-    $sql = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid WHERE casual_post.ptitle LIKE '".$search."'";
+    $sql = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username,users.uprofile_photo,users.uid from casual_post join users on users.uid=casual_post.uid WHERE casual_post.ptitle LIKE '" . $search . "'";
     $run = mysqli_query($db, $sql);
     if ($run) {
         $posts = [];
         while ($post = mysqli_fetch_assoc($run)) {
-            $posts[] = $post;
+            if (!checkBlockStatus($post['uid'], $_SESSION['userdata']['uid'])) {
+                $posts[] = $post;
+            }
+
         }
-        $sql_content = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid";
+        $sql_content = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo,users.uid from casual_post join users on users.uid=casual_post.uid";
         $result_content = mysqli_query($db, $sql_content);
         while ($post = mysqli_fetch_assoc($result_content)) {
             $file_content = getPostContentWithoutFormating($post['pcontent']);
-                if (stripos($file_content, $query) !== false) {
+            if (stripos($file_content, $query) !== false) {
+                if (!checkBlockStatus($post['uid'], $_SESSION['userdata']['uid'])) {
                     if (!in_array($post, $posts)) {
                         $posts[] = $post;
                     }
                 }
             }
+        }
         mysqli_free_result($run);
         return $posts;
-    }else {
+    } else {
         // Log error and return an empty array in case of failure
         error_log("SQL Error: " . mysqli_error($db));
         return [];
     }
 }
 
-function searchBook($query){
+function searchBook($query)
+{
     global $db;
     $search = '%' . $query . '%';
-    $sql = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid WHERE book_post.btitle LIKE '".$search."'";
+    $sql = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username,users.uid from book_post join users on users.uid=book_post.uid WHERE book_post.btitle LIKE '" . $search . "'";
     $run = mysqli_query($db, $sql);
     if ($run) {
         $posts = [];
         while ($post = mysqli_fetch_assoc($run)) {
-            $posts[] = $post;
+            if (!in_array($post, $posts)) {
+                if (!checkBlockStatus($post['uid'], $_SESSION['userdata']['uid'])) {
+                    $posts[] = $post;
+                }
+            }
         }
-        $sql_content = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid";
+        $sql_content = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username,users.uid from book_post join users on users.uid=book_post.uid";
         $result_content = mysqli_query($db, $sql_content);
         while ($post = mysqli_fetch_assoc($result_content)) {
             $file_content = getBookContent($post['bcontent']);
-                if (stripos($file_content, $query) !== false) {
+            if (stripos($file_content, $query) !== false) {
+                if (!checkBlockStatus($post['uid'], $_SESSION['userdata']['uid'])) {
                     if (!in_array($post, $posts)) {
                         $posts[] = $post;
                     }
                 }
+
             }
+        }
         mysqli_free_result($run);
         return $posts;
-    }else {
+    } else {
         // Log error and return an empty array in case of failure
         error_log("SQL Error: " . mysqli_error($db));
         return [];
     }
 }
 
-function searchUser($query){
+function searchUser($query)
+{
     global $db;
     $search = '%' . $query . '%';
-    $sql ="SELECT uid, uname, username, uprofile_photo FROM users WHERE username LIKE '$search' OR uname LIKE '$search' ORDER BY  CASE  WHEN username LIKE '$search' THEN 1  ELSE 2  END";
+    $sql = "SELECT uid, uname, username, uprofile_photo FROM users WHERE username LIKE '$search' OR uname LIKE '$search' ORDER BY  CASE  WHEN username LIKE '$search' THEN 1  ELSE 2  END";
     $run = mysqli_query($db, $sql);
-    return mysqli_fetch_all($run, true);
+    $userlist = [];
+    while ($user = mysqli_fetch_assoc($run)) {
+        if (!checkBlockStatus($user['uid'], $_SESSION['userdata']['uid'])) {
+            $userlist[] = $user;
+        }
+    }
+    return $userlist;
 }
 
-function deletePost($post_id){
+function deletePost($post_id)
+{
     global $db;
-$user_id=$_SESSION['userdata']['uid'];
-    $dellike = "DELETE FROM likes WHERE lpost=".$post_id." && uid=".$user_id;
-    mysqli_query($db,$dellike) or die(mysqli_error($db));
-    $delcom = "DELETE FROM comments WHERE cpost=".$post_id." && uid=".$user_id;
-    mysqli_query($db,$delcom) or die(mysqli_error($db));
-//     $not = "UPDATE notifications SET read_status=2 WHERE post_id=$post_id && to_user_id=$user_id";
+    $user_id = $_SESSION['userdata']['uid'];
+    $dellike = "DELETE FROM likes WHERE lpost=" . $post_id . " && uid=" . $user_id;
+    mysqli_query($db, $dellike) or die(mysqli_error($db));
+    $delcom = "DELETE FROM comments WHERE cpost=" . $post_id . " && uid=" . $user_id;
+    mysqli_query($db, $delcom) or die(mysqli_error($db));
+    //     $not = "UPDATE notifications SET read_status=2 WHERE post_id=$post_id && to_user_id=$user_id";
 // mysqli_query($db,$not);
-    $file = "select pcontent from casual_post where pid=".$post_id;
-    $delfile= mysqli_query($db,$file) or die(mysqli_error($db));
-    $filename= mysqli_fetch_assoc($delfile);
-    if(deleteFile("../post_data/casual",$filename['pcontent'])) {
-    $query = "DELETE FROM casual_post WHERE pid=".$post_id;
-    return mysqli_query($db,$query) or die(mysqli_error($db));} 
-    else {
-        echo "not done";}
+    $file = "select pcontent from casual_post where pid=" . $post_id;
+    $delfile = mysqli_query($db, $file) or die(mysqli_error($db));
+    $filename = mysqli_fetch_assoc($delfile);
+    if (deleteFile("../post_data/casual", $filename['pcontent'])) {
+        $query = "DELETE FROM casual_post WHERE pid=" . $post_id;
+        return mysqli_query($db, $query) or die(mysqli_error($db));
+    } else {
+        echo "not done";
+    }
 }
 
 
-function deleteBook($book_id){
+function deleteBook($book_id)
+{
     global $db;
-$user_id=$_SESSION['userdata']['uid'];
-    $dellike = "DELETE FROM likes WHERE lbook=".$book_id." && uid=".$user_id;
-    mysqli_query($db,$dellike) or die(mysqli_error($db));
-    $delcom = "DELETE FROM comments WHERE cbook=".$book_id." && uid=".$user_id;
-    mysqli_query($db,$delcom) or die(mysqli_error($db));
-//     $not = "UPDATE notifications SET read_status=2 WHERE post_id=$post_id && to_user_id=$user_id";
+    $user_id = $_SESSION['userdata']['uid'];
+    $dellike = "DELETE FROM likes WHERE lbook=" . $book_id . " && uid=" . $user_id;
+    mysqli_query($db, $dellike) or die(mysqli_error($db));
+    $delcom = "DELETE FROM comments WHERE cbook=" . $book_id . " && uid=" . $user_id;
+    mysqli_query($db, $delcom) or die(mysqli_error($db));
+    //     $not = "UPDATE notifications SET read_status=2 WHERE post_id=$post_id && to_user_id=$user_id";
 // mysqli_query($db,$not);
-    $file = "select bcontent,bcover from book_post where bid=".$book_id;
-    $delfile= mysqli_query($db,$file) or die(mysqli_error($db));
-    $filename= mysqli_fetch_assoc($delfile);
-    if(deleteFile("../post_data/books",$filename['bcontent']) && deleteFile("../images/book-cover",$filename['bcover'])) {
-    $query = "DELETE FROM book_post WHERE bid=".$book_id;
-    return mysqli_query($db,$query) or die(mysqli_error($db));} 
-    else {
-        echo "not done";}
+    $file = "select bcontent,bcover from book_post where bid=" . $book_id;
+    $delfile = mysqli_query($db, $file) or die(mysqli_error($db));
+    $filename = mysqli_fetch_assoc($delfile);
+    if (deleteFile("../post_data/books", $filename['bcontent']) && deleteFile("../images/book-cover", $filename['bcover'])) {
+        $query = "DELETE FROM book_post WHERE bid=" . $book_id;
+        return mysqli_query($db, $query) or die(mysqli_error($db));
+    } else {
+        echo "not done";
+    }
 }
 
-function deleteFile($directory, $filename) {
+function deleteFile($directory, $filename)
+{
     $filepath = $directory . '/' . $filename;
     if (file_exists($filepath)) {
         if (unlink($filepath)) {
             return true;
         } else {
-            return $response=false;
+            return $response = false;
         }
     } else {
         return $response = false;

@@ -837,6 +837,8 @@ option {
 .profile-picture {
   border-radius: 50%;
   width: 200px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 .profile-information {
   grid-column-gap: 12px;
