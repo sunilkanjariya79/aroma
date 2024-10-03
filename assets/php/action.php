@@ -91,4 +91,33 @@ if(isset($_GET['addbook'])){
      header("location:../../");
     }
  }
+
+ if(isset($_GET["search"])){
+    if($_POST['search']==""){
+        header("location:../../../");
+    }
+    header("location:../../../?search=".$_POST['search']);
+
+ }
+
+ if(isset($_GET['deletepost'])){
+    $post_id = $_GET['deletepost'];
+      if(deletePost($post_id)){
+          header("location:{$_SERVER['HTTP_REFERER']}");
+      }else{
+          echo "something went wrong";
+      }
+  
+    
+  }
+  if(isset($_GET['deletebook'])){
+    $book_id = $_GET['deletebook'];
+      if(deleteBook($book_id)){
+          header("post-wall");
+      }else{
+          echo "something went wrong";
+      }
+  
+    
+  }
 ?>

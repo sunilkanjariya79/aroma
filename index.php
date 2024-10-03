@@ -53,7 +53,19 @@ elseif (isset($_GET['login'])) {
     showPage('header', ['page_title' => 'Edit Profile']);
     showPage('side-bar');
     showPage('edit-profile');
-} else {
+} elseif(isset($_GET['search']) && isset($_SESSION['auth'])) {
+    $seachedposts = searchPost($_GET['search']);
+    $seachedbooks = searchBook($_GET['search']);
+    $seachedusers = searchUser($_GET['search']);
+    showPage('header', ['page_title' => 'Main wall']);
+    showPage('side-bar');
+    showPage('right-bar');
+    showPage('top');
+    showPage('post-wall');
+
+}
+
+else {
     if (isset($_SESSION['auth'])) {
         showPage('header', ['page_title' => 'Main wall']);
         showPage('side-bar');

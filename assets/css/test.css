@@ -390,7 +390,6 @@ select {
 .main-content {
   grid-column-gap: 10px;
   grid-row-gap: 10px;
-  object-fit: fill;
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;

@@ -35,10 +35,19 @@ if (empty($book_data)) {
         <img src="assets/images/site-meta/heart-solid.svg " class="unlikebookbtn <?= $unlike_btn_display ?>"
           data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
           width="24" height="24" />
-      </div><img src="images/uil_share.svg" alt="" width="24" height="24"><img
-        src="images/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24">
+      </div><img src="images/uil_share.svg" alt="" width="24" height="24"><?php
+      if ($book_data[0]['uid'] == $_SESSION['userdata']['uid']) {
+        ?>
+
+        <a href="assets/php/action.php/?deletebook=<?= $book_data[0]['bid'] ?>"><img
+            src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" height="24" /></a>
+
+      <?php } else { ?>
+        <a href="/assets"><img src="assets/images/site-meta/warning-circle.svg" alt="" width="24" height="24" /></a>
+      <?php } ?>
     </div>
-    <div class="pco-count show-likes"> <span id="likecount<?= $book_data[0]['bid'] ?>"><?= count($likes) ?></span> People Liked This
+    <div class="pco-count show-likes"> <span id="likecount<?= $book_data[0]['bid'] ?>"><?= count($likes) ?></span>
+      People Liked This
     </div>
     <div class="pop-up-window hide" id="likes">
       <div class="pop-up">
@@ -100,34 +109,36 @@ if (empty($book_data)) {
     <div class="comment-section book-comments">
       <h1 class="heading-2">Comments</h1>
       <div class="form-comment w-form">
-      <textarea placeholder="Your Comment" maxlength="5000" id="comment-box"
-      class="log-reg-field comment-box w-input"></textarea>
-          <button type="button" class="primery-button w-button addbookcomment" data-book-id="<?=$book_data[0]['bid']?>">Comment</button>
+        <textarea placeholder="Your Comment" maxlength="5000" id="comment-box"
+          class="log-reg-field comment-box w-input"></textarea>
+        <button type="button" class="primery-button w-button addbookcomment"
+          data-book-id="<?= $book_data[0]['bid'] ?>">Comment</button>
       </div>
       <div class="comments-container">
-      <?php
-      $comments = getBookComments($book_data[0]['bid']);
-      if(count($comments) <1) {
-        echo "<p>No Comments</p>";
-    }
-      foreach($comments as $comment){
-      ?>
-        <div class="comment-card">
-          <div>
-            <a href="#" class="link-block w-inline-block"><img src="assets/images/profile/<?=$comment['uprofile_photo']?>"" loading="lazy" width="Auto" alt=""
-                class="pcm-img">
-              <div class="pcm-details">
-                <p class="pcm-text pcm-username">u/<?=$comment['username']?></p>
-                <p class="pcm-text"><?=$comment['uname']?></p>
-              </div>
-              <p class="pcm-text pd-date"><?=timeAgo($comment['cdate'])?></p>
-            </a>
+        <?php
+        $comments = getBookComments($book_data[0]['bid']);
+        if (count($comments) < 1) {
+          echo "<p>No Comments</p>";
+        }
+        foreach ($comments as $comment) {
+          ?>
+          <div class="comment-card">
+            <div>
+              <a href="#" class="link-block w-inline-block"><img
+                  src="assets/images/profile/<?= $comment['uprofile_photo'] ?>"" loading=" lazy" width="Auto" alt=""
+                  class="pcm-img">
+                <div class="pcm-details">
+                  <p class="pcm-text pcm-username">u/<?= $comment['username'] ?></p>
+                  <p class="pcm-text"><?= $comment['uname'] ?></p>
+                </div>
+                <p class="pcm-text pd-date"><?= timeAgo($comment['cdate']) ?></p>
+              </a>
+            </div>
+            <p class="main-text"><?= $comment['c_content'] ?></p>
           </div>
-          <p class="main-text"><?=$comment['c_content']?></p>
-        </div>
-        <?php }?>
+        <?php } ?>
       </div>
-      
+
     </div>
   </div>
 </div>

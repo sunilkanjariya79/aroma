@@ -4,12 +4,20 @@ global $posts;
 global $books;
 global $profile_post;
 global $profile_books;
+global $seachedusers;
+global $seachedposts;
+global $seachedbooks;
 $display_posts = $posts;
 $display_books = $books;
 
 if (isset($_GET['u'])) {
   $display_posts = $profile_post;
   $display_books = $profile_books;
+}
+if (isset($_GET['search'])) {
+  $display_posts = $seachedposts;
+  $display_books = $seachedbooks;
+  $display_users = $seachedusers;
 }
 ?>
 
@@ -22,6 +30,12 @@ if (isset($_GET['u'])) {
     <a class="p-tab w-inline-block w-tab-link" id="books">
       <div>Books</div>
     </a>
+    <?php if (isset($_GET['search'])) {
+      ?>
+      <a class="p-tab w-inline-block w-tab-link" id="users">
+        <div>Users</div>
+      </a>
+    <?php } ?>
   </div>
   <div class="tabs-content w-tab-content">
     <div class="p-tab-content w-tab-pane " id="casuals-container">
@@ -38,29 +52,38 @@ if (isset($_GET['u'])) {
         <div class="post-thumbnail tab-details w-inline-block">
           <div class="post-controls">
             <div class="pc-option">
-            <?php
-if(checkPostLikeStatus($post_details['pid'])){
-$like_btn_display='hide';
-$unlike_btn_display='';
-}else{
-    $like_btn_display='';
-    $unlike_btn_display='hide';  
-}
-    ?>
-              <img src="assets/images/site-meta/heart.svg " class="likepostbtn <?=$like_btn_display?>"
+              <?php
+              if (checkPostLikeStatus($post_details['pid'])) {
+                $like_btn_display = 'hide';
+                $unlike_btn_display = '';
+              } else {
+                $like_btn_display = '';
+                $unlike_btn_display = 'hide';
+              }
+              ?>
+              <img src="assets/images/site-meta/heart.svg " class="likepostbtn <?= $like_btn_display ?>"
                 data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
                 width="24" height="24" />
-                <img src="assets/images/site-meta/heart-solid.svg " class="unlikepostbtn <?=$unlike_btn_display?>"
+              <img src="assets/images/site-meta/heart-solid.svg " class="unlikepostbtn <?= $unlike_btn_display ?>"
                 data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
                 width="24" height="24" />
-              <div class="pco-count" id="likecount<?=$post_details['pid']?>"><?=count($likes)?></div>
+              <div class="pco-count" id="likecount<?= $post_details['pid'] ?>"><?= count($likes) ?></div>
             </div>
             <div class="pc-option">
               <img src="assets/images/site-meta/uil_comment.svg" alt="" width="24" height="24" />
-              <div class="pco-count"><?=count($comments)?></div>
+              <div class="pco-count"><?= count($comments) ?></div>
             </div>
             <img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" height="24" />
-            <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24" />
+            <?php
+if($post_details['uid']==$user['uid']){
+    ?>
+
+<a href="assets/php/action.php/?deletepost=<?=$post_details['pid']?>"><img src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" height="24" /></a>
+
+            <?php }else{?>
+            <a href="/assets"><img src="assets/images/site-meta/warning-circle.svg" alt="" width="24" height="24" /></a>
+            <?php }?>
+
           </div>
 
           <a href="?post=<?= $post_details['pid'] ?>" class="post-content-container">
@@ -120,6 +143,50 @@ $unlike_btn_display='';
             </div>
           </div>
         </div>
+
+        <?php
+      }
+      ?>
+    </div>
+    <div class="p-tab-content w-tab-pane hide" style= "padding: 0px 10%;"id="users-container">
+
+      <?php
+      if(isset($_GET['search']))
+      if (count($display_users) < 1) {
+        echo "<p style='width:93vw' class='heading-2'>No user Found</p>";
+      }
+      foreach ($display_users as $userdata) {
+        ?>
+        <div class="profile-card-min">
+                  <a href="?u=<?= $userdata['username'] ?>"  style="width:100%; margin-right: 20px;" class="link-block w-inline-block">
+                    <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
+                      class="pcm-img" />
+                    <div class="pcm-details">
+                      <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
+                      <p class="pcm-text"><?= $userdata['uname'] ?></p>
+                    </div>
+                  </a>
+                  <?php
+                  if ($_SESSION['userdata']['uid'] != $userdata['uid']) {
+                    ?>
+                    <?php
+                    if (checkFollowStatus($userdata['uid'])) {
+                      ?>
+                      <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
+                        data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
+
+                      <?php
+                    } else {
+                      ?>
+                      <a href="#" class="primery-button lr-btn w-button followbtn"
+                        data-user-id="<?= $userdata['uid'] ?>">Follow</a>
+
+                      <?php
+                    }
+
+                  }
+                  ?>
+                </div>
 
         <?php
       }

@@ -25,8 +25,11 @@ $(document).ready(function() {
         $('#books-container').removeClass('fade-in show').addClass('fade-out hide');
         $('#casuals-container').addClass('show').removeClass('hide');
         $('#books-container').addClass('hide').removeClass('show');
+      $('#users-container').removeClass('show').addClass('hide');
         $('#casuals').addClass('w--current');
         $('#books').removeClass('w--current');
+      $('#users').removeClass('w--current');
+
         localStorage.setItem('active','casuals');
     });
 
@@ -36,11 +39,27 @@ $(document).ready(function() {
         
         $('#casuals-container').addClass('hide').removeClass('show');
         $('#books-container').addClass('show').removeClass('hide');
+      $('#users-container').removeClass('show').addClass('hide');
         $('#books').addClass('w--current');
         $('#casuals').removeClass('w--current');
         localStorage.setItem('active','books');
+      $('#users').removeClass('w--current');
+
 
     });
+
+    $('#users').click(function(event) {
+      event.preventDefault(); // Prevent the default link behavior
+      
+      $('#casuals-container').addClass('hide').removeClass('show');
+      $('#books-container').addClass('hide').removeClass('show');
+      $('#users-container').addClass('show').removeClass('hide');
+      $('#books').removeClass('w--current');
+      $('#casuals').removeClass('w--current');
+      $('#users').addClass('w--current');
+      localStorage.setItem('active','books');
+
+  });
 
     
 

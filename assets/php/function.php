@@ -220,7 +220,7 @@ function getSinglePost($pid)
 function getSingleBook($bid)
 {
     global $db;
-    $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username ,users.uprofile_photo from book_post join users on users.uid=book_post.uid WHERE book_post.bid=" . $bid;
+    $query = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username ,users.uprofile_photo, users.uid from book_post join users on users.uid=book_post.uid WHERE book_post.bid=" . $bid;
     $run = mysqli_query($db, $query) or die(mysqli_error($db));
     return mysqli_fetch_all($run, true);
 }
@@ -732,6 +732,125 @@ function getPosterId($post_id)
     return mysqli_fetch_assoc($run)['user_id'];
 
 }
+
+function searchPost($query){
+    global $db;
+    $search = '%' . $query . '%';
+    $sql = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid WHERE casual_post.ptitle LIKE '".$search."'";
+    $run = mysqli_query($db, $sql);
+    if ($run) {
+        $posts = [];
+        while ($post = mysqli_fetch_assoc($run)) {
+            $posts[] = $post;
+        }
+        $sql_content = "SELECT casual_post.pid,casual_post.ptitle,casual_post.pcontent, casual_post.ptag, casual_post.pdate,users.uname,users.username, users.uprofile_photo from casual_post join users on users.uid=casual_post.uid";
+        $result_content = mysqli_query($db, $sql_content);
+        while ($post = mysqli_fetch_assoc($result_content)) {
+            $file_content = getPostContentWithoutFormating($post['pcontent']);
+                if (stripos($file_content, $query) !== false) {
+                    if (!in_array($post, $posts)) {
+                        $posts[] = $post;
+                    }
+                }
+            }
+        mysqli_free_result($run);
+        return $posts;
+    }else {
+        // Log error and return an empty array in case of failure
+        error_log("SQL Error: " . mysqli_error($db));
+        return [];
+    }
+}
+
+function searchBook($query){
+    global $db;
+    $search = '%' . $query . '%';
+    $sql = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid WHERE book_post.btitle LIKE '".$search."'";
+    $run = mysqli_query($db, $sql);
+    if ($run) {
+        $posts = [];
+        while ($post = mysqli_fetch_assoc($run)) {
+            $posts[] = $post;
+        }
+        $sql_content = "SELECT book_post.bid,book_post.btitle,book_post.bcontent,book_post.babout, book_post.btag, book_post.bdate,book_post.bcover,users.uname,users.username from book_post join users on users.uid=book_post.uid";
+        $result_content = mysqli_query($db, $sql_content);
+        while ($post = mysqli_fetch_assoc($result_content)) {
+            $file_content = getBookContent($post['bcontent']);
+                if (stripos($file_content, $query) !== false) {
+                    if (!in_array($post, $posts)) {
+                        $posts[] = $post;
+                    }
+                }
+            }
+        mysqli_free_result($run);
+        return $posts;
+    }else {
+        // Log error and return an empty array in case of failure
+        error_log("SQL Error: " . mysqli_error($db));
+        return [];
+    }
+}
+
+function searchUser($query){
+    global $db;
+    $search = '%' . $query . '%';
+    $sql ="SELECT uid, uname, username, uprofile_photo FROM users WHERE username LIKE '$search' OR uname LIKE '$search' ORDER BY  CASE  WHEN username LIKE '$search' THEN 1  ELSE 2  END";
+    $run = mysqli_query($db, $sql);
+    return mysqli_fetch_all($run, true);
+}
+
+function deletePost($post_id){
+    global $db;
+$user_id=$_SESSION['userdata']['uid'];
+    $dellike = "DELETE FROM likes WHERE lpost=".$post_id." && uid=".$user_id;
+    mysqli_query($db,$dellike) or die(mysqli_error($db));
+    $delcom = "DELETE FROM comments WHERE cpost=".$post_id." && uid=".$user_id;
+    mysqli_query($db,$delcom) or die(mysqli_error($db));
+//     $not = "UPDATE notifications SET read_status=2 WHERE post_id=$post_id && to_user_id=$user_id";
+// mysqli_query($db,$not);
+    $file = "select pcontent from casual_post where pid=".$post_id;
+    $delfile= mysqli_query($db,$file) or die(mysqli_error($db));
+    $filename= mysqli_fetch_assoc($delfile);
+    if(deleteFile("../post_data/casual",$filename['pcontent'])) {
+    $query = "DELETE FROM casual_post WHERE pid=".$post_id;
+    return mysqli_query($db,$query) or die(mysqli_error($db));} 
+    else {
+        echo "not done";}
+}
+
+
+function deleteBook($book_id){
+    global $db;
+$user_id=$_SESSION['userdata']['uid'];
+    $dellike = "DELETE FROM likes WHERE lbook=".$book_id." && uid=".$user_id;
+    mysqli_query($db,$dellike) or die(mysqli_error($db));
+    $delcom = "DELETE FROM comments WHERE cbook=".$book_id." && uid=".$user_id;
+    mysqli_query($db,$delcom) or die(mysqli_error($db));
+//     $not = "UPDATE notifications SET read_status=2 WHERE post_id=$post_id && to_user_id=$user_id";
+// mysqli_query($db,$not);
+    $file = "select bcontent,bcover from book_post where bid=".$book_id;
+    $delfile= mysqli_query($db,$file) or die(mysqli_error($db));
+    $filename= mysqli_fetch_assoc($delfile);
+    if(deleteFile("../post_data/books",$filename['bcontent']) && deleteFile("../images/book-cover",$filename['bcover'])) {
+    $query = "DELETE FROM book_post WHERE bid=".$book_id;
+    return mysqli_query($db,$query) or die(mysqli_error($db));} 
+    else {
+        echo "not done";}
+}
+
+function deleteFile($directory, $filename) {
+    $filepath = $directory . '/' . $filename;
+    if (file_exists($filepath)) {
+        if (unlink($filepath)) {
+            return true;
+        } else {
+            return $response=false;
+        }
+    } else {
+        return $response = false;
+    }
+}
+
 
 // to return the string in given limit
 function cutString($string, $limit)
