@@ -113,3 +113,13 @@ if(isset($_POST['addbookcomment'])){
         }
         echo json_encode($response); 
 }
+
+
+if(isset($_GET['notread'])){
+    if(setNotificationStatusAsRead()){
+        $response['status']=true;
+    }else{
+        $response['status']=false;
+    }
+    echo json_encode($response);
+}

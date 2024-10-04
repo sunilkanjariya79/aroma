@@ -21,8 +21,11 @@
           <a href="?create-post" class="side-bar-heading">Create Post</a>
         </div>
         <div class="w-layout-hflex flex-block">
-          <img src="assets/images/site-meta/app-notification.svg" loading="eager" width="24" height="24" alt="" id="logo"/>
-          <a href="#" class="side-bar-heading">Notification</a>
+        <?php
+if(getUnreadNotificationsCount()>0){
+    ?> <img class="show-not" src="assets/images/site-meta/new-app-notification-solid.svg" loading="eager" width="24" height="24" alt="" id="logo"/><?php }else {?>
+          <img class="show-not" src="assets/images/site-meta/app-notification.svg" loading="eager" width="24" height="24" alt="" id="logo"/><?php }?>
+          <a class="side-bar-heading notification-button show-not">Notification</a>
         </div>
         <div class="w-layout-hflex flex-block">
           <a href="profile-page.php">

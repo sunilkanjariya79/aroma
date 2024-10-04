@@ -118,6 +118,16 @@ $(document).ready(function () {
     $('#user-action').removeClass('hide');
   });
 
+  //to show likes menu
+  $('.notification-button').click(function (event) {
+    $('#notification_sidebar').removeClass('hide');
+  });
+
+  //to close pop up manu on page
+  $('.close-side-bar').click(function (event) {
+    $('#pop-up-side-bar').addClass('hide');
+  });
+
 
   // create post, books and casual posts both
   let optionsButtons = $(".option-button");
@@ -497,6 +507,25 @@ $(".addbookcomment").click(function () {
       $(button).attr('disabled', false);  // Re-enable button on error
     }
   });
+});
+
+$(".show-not").click(function () {
+
+  $.ajax({
+      url: 'assets/php/ajax.php?notread',
+      method: 'post',
+      dataType: 'json',
+      success: function (response) {
+
+          if (response.status) {
+              
+          }
+
+
+
+      }
+  });
+
 });
 
 

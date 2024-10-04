@@ -106,10 +106,10 @@ function getUser($uid)
 function followUser($user_id)
 {
     global $db;
-    // $cu = getUser($_SESSION['userdata']['uid']);
+    $cu = getUser($_SESSION['userdata']['uid']);
     $current_user = $_SESSION['userdata']['uid'];
     $query = "insert into follower (uid,follower) values('" . $user_id . "','" . $current_user . "')";
-    // createNotification($cu['id'],$user_id,"started following you !");
+    createNotification($cu['uid'], $user_id, "started following you !");
     return mysqli_query($db, $query);
 
 }
@@ -662,11 +662,11 @@ function likePost($post_id)
     global $db;
     $current_user = $_SESSION['userdata']['uid'];
     $query = "INSERT INTO likes(lpost,uid) VALUES(" . $post_id . "," . $current_user . ")";
-    //    $poster_id = getPosterId($post_id);
+    $poster_id = getPosterId($post_id);
 
-    //    if($poster_id!=$current_user){
-    //     createNotification($current_user,$poster_id,"liked your post !",$post_id);
-    //    }
+    if ($poster_id != $current_user) {
+        createNotification($current_user, $poster_id, "liked your post !", $post_id);
+    }
 
 
     return mysqli_query($db, $query);
@@ -687,12 +687,6 @@ function unlikePost($post_id)
     global $db;
     $current_user = $_SESSION['userdata']['uid'];
     $query = "DELETE FROM likes WHERE uid=" . $current_user . " and lpost=" . $post_id;
-
-    // $poster_id = getPosterId($post_id);
-    // if($poster_id!=$current_user){
-    //     createNotification($current_user,$poster_id,"unliked your post !",$post_id);
-    // }
-
     return mysqli_query($db, $query);
 }
 
@@ -701,11 +695,11 @@ function likebook($book_id)
     global $db;
     $current_user = $_SESSION['userdata']['uid'];
     $query = "INSERT INTO likes(lbook,uid) VALUES(" . $book_id . "," . $current_user . ")";
-    //    $poster_id = getPosterId($post_id);
+    $poster_id = getPosterId(book_id: $book_id);
 
-    //    if($poster_id!=$current_user){
-    //     createNotification($current_user,$poster_id,"liked your post !",$post_id);
-    //    }
+    if ($poster_id != $current_user) {
+        createNotification($current_user, $poster_id, "liked your post !", book_id: $book_id);
+    }
 
 
     return mysqli_query($db, $query);
@@ -741,10 +735,10 @@ function addPostComment($post_id, $comment)
     $comment = mysqli_real_escape_string($db, $comment);
     $current_user = $_SESSION['userdata']['uid'];
     $query = "INSERT INTO comments (uid,cpost,c_content) VALUES(" . $current_user . "," . $post_id . ",'" . $comment . "')";
-    // $poster_id = getPosterId($post_id);
-    // if ($poster_id != $current_user) {
-    //     createNotification($current_user, $poster_id, "commented on your post", $post_id);
-    // }
+    $poster_id = getPosterId($post_id);
+    if ($poster_id != $current_user) {
+        createNotification($current_user, $poster_id, "commented on your post", $post_id);
+    }
     return mysqli_query($db, $query) or die(mysqli_error($db));
 }
 
@@ -762,10 +756,10 @@ function addBookComment($book_id, $comment)
     $comment = mysqli_real_escape_string($db, $comment);
     $current_user = $_SESSION['userdata']['uid'];
     $query = "INSERT INTO comments (uid,cbook,c_content) VALUES(" . $current_user . "," . $book_id . ",'" . $comment . "')";
-    // $poster_id = getPosterId($post_id);
-    // if ($poster_id != $current_user) {
-    //     createNotification($current_user, $poster_id, "commented on your post", $post_id);
-    // }
+    $poster_id = getPosterId(book_id: $book_id);
+    if ($poster_id != $current_user) {
+        createNotification($current_user, $poster_id, "commented on your post", book_id: $book_id);
+    }
     return mysqli_query($db, $query) or die(mysqli_error($db));
 }
 
@@ -778,12 +772,19 @@ function getBookComments($book_id)
 }
 
 
-function getPosterId($post_id)
+function getPosterId($post_id = 0, $book_id = 0)
 {
     global $db;
-    $query = "SELECT user_id FROM posts WHERE id=$post_id";
-    $run = mysqli_query($db, $query);
-    return mysqli_fetch_assoc($run)['user_id'];
+    if ($post_id != 0) {
+        $query = "SELECT uid FROM casual_post WHERE pid=".$post_id;
+        $run = mysqli_query($db, $query);
+        return mysqli_fetch_assoc($run)['uid'];
+    } else if ($book_id != 0) {
+        $query = "SELECT uid FROM book_posts WHERE bid=".$book_id;
+        $run = mysqli_query($db, $query);
+        return mysqli_fetch_assoc($run)['uid'];
+    }
+
 
 }
 
@@ -930,6 +931,43 @@ function deleteFile($directory, $filename)
         return $response = false;
     }
 }
+
+function createNotification($from_user_id, $to_user_id, $msg, $post_id = 0, $book_id = 0)
+{
+    global $db;
+    $query = "INSERT INTO notification(from_user_id,to_user_id,message,pid,bid) VALUES(" . $from_user_id . "," . $to_user_id . ",'" . $msg . "'," . $post_id . "," . $book_id . ")";
+    mysqli_query($db, $query);
+}
+
+function getNotifications()
+{
+    $cu_user_id = $_SESSION['userdata']['uid'];
+
+    global $db;
+    $query = "SELECT * FROM notification WHERE to_user_id=" . $cu_user_id . " ORDER BY nid DESC";
+    $run = mysqli_query($db, $query);
+    return mysqli_fetch_all($run, true);
+}
+
+function getUnreadNotificationsCount()
+{
+    $cu_user_id = $_SESSION['userdata']['uid'];
+
+    global $db;
+    $query = "SELECT count(*) as r FROM notification WHERE to_user_id=" . $cu_user_id . " and read_status=0 ORDER BY nid DESC";
+    $run = mysqli_query($db, $query);
+    return mysqli_fetch_assoc($run)['r'];
+}
+
+function setNotificationStatusAsRead()
+{
+    $cu_user_id = $_SESSION['userdata']['uid'];
+    global $db;
+    $query = "UPDATE notification SET read_status=1 WHERE to_user_id=" . $cu_user_id;
+    return mysqli_query($db, $query);
+}
+
+
 
 
 // to return the string in given limit
