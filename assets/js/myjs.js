@@ -143,6 +143,10 @@ $(document).ready(function () {
     $('#messages_sidebar').addClass('hide');
   });
 
+  $('.create-post').click(function (event) {
+    $('#create-post').removeClass('hide');
+  });
+
   $('.report-post').click(function (event) {
     var post_id = $(this).data('postId');
     $('.report-post').removeClass('hide');
@@ -577,13 +581,8 @@ $(".show-not").click(function () {
     method: 'post',
     dataType: 'json',
     success: function (response) {
-
       if (response.status) {
-
       }
-
-
-
     }
   });
 
@@ -637,7 +636,8 @@ function synmsg() {
 
       } else {
         $("#msgsender").show();
-        $("#blerror").hide();
+        $('.pop-up-footer').addClass('hide');
+        $("#blerror").addClass('hide');
       }
 
       if (typeof chatting_user_id === "number" &&chatting_user_id != 0 ) {

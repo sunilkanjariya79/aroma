@@ -103,7 +103,7 @@ if(isset($_GET['addbook'])){
  if(isset($_GET['deletepost'])){
     $post_id = $_GET['deletepost'];
       if(deletePost($post_id)){
-          header("location:{$_SERVER['HTTP_REFERER']}");
+          header("location:../../../");
       }else{
           echo "something went wrong";
       }
@@ -113,7 +113,7 @@ if(isset($_GET['addbook'])){
   if(isset($_GET['deletebook'])){
     $book_id = $_GET['deletebook'];
       if(deleteBook($book_id)){
-          header("post-wall");
+          header("location:../../../");
       }else{
           echo "something went wrong";
       }

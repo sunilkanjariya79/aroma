@@ -1,4 +1,4 @@
-<div class="left-panel hide pop-up-side-bar" id="notification_sidebar" style="background-color:black;">
+<div class="left-panel hide pop-up-side-bar" id="notification_sidebar">
   <div class="left-panel-header">
     <h5 class="heading-2" id="left-panel-title">Notifications</h5>
     <a class="close-side-bar"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
@@ -8,27 +8,24 @@
     $notifications = getNotifications();
     foreach ($notifications as $not) {
       $fuser = getUser($not['from_user_id']);
-      $post = '';
-      $book = '';
+      $post = '?u='.$fuser['username'];
       if ($not['pid'] != 0) {
-
+        $post="?post=".$not['pid'];
       }
       if ($not['bid'] != 0) {
-
+        $post="?post=".$not['bid'];
       }
       $fbtn = '';
       ?>
-      <a <?= $post ?> class="not-card">
+        <a href="<?=$post?>" class="not-card">
         <div class="nc-details">
-          <div><img src="assets/images/profile/<?= $fuser['uprofile_photo'] ?>" alt="" height="40" width="40" class="">
-          </div>
+          <img src="assets/images/profile/<?= $fuser['uprofile_photo'] ?>" alt="" height="40" width="40" class="pcm-img">
+          <div>&nbsp;&nbsp;</div>
           <div class="nc-info">
-            <a href='?u=<?= $fuser['username'] ?>' class="nc-text">
               <h6 style="margin: 0px;font-size: small;"><?= $fuser['uname'] ?></h6>
-            </a>
             <p style="margin:0px;font-size:small" class="<?= $not['read_status'] ? 'muted' : '' ?>">
-              @<?= $fuser['username'] ?>   <?= $not['message'] ?></p>
-            <p><?= timeAgo($not['created_at']) ?></p>
+              u/<?= $fuser['username'] ?>   <?= $not['message'] ?></p>
+            <span class="pcm-text"><?= timeAgo($not['created_at']) ?></span>
           </div>
         </div>
         <div class="d-flex align-items-center">
@@ -47,7 +44,7 @@
           ?>
 
         </div>
-      </a>
+        </a>
       <?php
     }
     ?>
@@ -55,7 +52,7 @@
   </div>
 </div>
 
-<div class="left-panel hide pop-up-side-bar" id="messages_sidebar" style="background-color:black;">
+<div class="left-panel hide pop-up-side-bar" id="messages_sidebar">
   <div class="left-panel-header">
     <h5 class="heading-2" id="left-panel-title">Messages</h5>
     <a class="close-side-bar"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
@@ -66,32 +63,47 @@
 
 
 <div class="pop-up-window hide" id="chatbox" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="pop-up">
-    <div class="pop-up-heading">
-      <a href="" id="cplink" class="text-decoration-none text-dark">
-        <h5 class="modal-title" id="exampleModalLabel"><img src="assets/images/profile/default_profile.jpg"
-            id="chatter_pic" height="40" width="40" class="m-1 rounded-circle border"><span
-            id="chatter_name"></span>(u/<span id="chatter_username">loading..</span>)</h5>
-      </a>
-      <a class="close" data-bs-dismiss="modal" aria-label="Close"></a>
+  <div class="pop-up chatbox">
+    <div class="pop-up-heading" style="padding:15px 20px">
+      <div class="profile-card-min" style="padding:0px;">
+        <a href="" id="cplink" class="link-block w-inline-block">
+          <img src="assets/images/profile/default_profile.jpg" id="chatter_pic" loading="lazy" alt="" class="pcm-img" />
+          <div class="pcm-details">
+            <p class="pcm-text pcm-username" id="chatter_username">Loading?></p>
+            <p class="pcm-text" id="chatter_name">Loading</p>
+          </div>
+        </a>
+        <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" alt=""></a>
+      </div>
+
     </div>
-    <div class="modal-body d-flex flex-column-reverse gap-2" id="user_chat">
+    <div class="pop-up-content" style="flex-direction:column-reverse;gap:0.5em; height:80%" id="user_chat">
       loading..
     </div>
-    <div class="modal-footer">
-
-      <p class="p-2 text-danger mx-auto" id="blerror" style="display:none">
-        <i class="bi bi-x-octagon-fill"></i> you are not allowed to send msg to this user anymore
-
+    <div class="pop-up-footer">
+      <span class="" id="blerror" style="display:none"> you are not allowed to send msg to this user anymore</span>
     </div>
-    <div class="input-group p-2 " id="msgsender">
-      <input type="text" class="form-control rounded-0 border-0" id="msginput" placeholder="say something.."
-        aria-label="Recipient's username" aria-describedby="button-addon2">
-      <button class="btn btn-outline-primary primery-button rounded-0 border-0" id="sendmsg" data-user-id="0"
-        type="button">Send</button>
+    <div class="search-bar message-bar" id="msgsender">
+      <input type="text" class="log-reg-field search-area" style="width:100%" id="msginput"
+        placeholder="say something.." aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="primery-button search-button" id="sendmsg" data-user-id="0" type="button">Send</button>
     </div>
   </div>
 </div>
+</div>
+
+
+<div class="pop-up-window hide" id="create-post">
+  <div class="pop-up">
+    <div class="pop-up-heading">
+      <h2 class="heading-2">create Post</h2>
+      <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+    </div>
+    <div class="pop-up-content">
+      <a href="?create-post">create Text Post</a>
+      <a href="?create-book">Create book Post</a>
+    </div>
+  </div>
 </div>
 
 

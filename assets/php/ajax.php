@@ -146,13 +146,13 @@ if (isset($_POST['getmessages'])) {
             $seen = true;
         }
         $chatlist .= '  
-    <div class="d-flex justify-content-between border-bottom chatlist_item" data-bs-toggle="modal" data-bs-target="#chatbox" onclick="popchat(' . $chat['user_id'] . ')" >
-                        <div class="d-flex align-items-center p-2">
-                            <div><img src="assets/images/profile/'.$ch_user['uprofile_photo'].'" alt="" height="40" width="40" class="rounded-circle border">
-                            </div>
+    <div class="not-card" data-bs-toggle="modal" data-bs-target="#chatbox" onclick="popchat(' . $chat['user_id'] . ')" >
+                        <div class="nc-details">
+                            <img src="assets/images/profile/'.$ch_user['uprofile_photo'].'" alt="" height="40" width="40" class="pcm-img">
+                            
                             <div>&nbsp;&nbsp;</div>
-                            <div class="d-flex flex-column justify-content-center" >
-                                <a href="#" class="text-decoration-none text-dark"><h6 style="margin: 0px;font-size: small;">' . $ch_user['uname'] . '</h6></a>
+                            <div class="nc-info" >
+                                <a href="#" class="pcm-username"><h6 style="color: #b867f5;margin: 0px;font-size: small;">' . $ch_user['uname'] . '</h6></a>
                                 <p style="margin:0px;font-size:small" class="">' . $chat['messages'][0]['msg'] . '</p>
                                 <time style="font-size:small" class="timeago text-small" datetime="' . $chat['messages'][0]['created_at'] . '">' . timeAgo($chat['messages'][0]['created_at']) . '</time>
                             </div>
@@ -187,16 +187,21 @@ if (isset($_POST['getmessages'])) {
 
         foreach ($messages as $cm) {
             if ($cm['from_user_id'] == $_SESSION['userdata']['uid']) {
-                $cl1 = 'align-self-end bg-primary text-light';
-                $cl2 = 'text-light';
-
+                $cl1 = ' message-self';
+                $cl2 = 'white-txt';
+                if($cm['read_status']==0){
+                $cl3 = ' - unread';}
+                else{
+                    $cl3 = ' - read';
+                }
             } else {
                 $cl1 = '';
                 $cl2 = 'text-muted';
+                $cl3='';
             }
 
-            $chatmsg .= ' <div class="py-2 px-3 border rounded shadow-sm col-8 d-inline-block ' . $cl1 . '">' . $cm['msg'] . '<br>
-    <span style="font-size:small" class="' . $cl2 . '">' . timeAgo($cm['created_at']) . '</span>
+            $chatmsg .= ' <div class="message-box' . $cl1 . '"><span style="display:block">' . $cm['msg'] . '</span>
+    <span style="font-size:.8em;display:block;text-align:right" class="' . $cl2 . '">' .  timeAgo($cm['created_at']) . $cl3 .'</span>
 </div>';
         }
         $json['chat']['msgs'] = $chatmsg;

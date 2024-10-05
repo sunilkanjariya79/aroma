@@ -43,7 +43,11 @@ if (isset($_GET['search'])) {
       <?php
       showError('post_img');
       if (count($display_posts) < 1) {
-        echo "<p style='width:93vw' class='heading-2'>Follow Someone or Add a new post</p>";
+        echo "<div class='no-posts'>
+  <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
+  <h2>No Posts Yet</h2>
+  <p>Looks like there’s nothing here. Start sharing your thoughts!</p>
+</div>";
       }
       foreach ($display_posts as $post_details) {
         $likes = getPostLikes($post_details['pid']);
@@ -115,7 +119,12 @@ if (isset($_GET['search'])) {
       <?php
       showError('post_img');
       if (count($display_books) < 1) {
-        echo "<p style='width:93vw' class='heading-2'>Follow Someone or Add a new book</p>";
+        echo "<div class='no-posts'>
+  <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
+  <h2>No Posts Yet</h2>
+  <p>Looks like there’s nothing here. Start sharing your thoughts!</p>
+</div>
+";
       }
 
       foreach ($display_books as $book_details) {
@@ -155,7 +164,11 @@ if (isset($_GET['search'])) {
       <?php
       if (isset($_GET['search']))
         if (count($display_users) < 1) {
-          echo "<p style='width:93vw' class='heading-2'>No user Found</p>";
+          echo "<div class='no-posts'>
+  <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
+  <h2>No User Found</h2>
+  <p>Looks like You're trying to find someone, who does not exists </p>
+</div>";
         }
       foreach ($display_users as $userdata) {
         ?>

@@ -4,13 +4,17 @@ global $profile_books;
 $following = getFollowing($profile['uid']);
 $follower = getFollowers($profile['uid']);
 global $user;
-
-if (checkBlockStatus($profile['uid'], $user['uid'])) {
-  echo "user blocke you";
-  exit;
-}
 ?>
 <div class="profile-panel">
+<?php
+if (checkBlockStatus($profile['uid'], $user['uid'])) {
+  echo "<div class='no-posts'>
+  <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
+  <h2>You are blocked by this user</h2>
+  <p>You can't see anything from this user, You have been blocked by him</p>
+</div> </div>";
+  
+} else{?>
   <div class="profile-card">
     <img src="assets/images/profile/<?= $profile['uprofile_photo'] ?>" loading="lazy" alt="" class="profile-picture" />
     <div class="profile-information">
@@ -206,6 +210,8 @@ if (checkBlockStatus($profile['uid'], $user['uid'])) {
     </div>
   </div>
 </div>
+
+<?php }?>
 </body>
 
 </html>

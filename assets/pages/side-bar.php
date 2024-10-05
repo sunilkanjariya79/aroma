@@ -7,29 +7,30 @@
       </div>
       <div class="w-layout-vflex side-bar-nav">
         <div class="w-layout-hflex flex-block">
-          <a href="casual-post-wall.php">
+          <a href="?post-wall">
           <img src="assets/images/site-meta/home-simple-door.svg"  loading="eager" width="24" height="24" alt="" id="logo"/></a>
           <a href="?post-wall" class="side-bar-heading">Home</a>
         </div>
         <div class="w-layout-hflex flex-block">
-          <a href="">
+          <a class="messages-button">
           <img src="assets/images/site-meta/chat-bubble.svg" loading="eager" width="24" height="24" alt="" id="chat"/>
           <img src="assets/images/site-meta/chat-bubble-solid.svg" class="hide" loading="eager" width="24" height="24" alt="" id="new-chat"/></a>
           <a class="side-bar-heading messages-button">Messages</a>
         </div>
         <div class="w-layout-hflex flex-block">
-          <img src="assets/images/site-meta/plus-circle.svg" loading="eager" width="24" height="24" alt="" id="logo" />
-          <a href="?create-post" class="side-bar-heading">Create Post</a>
+          <a class="create-post">
+          <img src="assets/images/site-meta/plus-circle.svg" loading="eager" width="24" height="24" alt="" id="logo" /></a>
+          <a class="side-bar-heading create-post">Create Post</a>
         </div>
-        <div class="w-layout-hflex flex-block">
+        <div class="w-layout-hflex flex-block"><a class="notification-button show-not">
         <?php
 if(getUnreadNotificationsCount()>0){
     ?> <img class="show-not" src="assets/images/site-meta/new-app-notification-solid.svg" loading="eager" width="24" height="24" alt="" id="logo"/><?php }else {?>
-          <img class="show-not" src="assets/images/site-meta/app-notification.svg" loading="eager" width="24" height="24" alt="" id="logo"/><?php }?>
+          <img class="show-not" src="assets/images/site-meta/app-notification.svg" loading="eager" width="24" height="24" alt="" id="logo"/><?php }?></a>
           <a class="side-bar-heading notification-button show-not">Notification</a>
         </div>
         <div class="w-layout-hflex flex-block">
-          <a href="profile-page.php">
+          <a href="?u=<?=$_SESSION['userdata']['username']?>">
           <img src="assets/images/site-meta/profile-circle.svg" loading="eager" width="24" height="24" alt="" id="logo"/></a>
           <a href="?u=<?=$_SESSION['userdata']['username']?>" class="side-bar-heading">Profile</a>
         </div>
