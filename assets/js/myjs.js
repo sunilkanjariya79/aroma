@@ -1,5 +1,10 @@
 // script.js
 $(document).ready(function () {
+  synmsg();
+
+  setInterval(() => {
+    synmsg();
+  },1000);
 
   //opening last opened tab
   // Check the stored value in localStorage
@@ -75,7 +80,7 @@ $(document).ready(function () {
 
   //to show add details menu in books section
   $('.show-book-input').click(function (event) {
-    $('.pop-up-window').removeClass('hide');
+    $('.book-input').removeClass('hide');
   });
 
   //to close pop up manu on page
@@ -125,9 +130,37 @@ $(document).ready(function () {
 
   //to close pop up manu on page
   $('.close-side-bar').click(function (event) {
-    $('#pop-up-side-bar').addClass('hide');
+    $('#notification_sidebar').addClass('hide');
   });
 
+  //to show likes menu
+  $('.messages-button').click(function (event) {
+    $('#messages_sidebar').removeClass('hide');
+  });
+
+  //to close pop up manu on page
+  $('.close-side-bar').click(function (event) {
+    $('#messages_sidebar').addClass('hide');
+  });
+
+  $('.report-post').click(function (event) {
+    var post_id = $(this).data('postId');
+    $('.report-post').removeClass('hide');
+    $('#post-id').attr("value",post_id);
+  });
+
+  $('.report-book').click(function (event) {
+    var book_id = $(this).data('bookId');
+    $('.report-book').removeClass('hide');
+    $('#book-id').attr("value",book_id);
+  });
+
+  
+  $('.report-user').click(function (event) {
+    var user_id = $(this).data('userId');
+    $('.report-user').removeClass('hide');
+    $('#user-id').attr("value",user_id);
+  });
 
   // create post, books and casual posts both
   let optionsButtons = $(".option-button");
@@ -207,6 +240,34 @@ $(document).ready(function () {
 
   // Initialize on page load
   initializer();
+
+  $("#sendmsg").click(function () {
+    var user_id = chatting_user_id;
+    var msg = $("#msginput").val();
+    if (!msg) return;
+  
+    $("#sendmsg").attr("disabled", true);
+    $("#msginput").attr("disabled", true);
+    $.ajax({
+      url: 'assets/php/ajax.php?sendmessage',
+      method: 'post',
+      dataType: 'json',
+      data: { user_id: user_id, msg: msg },
+      success: function (response) {
+        if (response.status) {
+          $("#sendmsg").attr("disabled", false);
+          $("#msginput").attr("disabled", false);
+          $("#msginput").val('');
+        } else {
+          alert('someting went wrong, try again after some time');
+        }
+  
+  
+  
+      }
+    });
+  
+  });
 });
 
 
@@ -512,18 +573,18 @@ $(".addbookcomment").click(function () {
 $(".show-not").click(function () {
 
   $.ajax({
-      url: 'assets/php/ajax.php?notread',
-      method: 'post',
-      dataType: 'json',
-      success: function (response) {
+    url: 'assets/php/ajax.php?notread',
+    method: 'post',
+    dataType: 'json',
+    success: function (response) {
 
-          if (response.status) {
-              
-          }
-
-
+      if (response.status) {
 
       }
+
+
+
+    }
   });
 
 });
@@ -539,4 +600,73 @@ document.getElementById('add-post-form').addEventListener('submit', function (e)
   // Set the value of the hidden input field
   document.getElementById('hidden-input').value = editableContent;
 });
+
+var chatting_user_id = 0;
+
+function popchat(user_id) {
+  $("#user_chat").html(`<div class="spinner-border text-center" role="status">
+
+  </div>`);
+
+  $("#chatter_username").text('loading..');
+  $("#chatter_name").text('');
+  $("#chatter_pic").attr('src', 'assets/images/profile/default_profile.jpg');
+  chatting_user_id = user_id;
+  $("#sendmsg").attr('data-user-id', user_id);
+}
+function synmsg() {
+  $.ajax({
+    url: 'assets/php/ajax.php',
+    method: 'post',
+    dataType: 'json',
+    data: { getmessages: true, chatter_id: chatting_user_id},
+    success: function (response) {
+      $(".chatlist").html(response.chatlist);
+      if (response.newmsgcount == 0) {
+        $("#new-chat").hide();
+        $("#chat").show();
+      } else {
+        $("#new-chat").show();
+        $("#chat").hide();
+
+
+      }
+      if (response.blocked) {
+        $("#msgsender").hide();
+        $("#blerror").show();
+
+      } else {
+        $("#msgsender").show();
+        $("#blerror").hide();
+      }
+
+      if (typeof chatting_user_id === "number" &&chatting_user_id != 0 ) {
+        $("#user_chat").html(response.chat.msgs);
+
+        $("#chatter_username").text(response.chat.userdata.username);
+        $("#cplink").attr('href', '?u=' + response.chat.userdata.username);
+
+        $("#chatter_name").text(response.chat.userdata.uname);
+        $("#chatter_pic").attr('src', 'assets/images/profile/' + response.chat.userdata.uprofile_photo);
+      }
+
+
+
+    }
+  });
+}
+
+function popchat(user_id) {
+  console.log('clicked');
+  $('#chatbox').removeClass('hide');
+  $("#user_chat").html(`<div class="spinner-border text-center" role="status">
+
+</div>`);
+
+  $("#chatter_username").text('loading..');
+  $("#chatter_name").text('');
+  $("#chatter_pic").attr('src', 'assets/images/profile/default_profile.jpg');
+  chatting_user_id = user_id;
+  $("#sendmsg").attr('data-user-id', user_id);
+}
 

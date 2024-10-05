@@ -968,6 +968,70 @@ function setNotificationStatusAsRead()
 }
 
 
+//for getting ids of chat users
+function getActiveChatUserIds(){
+    global $db;
+    $current_user_id = $_SESSION['userdata']['uid'];
+    $query = "SELECT from_user_id,to_user_id FROM messages WHERE to_user_id=".$current_user_id." or from_user_id=".$current_user_id." ORDER BY mid DESC";
+    $run = mysqli_query($db,$query);
+    $data =  mysqli_fetch_all($run,true);
+    $ids=array();
+    foreach($data as $ch){
+    if($ch['from_user_id']!=$current_user_id && !in_array($ch['from_user_id'],$ids)){
+       $ids[]=$ch['from_user_id'];
+    }
+
+    if($ch['to_user_id']!=$current_user_id && !in_array($ch['to_user_id'],$ids)){
+        $ids[]=$ch['to_user_id'];
+     }
+
+    }
+
+    return $ids;
+}
+
+function getMessages($user_id){
+    global $db;
+    $current_user_id = $_SESSION['userdata']['uid'];
+    $query = "SELECT * FROM messages WHERE (to_user_id=".$current_user_id." and from_user_id=".$user_id.") or (from_user_id=".$current_user_id." and to_user_id=".$user_id.") ORDER BY mid DESC";
+    $run = mysqli_query($db,$query);
+    return  mysqli_fetch_all($run,true);
+}
+
+function sendMessage($user_id,$msg){
+    global $db;
+    $current_user_id = $_SESSION['userdata']['uid'];
+    $query = "INSERT INTO messages (from_user_id,to_user_id,msg) VALUES(".$current_user_id.",".$user_id.",'".$msg."')";
+    return mysqli_query($db,$query);
+
+}
+
+function newMsgCount(){
+global $db;
+$current_user_id = $_SESSION['userdata']['uid'];
+$query="SELECT COUNT(*) as r FROM messages WHERE to_user_id=".$current_user_id." and read_status=0";
+$run=mysqli_query($db,$query);
+return mysqli_fetch_assoc($run)['r'];
+}
+
+function updateMessageReadStatus($user_id){
+    $cu_user_id = $_SESSION['userdata']['uid'];
+    global $db;
+    $query="UPDATE messages SET read_status=1 WHERE to_user_id=".$cu_user_id." and from_user_id=".$user_id;
+    return mysqli_query($db,$query);
+}
+
+function getAllMessages(){
+    $active_chat_ids = getActiveChatUserIds();
+    $conversation=array();
+    foreach($active_chat_ids as $index=>$id){
+        $conversation[$index]['user_id'] = $id;
+        $conversation[$index]['messages'] = getMessages($id);
+    }
+    return $conversation;
+}
+
+
 
 
 // to return the string in given limit
@@ -980,6 +1044,35 @@ function cutString($string, $limit)
     } else {
         // If the string is within the limit, return it as is
         return $string;
+    }
+}
+
+function validateReport($report){
+    $response = array();
+    $response['status'] = true;
+    if (!$report['preport']) {
+        $response['msg'] = "Add a reason to report this";
+        $response['status'] = false;
+        $response['field'] = 'preport';
+    }
+    return $response;
+
+}
+
+function addReport($report){
+    global $db;
+    $current_user_id = $_SESSION['userdata']['uid'];
+    if(isset($report['post-id']) && $report['post-id']!=0){
+        $query = "INSERT INTO report (reporter_id,rpost,report_text) VALUES(".$current_user_id.",".$report['post-id'].",'".$report['preport']."')";
+    return mysqli_query($db,$query);
+    }
+    else if(isset($report['book-id']) && $report['book-id']!=0){
+        $query = "INSERT INTO report (reporter_id,rbook,report_text) VALUES(".$current_user_id.",".$report['book-id'].",'".$report['preport']."')";
+    return mysqli_query($db,$query);
+    }
+    else if(isset($report['user-id']) && $report['user-id']!=0){
+        $query = "INSERT INTO report (reporter_id,uid,report_text) VALUES(".$current_user_id.",".$report['user-id'].",'".$report['preport']."')";
+    return mysqli_query($db,$query);
     }
 }
 function timeAgo($saved_date)

@@ -54,7 +54,17 @@ $likes = getPostLikes($post_data[0]['pid']);
               width="24" height="24" />
           </div>
           <img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" height="24" />
-          <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg" alt="" width="24" height="24" />
+          <?php
+            if ($post_data[0]['uid'] == $_SESSION['userdata']['uid']) {
+              ?>
+
+              <a href="assets/php/action.php/?deletepost=<?= $post_data[0]['pid'] ?>"><img
+                  src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" height="24" /></a>
+
+            <?php } else { ?>
+              <a data-post-id="<?= $post_data[0]['pid'] ?>" class="report-post"><img
+                  src="assets/images/site-meta/warning-circle.svg" alt="" width="24" height="24" /></a>
+            <?php } ?>
         </div>
         <div class="pco-count show-likes "> <span id="likecount<?= $post_data[0]['pid'] ?>"><?= count($likes) ?></span> People Liked
           This</div>
@@ -140,6 +150,26 @@ $likes = getPostLikes($post_data[0]['pid']);
         <?php  }?>
       </div>
       
+    </div>
+  </div>
+</div>
+
+
+<div class="pop-up-window report-post hide">
+  <div class="pop-up">
+    <div class="pop-up-heading">
+      <h2 class="heading-2">Reporting Post</h2>
+      <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+    </div>
+    <div class="pop-up-content">
+      <form action="assets/php/action.php/?report" method="post">
+        <textarea placeholder="Why Are You Reporting This Post?" maxlength="220" name="preport" id="preport"
+          class="log-reg-field reg-edit-about w-input"></textarea>
+        <input type="hidden" id="post-id" name="post-id" value="0">
+        <input type="submit" class="primery-button" value="Report">
+
+      </form>
+
     </div>
   </div>
 </div>

@@ -35,6 +35,9 @@ if (checkBlockStatus($profile['uid'], $user['uid'])) {
               <div class="pop-up-content">
                 <a
                   href="assets/php/action.php?block=<?= $profile['uid'] ?>&username=<?= $profile['username'] ?>">Block</a>
+                  <a
+                  data-bs-target="#chatbox" onclick="popchat(<?=$profile['uid']?>)"> message</a>
+                  <a class="report-user" data-user-id="<?= $profile['uid'] ?>"> report User</a>
               </div>
             </div>
           </div>
@@ -182,6 +185,26 @@ if (checkBlockStatus($profile['uid'], $user['uid'])) {
     <?php include("assets/pages/tabs.php"); ?>
   </div>
   <?php } ?>
+</div>
+
+
+<div class="pop-up-window report-user hide">
+  <div class="pop-up">
+    <div class="pop-up-heading">
+      <h2 class="heading-2">Reporting user</h2>
+      <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+    </div>
+    <div class="pop-up-content">
+      <form action="assets/php/action.php/?report" method="post">
+        <textarea placeholder="Why Are You Reporting This Post?" maxlength="220" name="preport" id="preport"
+          class="log-reg-field reg-edit-about w-input"></textarea>
+        <input type="hidden" id="user-id" name="user-id" value="0">
+        <input type="submit" class="primery-button" value="Report">
+
+      </form>
+
+    </div>
+  </div>
 </div>
 </body>
 

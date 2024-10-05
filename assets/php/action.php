@@ -144,4 +144,17 @@ if(isset($_GET['addbook'])){
   
     
   }
+
+  if(isset($_GET['report'])){
+   $response = validateReport($_POST);
+
+   if($response['status']){
+    addReport($_POST);
+    header('location:../../../');
+   }
+   else{
+    $_SESSION['error']=$response;
+        header("location:../../../?not_done");
+   }
+  }
 ?>

@@ -207,6 +207,50 @@ select {
   padding: 5px 20px;
 }
 
+
+.left-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.left-panel-body {
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.not-card {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.nc-details {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.custom-class {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nc-text{
+  text-decoration: none;
+  color: #b0b0b0;
+}
+
+.muted{
+  color: #888888;
+}
+
+
 /* right bar */
 
 .right-panel {

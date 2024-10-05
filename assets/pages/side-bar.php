@@ -13,8 +13,9 @@
         </div>
         <div class="w-layout-hflex flex-block">
           <a href="">
-          <img src="assets/images/site-meta/chat-bubble.svg" loading="eager" width="24" height="24" alt="" id="logo"/></a>
-          <a href="?create-book" class="side-bar-heading">Messages</a>
+          <img src="assets/images/site-meta/chat-bubble.svg" loading="eager" width="24" height="24" alt="" id="chat"/>
+          <img src="assets/images/site-meta/chat-bubble-solid.svg" class="hide" loading="eager" width="24" height="24" alt="" id="new-chat"/></a>
+          <a class="side-bar-heading messages-button">Messages</a>
         </div>
         <div class="w-layout-hflex flex-block">
           <img src="assets/images/site-meta/plus-circle.svg" loading="eager" width="24" height="24" alt="" id="logo" />

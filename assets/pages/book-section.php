@@ -43,7 +43,8 @@ if (empty($book_data)) {
             src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" height="24" /></a>
 
       <?php } else { ?>
-        <a href="/assets"><img src="assets/images/site-meta/warning-circle.svg" alt="" width="24" height="24" /></a>
+        <a data-book-id="<?= $book_data[0]['bid'] ?>" class="report-book"><img
+                  src="assets/images/site-meta/warning-circle.svg" alt="" width="24" height="24" /></a>
       <?php } ?>
     </div>
     <div class="pco-count show-likes"> <span id="likecount<?= $book_data[0]['bid'] ?>"><?= count($likes) ?></span>
@@ -167,6 +168,26 @@ if (empty($book_data)) {
           </div>
         </div>
       <?php } ?>
+    </div>
+  </div>
+</div>
+
+
+<div class="pop-up-window report-book hide">
+  <div class="pop-up">
+    <div class="pop-up-heading">
+      <h2 class="heading-2">Reporting Book</h2>
+      <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+    </div>
+    <div class="pop-up-content">
+      <form action="assets/php/action.php/?report" method="post">
+        <textarea placeholder="Why Are You Reporting This Post?" maxlength="220" name="preport" id="preport"
+          class="log-reg-field reg-edit-about w-input"></textarea>
+        <input type="hidden" id="book-id" name="book-id" value="0">
+        <input type="submit" class="primery-button" value="Report">
+
+      </form>
+
     </div>
   </div>
 </div>

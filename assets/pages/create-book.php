@@ -1,6 +1,6 @@
     <form action="assets/php/action.php?addbook" method="post" class="main-content" id="add-post-form"enctype="multipart/form-data" style= "padding: 0px 20px;">
     <h2 class="secondary-heading" style="margin-right:auto"> Create Post</h2>
-    <div class="pop-up-window hide">
+    <div class="pop-up-window book-input hide">
     <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">heading</h2>
