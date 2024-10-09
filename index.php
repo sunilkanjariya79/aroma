@@ -16,6 +16,10 @@ if (isset($_GET['register'])) {
 elseif (isset($_GET['login'])) {
     showPage('header', ['page_title' => 'aroma-Log-In']);
     showPage('login');
+}elseif (isset($_GET['change-password'])) {
+    showPage('side-bar');
+    showPage('header', ['page_title' => 'change password']);
+    showPage('change-password');
 } elseif (isset($_GET['u']) && isset($_SESSION['auth'])) {
     $profile = getUserByUsername($_GET['u']);
     $profile_post = getPostById($profile['uid']);
@@ -63,6 +67,14 @@ elseif (isset($_GET['login'])) {
     showPage('top');
     showPage('post-wall');
 
+}elseif(isset($_GET['adminpanel']) && isset($_SESSION['auth']) && $_SESSION['userdata']['is_admin']==1) {
+    $userlist= getAllUsers();
+    $postlist= getPost();
+    $booklist= getBook();
+    $reportlist= getReport();
+    showPage('header', ['page_title' => 'Main wall']);
+    showPage('side-bar');
+    showPage('admin-panel');
 }
 
 else {

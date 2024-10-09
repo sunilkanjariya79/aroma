@@ -29,22 +29,22 @@ if (empty($book_data)) {
           $unlike_btn_display = 'hide';
         }
         ?>
-        <img src="assets/images/site-meta/heart.svg " class="likebookbtn <?= $like_btn_display ?>"
+        <img src="assets/images/site-meta/heart.svg " class="ps-option likebookbtn <?= $like_btn_display ?>"
           data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
           width="24" height="24" />
-        <img src="assets/images/site-meta/heart-solid.svg " class="unlikebookbtn <?= $unlike_btn_display ?>"
+        <img src="assets/images/site-meta/heart-solid.svg " class="ps-option unlikebookbtn <?= $unlike_btn_display ?>"
           data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
           width="24" height="24" />
-      </div><img src="images/uil_share.svg" alt="" width="24" height="24"><?php
+      </div><img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" class="ps-option" height="24"><?php
       if ($book_data[0]['uid'] == $_SESSION['userdata']['uid']) {
         ?>
 
-        <a href="assets/php/action.php/?deletebook=<?= $book_data[0]['bid'] ?>"><img
-            src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" height="24" /></a>
+        <a href="assets/php/action.php/?deletebook=<?= $book_data[0]['bid'] ?>" style="line-height:0px;" ><img
+            src="assets/images/site-meta/bin-minus-in.svg" alt="" class="ps-option" width="24" height="24" /></a>
 
       <?php } else { ?>
-        <a data-book-id="<?= $book_data[0]['bid'] ?>" class="report-book"><img
-                  src="assets/images/site-meta/warning-circle.svg" alt="" width="24" height="24" /></a>
+        <a data-book-id="<?= $book_data[0]['bid'] ?>" style="line-height:0px;" class="report-book"><img
+                  src="assets/images/site-meta/warning-circle.svg" alt="" class="ps-option" width="24" height="24" /></a>
       <?php } ?>
     </div>
     <div class="pco-count show-likes"> <span id="likecount<?= $book_data[0]['bid'] ?>"><?= count($likes) ?></span>
@@ -132,10 +132,11 @@ if (empty($book_data)) {
                   <p class="pcm-text pcm-username">u/<?= $comment['username'] ?></p>
                   <p class="pcm-text"><?= $comment['uname'] ?></p>
                 </div>
-                <p class="pcm-text pd-date"><?= timeAgo($comment['cdate']) ?></p>
+                
               </a>
             </div>
             <p class="main-text"><?= $comment['c_content'] ?></p>
+            <p class="pcm-text pd-date" style="align-self:flex-end;"><?= timeAgo($comment['cdate']) ?></p>
           </div>
         <?php } ?>
       </div>

@@ -44,7 +44,6 @@ if (isset($_POST['likepost'])) {
 
 if (isset($_POST['likebook'])) {
     $book_id = $_POST['book_id'];
-
     if (!checkBookLikeStatus($book_id)) {
         if (likeBook($book_id)) {
             $response['status'] = true;

@@ -11,22 +11,10 @@ include_once('assets/pages/header.php'); ?>
     </div>
     <div class="form-block w-form">
       <form method="post" class="register-form" action="assets/php/action.php?register" enctype="multipart/form-data">
-        <a class="reg-edit-img-in w-inline-block">
-          <img src="assets/images/site-meta/typcn_plus.svg" alt="" class="image-2" /></a>
-        <div class="pop-up-window add-img hide">
-          <div class="pop-up">
-            <div class="pop-up-heading">
-              <h2 class="heading-2">heading</h2>
-              <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
-            </div>
-            <div class="pop-up-content">
-              <input type="file" name="uprofile_pic" id="uprofile_photo">
-              <label for="uprofile_photo" class="custom-file-upload">Add Book Cover <img
-                  src="assets/images/site-meta/plus-circle.svg" alt="" /></a></label>
-              <a onClick class="primery-button"> Add</a>
-            </div>
-          </div>
-        </div>
+        <input type="file" name="uprofile_pic" id="uprofile_pic">
+              <label for="uprofile_pic" class="custom-file-upload">
+          <img src="assets/images/site-meta/profile-circle.svg" alt="" class="image-2" /></label>
+          <?= showError('profile_pic') ?>
 
         <input class="log-reg-field w-input" maxlength="20" name="umail" placeholder="Enter your Email" type="email"
           required="" />

@@ -65,29 +65,29 @@ if (isset($_GET['search'])) {
                 $unlike_btn_display = 'hide';
               }
               ?>
-              <img src="assets/images/site-meta/heart.svg " class="likepostbtn <?= $like_btn_display ?>"
+              <img src="assets/images/site-meta/heart.svg " class="pc-control likepostbtn <?= $like_btn_display ?>"
                 data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
                 width="24" height="24" />
-              <img src="assets/images/site-meta/heart-solid.svg " class="unlikepostbtn <?= $unlike_btn_display ?>"
+              <img src="assets/images/site-meta/heart-solid.svg " class="pc-control unlikepostbtn <?= $unlike_btn_display ?>"
                 data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
                 width="24" height="24" />
               <div class="pco-count" id="likecount<?= $post_details['pid'] ?>"><?= count($likes) ?></div>
             </div>
             <div class="pc-option">
-              <img src="assets/images/site-meta/uil_comment.svg" alt="" width="24" height="24" />
+              <img src="assets/images/site-meta/uil_comment.svg" class="pc-control" alt="" width="24" height="24" />
               <div class="pco-count"><?= count($comments) ?></div>
             </div>
-            <img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" height="24" />
+            <img src="assets/images/site-meta/share-android-solid.svg" class="pc-control" alt="" width="24" height="24" />
             <?php
             if ($post_details['uid'] == $_SESSION['userdata']['uid']) {
               ?>
 
               <a href="assets/php/action.php/?deletepost=<?= $post_details['pid'] ?>"><img
-                  src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" height="24" /></a>
+                  src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" class="pc-control" height="24" /></a>
 
             <?php } else { ?>
               <a data-post-id="<?= $post_details['pid'] ?>" class="report-post"><img
-                  src="assets/images/site-meta/warning-circle.svg" alt="" width="24" height="24" /></a>
+                  src="assets/images/site-meta/warning-circle.svg" alt="" width="24" class="pc-control" height="24" /></a>
             <?php } ?>
 
           </div>

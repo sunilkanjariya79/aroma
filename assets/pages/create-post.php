@@ -1,5 +1,5 @@
 
-    <form action="assets/php/action.php?addpost" method="post" class="main-content" style= "padding: 0px 20px;" id="add-post-form">
+    <form action="assets/php/action.php?addpost" method="post" class="main-content" style= "padding: 0px 20px;top:0px;" id="add-post-form">
     <h2 class="secondary-heading" style="margin-right:auto"> Create Post</h2>
     <input type="text" name="title" id="title" placeholder="Title" class="log-reg-field">
     <?=showError('title')?>
@@ -15,32 +15,35 @@
         <img src="assets/images/site-meta/italic.svg" alt="B">
         </button>
         <button type="button" id="underline" class="option-button format">
-          <i class="fa-solid fa-underline"></i>
+        <img src="assets/images/site-meta/underline.svg" alt="B">
+          
         </button>
         <button type="button" id="strikethrough" class="option-button format">
         <img src="assets/images/site-meta/strikethrough.svg" alt="B">
         </button>
         <button type="button" id="superscript" class="option-button script">
-          <i class="fa-solid fa-superscript"></i>
+        <img src="assets/images/site-meta/superscript.svg" alt="B">
         </button>
         <button type="button" id="subscript" class="option-button script">
-          <i class="fa-solid fa-subscript"></i>
+        <img src="assets/images/site-meta/subscript.svg" alt="B">
         </button>   
 
         <!-- Undo/Redo -->
         <button type="button" id="undo" class="option-button">
-          <i class="fa-solid fa-rotate-left"></i>
+        <img src="assets/images/site-meta/undo.svg" alt="B">
+
         </button>
         <button type="button" id="redo" class="option-button">
-          <i class="fa-solid fa-rotate-right"></i>
+        <img src="assets/images/site-meta/redo.svg" alt="B">
         </button>
 
         <!-- Link -->
         <button type="button" id="createLink" class="adv-option-button">
-          <i class="fa fa-link"></i>
+          <img src="assets/images/site-meta/attachment.svg" alt="B">
         </button>
         <button type="button" id="unlink" class="option-button">
-          <i class="fa fa-unlink"></i>
+        <img src="assets/images/site-meta/deattachment.svg" alt="B">
+          
         </button>
         <input type="submit" value="Post" class="primery-button" style="margin-left:auto">
       </div>

@@ -1,7 +1,7 @@
 <div class="left-panel hide pop-up-side-bar" id="notification_sidebar">
   <div class="left-panel-header">
     <h5 class="heading-2" id="left-panel-title">Notifications</h5>
-    <a class="close-side-bar"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+    <a class="close-side-bar"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
   </div>
   <div class="left-panel-body">
     <?php
@@ -55,7 +55,7 @@
 <div class="left-panel hide pop-up-side-bar" id="messages_sidebar">
   <div class="left-panel-header">
     <h5 class="heading-2" id="left-panel-title">Messages</h5>
-    <a class="close-side-bar"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+    <a class="close-side-bar"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
   </div>
   <div class="left-panel-body chatlist">
   </div>
@@ -86,7 +86,7 @@
     <div class="search-bar message-bar" id="msgsender">
       <input type="text" class="log-reg-field search-area" style="width:100%" id="msginput"
         placeholder="say something.." aria-label="Recipient's username" aria-describedby="button-addon2">
-      <button class="primery-button search-button" id="sendmsg" data-user-id="0" type="button">Send</button>
+      <button class="primery-button" id="sendmsg" data-user-id="0" type="button">Send</button>
     </div>
   </div>
 </div>

@@ -66,8 +66,71 @@ $(document).ready(function () {
 
   });
 
+  //for admin-panel
+  var adminTab = localStorage.getItem('admin');
+
+  // If no tab is set, default to casuals
+  if (adminTab === 'book') {
+    $('#post-container').hide();
+    $('#book-container').show();
+    $('#user-container').hide();
+    $('#report-container').hide();
+  }
+   else if(adminTab == 'post') {
+    $('#post-container').show();
+    $('#book-container').hide();
+    $('#user-container').hide();
+    $('#report-container').hide();
+  }
+  else if(adminTab == 'user'){
+    $('#post-container').hide();
+    $('#book-container').hide();
+    $('#user-container').show();
+    $('#report-container').hide();
+  }
+  else{
+    $('#post-container').hide();
+    $('#book-container').hide();
+    $('#user-container').hide();
+    $('#report-container').show();
+  }
 
 
+  $('#post-panel').click(function (event) {
+    event.preventDefault(); // Prevent the default link behavior
+    $('#post-container').show();
+    $('#book-container').hide();
+    $('#user-container').hide();
+    $('#report-container').hide();
+    localStorage.setItem('admin', 'post');
+  });
+
+  $('#book-panel').click(function (event) {
+    event.preventDefault(); // Prevent the default link behavior
+    $('#post-container').hide();
+    $('#book-container').show();
+    $('#user-container').hide();
+    $('#report-container').hide();
+    localStorage.setItem('admin', 'book');
+  });
+
+  $('#user-panel').click(function (event) {
+    event.preventDefault(); // Prevent the default link behavior
+    $('#post-container').hide();
+    $('#book-container').hide();
+    $('#user-container').show();
+    $('#report-container').hide();
+    localStorage.setItem('admin','user');
+  });
+
+  $('#report-panel').click(function (event) {
+    event.preventDefault(); // Prevent the default link behavior
+    $('#post-container').hide();
+    $('#book-container').hide();
+    $('#user-container').hide();
+    $('#report-container').show();
+    localStorage.setItem('admin', 'report');
+  });
   //to show add photo menu on register and update page
   $('.reg-edit-img-in').click(function (event) {
     $('.add-img').removeClass('hide');
