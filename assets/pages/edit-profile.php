@@ -18,7 +18,7 @@ global $user;
           <form method="post" class="register-form" action="assets/php/action.php?updateprofile" enctype="multipart/form-data">
             <input type="file" name="uprofile_pic" id="uprofile_pic">
             <label for="uprofile_pic">
-              <img src="assets/images/profile/<?php echo $user['uprofile_photo']?>" alt="" class="image-2" /></label>
+              <img src="assets/images/profile/<?php echo $user['uprofile_photo']?>"   class="image-2" /></label>
             <div class="lr-field-box" style="">
             <input class="log-reg-field lg-field w-input" maxlength="256" name="uname" value=<?php echo $user['uname']?> placeholder="Enter your Name" type="text" required=""/>
             <?=showError('uname')?>
@@ -38,5 +38,3 @@ global $user;
     </div>
   </div>
 </div>
-  <?php include_once('assets/pages/header.php');
-?>

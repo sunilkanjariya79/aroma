@@ -19,7 +19,6 @@ $(document).ready(function () {
     $('#casuals').addClass('w--current');
     $('#books').removeClass('w--current');
   }
- 
   //to change to casual posts tab
   $('#casuals').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
@@ -42,7 +41,6 @@ $(document).ready(function () {
     $('#casuals').removeClass('w--current');
     localStorage.setItem('active', 'books');
     $('#users').removeClass('w--current');
- 
   });
    $('#users').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
@@ -81,7 +79,6 @@ $(document).ready(function () {
     $('#user-container').hide();
     $('#report-container').show();
   }
- 
   $('#post-panel').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
     $('#post-container').show();
@@ -118,33 +115,17 @@ $(document).ready(function () {
   $('.reg-edit-img-in').click(function (event) {
     $('.add-img').removeClass('hide');
   });
-   //to close pop up manu on page
-  $('.close').click(function (event) {
-    $('.pop-up-window').addClass('hide');
-  });
    //to show add details menu in books section
   $('.show-book-input').click(function (event) {
     $('.book-input').removeClass('hide');
-  });
-   //to close pop up manu on page
-  $('.close').click(function (event) {
-    $('.pop-up-window').addClass('hide');
   });
    //to show add details menu in follow section
   $('.show-follow-input').click(function (event) {
     $('#following').removeClass('hide');
   });
-   //to close pop up manu on page
-  $('.close').click(function (event) {
-    $('.pop-up-window').addClass('hide');
-  });
    //to show add details menu in followers section
   $('.show-follower-input').click(function (event) {
     $('#followers').removeClass('hide');
-  });
-   //to close pop up manu on page
-  $('.close').click(function (event) {
-    $('.pop-up-window').addClass('hide');
   });
    //to show likes menu
   $('.show-likes').click(function (event) {
@@ -259,14 +240,13 @@ $(document).ready(function () {
    // Remove highlights from all buttons in a group
   const highlighterRemover = (buttons) => {
     buttons.removeClass("active");
-  };
+  }; 
    // Initialize on page load
   initializer();
    $("#sendmsg").click(function () {
     var user_id = chatting_user_id;
     var msg = $("#msginput").val();
     if (!msg) return;
-  
     $("#sendmsg").attr("disabled", true);
     $("#msginput").attr("disabled", true);
     $.ajax({
@@ -282,14 +262,9 @@ $(document).ready(function () {
         } else {
           alert('someting went wrong, try again after some time');
         }
-  
-  
-  
       }
     });
-  
   });
-   
 $('#sharethispage').click(function(){
   var tempurl = $('<input>');
   $('body').append(tempurl);
@@ -316,7 +291,6 @@ $('#sharethispage').click(function(){
   alert("done");
 });
 });
- 
 //for follow the user
 $(".followbtn").click(function () {
   var user_id_r = $(this).data('userId');
@@ -328,27 +302,23 @@ $(".followbtn").click(function () {
     dataType: 'json',
     data: { follow: true, user_id: user_id_r },
     success: function (response) {
-      console.log(response);
       if (response.status) {
         $(button).data('userId', 0);
         $(button).html('Followed');
         $(button).removeClass('primery-button');
         $(button).addClass('secondary-button');
- 
       } else {
         $(button).attr('disabled', false);
          alert('something is wrong,try again after some time');
       }
     },
     error: function (xhr, status, error) {
-      // Handle errors
       console.error("AJAX Error: ", status, error);
       alert('An error occurred. Please try again later.');
       $(button).attr('disabled', false);  // Re-enable button on error
     }
   });
  });
- 
 //for unfollow the user
 $(".unfollowbtn").click(function () {
   var user_id_r = $(this).data('userId');
@@ -360,13 +330,11 @@ $(".unfollowbtn").click(function () {
     dataType: 'json',
     data: { unfollow: true, user_id: user_id_r },
     success: function (response) {
-      console.log(response);
       if (response.status) {
         $(button).data('userId', 0);
         $(button).html('Unfollowed');
         $(button).addClass('primery-button');
         $(button).removeClass('secondary-button');
- 
       } else {
         $(button).attr('disabled', false);
          alert('something is wrong,try again after some time');
@@ -380,9 +348,7 @@ $(".unfollowbtn").click(function () {
     }
   });
  });
- 
  //for like the post
- 
  $(".likepostbtn").click(function () {
   var post_id_r = $(this).data('postId');
   var button = this;
@@ -393,7 +359,6 @@ $(".unfollowbtn").click(function () {
     dataType: 'json',
     data: { likepost: true, post_id: post_id_r },
     success: function (response) {
-      console.log(response);
       if (response.status) {
          $(button).attr('disabled', false);
         $(button).hide();
@@ -404,7 +369,6 @@ $(".unfollowbtn").click(function () {
         $(button).attr('disabled', false);
         alert('something is wrong,try again after some time');
        }
- 
     },
     error: function (xhr, status, error) {
       // Handle errors
@@ -414,7 +378,6 @@ $(".unfollowbtn").click(function () {
     }
   });
 });
- 
  $(".unlikepostbtn").click(function () {
   var post_id_r = $(this).data('postId');
   var button = this;
@@ -451,7 +414,6 @@ $(".unfollowbtn").click(function () {
     dataType: 'json',
     data: { likebook: true, book_id: book_id_r },
     success: function (response) {
-      console.log(response);
       if (response.status) {
          $(button).attr('disabled', false);
         $(button).hide();
@@ -516,7 +478,6 @@ $(".addpostcomment").click(function () {
     dataType: 'json',
     data: { addpostcomment: true, post_id: post_id_r, comment: comment_v },
     success: function (response) {
-      console.log(response);
       if (response.status) {
          $(button).attr('disabled', false);
         $(button).siblings('.comment-input').attr('disabled', false);
@@ -552,7 +513,6 @@ $(".addbookcomment").click(function () {
     dataType: 'json',
     data: { addbookcomment: true, book_id: book_id_r, comment: comment_v },
     success: function (response) {
-      console.log(response);
       if (response.status) {
          $(button).attr('disabled', false);
         $(button).siblings('.comment-box').attr('disabled', false);
@@ -579,6 +539,7 @@ $(".addbookcomment").click(function () {
     dataType: 'json',
     success: function (response) {
       if (response.status) {
+        window.reload();
       }
     }
   });
@@ -586,21 +547,12 @@ $(".addbookcomment").click(function () {
  
  //to get text of post
  document.getElementById('add-post-form').addEventListener('submit', function (e) {
-  // Get the content of the contenteditable div
   var editableContent = document.getElementById('text-input').innerHTML;
-   // Set the value of the hidden input field
   document.getElementById('hidden-input').value = editableContent;
 });
+
+
  var chatting_user_id = 0;
- function popchat(user_id) {
-  $("#user_chat").html(`<div class="spinner-border text-center" role="status">
-   </div>`);
-   $("#chatter_username").text('loading..');
-  $("#chatter_name").text('');
-  $("#chatter_pic").attr('src', 'assets/images/profile/default_profile.jpg');
-  chatting_user_id = user_id;
-  $("#sendmsg").attr('data-user-id', user_id);
-}
 function synmsg() {
   $.ajax({
     url: 'assets/php/ajax.php',
@@ -615,17 +567,18 @@ function synmsg() {
       } else {
         $("#new-chat").show();
         $("#chat").hide();
- 
       }
       if (response.blocked) {
         $("#msgsender").hide();
         $("#blerror").show();
+        $('.pop-up-footer').show();
+
        } else {
         $("#msgsender").show();
-        $('.pop-up-footer').addClass('hide');
-        $("#blerror").addClass('hide');
+        $('.pop-up-footer').hide();
+        $("#blerror").hide();
       }
-       if (typeof chatting_user_id === "number" &&chatting_user_id != 0 ) {
+       if (typeof chatting_user_id === "number" && chatting_user_id != 0 ) {
         $("#user_chat").html(response.chat.msgs);
          $("#chatter_username").text(response.chat.userdata.username);
         $("#cplink").attr('href', '?u=' + response.chat.userdata.username);
@@ -637,7 +590,6 @@ function synmsg() {
   });
 }
  function popchat(user_id) {
-  console.log('clicked');
   $('#chatbox').removeClass('hide');
   $("#user_chat").html(`<div class="spinner-border text-center" role="status">
  </div>`);

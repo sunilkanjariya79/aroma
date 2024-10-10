@@ -1,7 +1,7 @@
 <div class="left-panel hide pop-up-side-bar" id="notification_sidebar">
   <div class="left-panel-header">
     <h5 class="heading-2" id="left-panel-title">Notifications</h5>
-    <a class="close-side-bar"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+    <a class="close-side-bar"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
   </div>
   <div class="left-panel-body">
     <?php
@@ -19,7 +19,7 @@
       ?>
         <a href="<?=$post?>" class="not-card">
         <div class="nc-details">
-          <img src="assets/images/profile/<?= $fuser['uprofile_photo'] ?>" alt="" height="40" width="40" class="pcm-img">
+          <img src="assets/images/profile/<?= $fuser['uprofile_photo'] ?>"   height="40" width="40" class="pcm-img">
           <div>&nbsp;&nbsp;</div>
           <div class="nc-info">
               <h6 style="margin: 0px;font-size: small;"><?= $fuser['uname'] ?></h6>
@@ -47,7 +47,7 @@
  <div class="left-panel hide pop-up-side-bar" id="messages_sidebar">
   <div class="left-panel-header">
     <h5 class="heading-2" id="left-panel-title">Messages</h5>
-    <a class="close-side-bar"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+    <a class="close-side-bar"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
   </div>
   <div class="left-panel-body chatlist">
   </div>
@@ -57,20 +57,20 @@
     <div class="pop-up-heading" style="padding:15px 20px">
       <div class="profile-card-min" style="padding:0px;">
         <a href="" id="cplink" class="link-block w-inline-block">
-          <img src="assets/images/profile/default_profile.jpg" id="chatter_pic"   alt="" class="pcm-img" />
+          <img src="assets/images/profile/default_profile.jpg" id="chatter_pic"     class="pcm-img" />
           <div class="pcm-details">
             <p class="pcm-text pcm-username" id="chatter_username">Loading?></p>
             <p class="pcm-text" id="chatter_name">Loading</p>
           </div>
         </a>
-        <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" alt=""></a>
+        <a class="close"><img src="assets/images/site-meta/xmark-circle.svg"  ></a>
       </div>
     </div>
     <div class="pop-up-content" style="flex-direction:column-reverse;gap:0.5em; height:80%" id="user_chat">
       loading..
     </div>
     <div class="pop-up-footer">
-      <span class="" id="blerror" style="display:none"> you are not allowed to send msg to this user anymore</span>
+      <span id="blerror"> you are not allowed to send msg to this user anymore</span>
     </div>
     <div class="search-bar message-bar" id="msgsender">
       <input type="text" class="log-reg-field search-area" style="width:100%" id="msginput"
@@ -84,7 +84,7 @@
   <div class="pop-up">
     <div class="pop-up-heading">
       <h2 class="heading-2">create Post</h2>
-      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
     </div>
     <div class="pop-up-content">
       <a href="?create-post" class="pop-up-option">Create Text Post</a>

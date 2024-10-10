@@ -51,30 +51,28 @@ global $reportlist;
                         ?>
                         <img src="assets/images/site-meta/heart.svg "
                             class="pc-control likepostbtn <?= $like_btn_display ?>"
-                            data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>"
-                            alt="" width="24" height="24" />
+                            data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" width="24" height="24" />
                         <img src="assets/images/site-meta/heart-solid.svg "
                             class="pc-control unlikepostbtn <?= $unlike_btn_display ?>"
-                            data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>"
-                            alt="" width="24" height="24" />
+                            data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" width="24" height="24" />
                         <div class="pco-count" id="likecount<?= $post_details['pid'] ?>"><?= count($likes) ?></div>
                     </div>
                     <div class="pc-option">
-                        <img src="assets/images/site-meta/uil_comment.svg" class="pc-control" alt="" width="24"
+                        <img src="assets/images/site-meta/chat-lines.svg" class="pc-control" width="24"
                             height="24" />
                         <div class="pco-count"><?= count($comments) ?></div>
                     </div>
-                    <img src="assets/images/site-meta/share-android-solid.svg" class="pc-control" alt="" width="24"
+                    <img src="assets/images/site-meta/share-android-solid.svg" class="pc-control" width="24"
                         height="24" />
                     <?php
                     if ($post_details['uid'] == $_SESSION['userdata']['uid'] || $_SESSION['userdata']['is_admin'] == 1) {
                         ?>
                         <a href="assets/php/action.php/?deletepost=<?= $post_details['pid'] ?>"><img
-                                src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" class="pc-control"
+                                src="assets/images/site-meta/bin-minus-in.svg" width="24" class="pc-control"
                                 height="24" /></a>
                     <?php } else { ?>
                         <a data-post-id="<?= $post_details['pid'] ?>" class="report-post"><img
-                                src="assets/images/site-meta/warning-circle.svg" alt="" width="24" class="pc-control"
+                                src="assets/images/site-meta/warning-circle.svg" width="24" class="pc-control"
                                 height="24" /></a>
                     <?php } ?>
                 </div>
@@ -113,7 +111,7 @@ global $reportlist;
             <div class="book-card tab-details">
                 <div class="book-thumbnail">
                     <img src="assets/images/book-cover/<?= $book_details['bcover'] ?>"   width="Auto"
-                        height="200" alt="" class="image" />
+                        height="200" class="image" />
                 </div>
                 <div class="book-details">
                     <div class="book-title-container">
@@ -151,7 +149,7 @@ global $reportlist;
             <div class="profile-card-min">
                 <a href="?u=<?= $userdata['username'] ?>" style="width:100%; margin-right: 20px;"
                     class="link-block w-inline-block">
-                    <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
+                    <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"
                         class="pcm-img" />
                     <div class="pcm-details">
                         <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -193,8 +191,8 @@ global $reportlist;
         ?>
             <div class="post-thumbnail tab-details w-inline-block">
                 <div class="post-controls">
-                    <a href="assets/php/action.php/?deletepost=<?= $report_details['rid'] ?>"><img
-                            src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" class="pc-control"
+                    <a href="assets/php/action.php/?deletereport=<?= $report_details['rid'] ?>"><img
+                            src="assets/images/site-meta/bin-minus-in.svg" width="24" class="pc-control"
                             height="24" /></a>
                 </div>
                 <?php

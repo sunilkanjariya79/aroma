@@ -63,26 +63,26 @@ if (isset($_GET['search'])) {
               }
               ?>
               <img src="assets/images/site-meta/heart.svg " class="pc-control likepostbtn <?= $like_btn_display ?>"
-                data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+                data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>"  
                 width="24" height="24" />
               <img src="assets/images/site-meta/heart-solid.svg " class="pc-control unlikepostbtn <?= $unlike_btn_display ?>"
-                data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+                data-post-id="<?= $post_details['pid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>"  
                 width="24" height="24" />
               <div class="pco-count" id="likecount<?= $post_details['pid'] ?>"><?= count($likes) ?></div>
             </div>
             <div class="pc-option">
-              <img src="assets/images/site-meta/chat-lines.svg" class="pc-control" alt="" width="24" height="24" />
+              <img src="assets/images/site-meta/chat-lines.svg" class="pc-control"   width="24" height="24" />
               <div class="pco-count"><?= count($comments) ?></div>
             </div>
-            <img src="assets/images/site-meta/share-android-solid.svg" data-post-id="<?= $post_details['pid'] ?>" id="copypostlink" class="pc-control" alt="" width="24" height="24" />
+            <img src="assets/images/site-meta/share-android-solid.svg" data-post-id="<?= $post_details['pid'] ?>" id="copypostlink" class="pc-control"   width="24" height="24" />
             <?php
             if ($post_details['uid'] == $_SESSION['userdata']['uid']) {
               ?>
                <a href="assets/php/action.php/?deletepost=<?= $post_details['pid'] ?>"><img
-                  src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" class="pc-control" height="24" /></a>
+                  src="assets/images/site-meta/bin-minus-in.svg"   width="24" class="pc-control" height="24" /></a>
              <?php } else { ?>
               <a data-post-id="<?= $post_details['pid'] ?>" class="report-post"><img
-                  src="assets/images/site-meta/warning-circle.svg" alt="" width="24" class="pc-control" height="24" /></a>
+                  src="assets/images/site-meta/warning-circle.svg"   width="24" class="pc-control" height="24" /></a>
             <?php } ?>
            </div>
            <a href="?post=<?= $post_details['pid'] ?>" class="post-content-container">
@@ -123,7 +123,7 @@ if (isset($_GET['search'])) {
          <div class="book-card tab-details">
           <div class="book-thumbnail">
             <img src="assets/images/book-cover/<?= $book_details['bcover'] ?>"   width="Auto" height="200"
-              alt="" class="image" />
+                class="image" />
           </div>
           <div class="book-details">
             <div class="book-title-container">
@@ -163,7 +163,7 @@ if (isset($_GET['search'])) {
         <div class="profile-card-min">
           <a href="?u=<?= $userdata['username'] ?>" style="width:100%; margin-right: 20px;"
             class="link-block w-inline-block">
-            <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt="" class="pcm-img" />
+            <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"     class="pcm-img" />
             <div class="pcm-details">
               <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
               <p class="pcm-text"><?= $userdata['uname'] ?></p>
@@ -197,7 +197,7 @@ if (isset($_GET['search'])) {
   <div class="pop-up">
     <div class="pop-up-heading">
       <h2 class="heading-2">Reporting Post</h2>
-      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
     </div>
     <div class="pop-up-content">
       <form action="assets/php/action.php/?report" method="post">

@@ -661,7 +661,8 @@ select {
   background-color: #cc373742;
   justify-content: center;
   padding: 1rem;
-  border-top: 1px solid #cc3737;
+  border-block: 1px dashed #cc3737;
+  margin:1em;
   width: 100%;
 }
  .close {

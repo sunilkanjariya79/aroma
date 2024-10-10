@@ -9,7 +9,7 @@ $likes = getBookLikes($book_data[0]['bid']);
 <div class="book-page">
   <div class="top-fade"></div>
   <div class="book-page-content">
-    <div class="book-cover"><img src="assets/images/book-cover/<?= $book_data[0]['bcover'] ?>"   alt=""
+    <div class="book-cover"><img src="assets/images/book-cover/<?= $book_data[0]['bcover'] ?>"    
         class="image-5"></div>
     <div class="book-main-content">
       <h1 class="heading-2"><?= $book_data[0]['btitle'] ?></h1>
@@ -30,19 +30,19 @@ $likes = getBookLikes($book_data[0]['bid']);
         }
         ?>
         <img src="assets/images/site-meta/heart.svg " class="ps-option likebookbtn <?= $like_btn_display ?>"
-          data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+          data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>"  
           width="24" height="24" />
         <img src="assets/images/site-meta/heart-solid.svg " class="ps-option unlikebookbtn <?= $unlike_btn_display ?>"
-          data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
+          data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>"  
           width="24" height="24" />
-      </div><img src="assets/images/site-meta/share-android-solid.svg" id="sharethispage" alt="" width="24" class="ps-option" height="24"><?php
-      if ($book_data[0]['uid'] == $_SESSION['userdata']['uid']) {
+      </div><img src="assets/images/site-meta/share-android-solid.svg" id="sharethispage"   width="24" class="ps-option" height="24"><?php
+      if ($book_data[0]['uid'] == $_SESSION['userdata']['uid'] || $_SESSION['userdata']['is_admin']==1) {
         ?>
         <a href="assets/php/action.php/?deletebook=<?= $book_data[0]['bid'] ?>" style="line-height:0px;" ><img
-            src="assets/images/site-meta/bin-minus-in.svg" alt="" class="ps-option" width="24" height="24" /></a>
+            src="assets/images/site-meta/bin-minus-in.svg"   class="ps-option" width="24" height="24" /></a>
       <?php } else { ?>
         <a data-book-id="<?= $book_data[0]['bid'] ?>" style="line-height:0px;" class="report-book"><img
-                  src="assets/images/site-meta/warning-circle.svg" alt="" class="ps-option" width="24" height="24" /></a>
+                  src="assets/images/site-meta/warning-circle.svg"   class="ps-option" width="24" height="24" /></a>
       <?php } ?>
     </div>
     <div class="pco-count show-likes"> <span id="likecount<?= $book_data[0]['bid'] ?>"><?= count($likes) ?></span>
@@ -52,7 +52,7 @@ $likes = getBookLikes($book_data[0]['bid']);
       <div class="pop-up">
         <div class="pop-up-heading">
           <h2 class="heading-2">Likes</h2>
-          <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+          <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
         </div>
         <div class="pop-up-content">
            <div class="profile-list">
@@ -60,7 +60,7 @@ $likes = getBookLikes($book_data[0]['bid']);
               $userdata = getUser($usercard['uid']) ?>
               <div class="profile-card-min">
                 <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
-                  <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
+                  <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"    
                     class="pcm-img" />
                   <div class="pcm-details">
                     <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -92,7 +92,7 @@ $likes = getBookLikes($book_data[0]['bid']);
     </div>
     <div class="ps-info">
       <a href="#" class="link-block w-inline-block"><img
-          src="assets/images/profile/<?= $book_data[0]['uprofile_photo'] ?>"   width="Auto" alt=""
+          src="assets/images/profile/<?= $book_data[0]['uprofile_photo'] ?>"   width="Auto"  
           class="pcm-img">
         <div class="pcm-details">
           <p class="pcm-text pcm-username">u/<?= $book_data[0]['username'] ?></p>
@@ -120,7 +120,7 @@ $likes = getBookLikes($book_data[0]['bid']);
           <div class="comment-card">
             <div>
               <a href="#" class="link-block w-inline-block"><img
-                  src="assets/images/profile/<?= $comment['uprofile_photo'] ?>"" loading=" lazy" width="Auto" alt=""
+                  src="assets/images/profile/<?= $comment['uprofile_photo'] ?>" width="Auto"  
                   class="pcm-img">
                 <div class="pcm-details">
                   <p class="pcm-text pcm-username">u/<?= $comment['username'] ?></p>
@@ -148,7 +148,7 @@ $likes = getBookLikes($book_data[0]['bid']);
         ?>
         <div class="book-card book-suggestion">
           <div class="book-thumbnail"><img src="assets/images/book-cover/<?= $book_details['bcover'] ?>"  
-              width="Auto" height="Auto" alt="" class="image bs"></div>
+              width="Auto" height="Auto"   class="image bs"></div>
           <div class="book-details">
             <div class="book-title-container">
               <h1 class="book-title bs"><?= $book_details['btitle'] ?></h1>
@@ -170,7 +170,7 @@ $likes = getBookLikes($book_data[0]['bid']);
   <div class="pop-up">
     <div class="pop-up-heading">
       <h2 class="heading-2">Reporting Book</h2>
-      <a class="close" > <img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+      <a class="close" > <img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
     </div>
     <div class="pop-up-content">
       <form action="assets/php/action.php/?report" method="post">
@@ -182,5 +182,3 @@ $likes = getBookLikes($book_data[0]['bid']);
      </div>
   </div>
 </div>
-</body>
- </html>

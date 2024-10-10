@@ -27,5 +27,3 @@ global $user;
     </div>
   </div>
 </div>
-  <?php include_once('assets/pages/header.php');
-?>

@@ -8,7 +8,7 @@ global $followSuggestions;
       <?php foreach ($followSuggestions as $usercard) { ?>
         <div class="profile-card-min">
           <a href="?u=<?= $usercard['username'] ?>" class="link-block w-inline-block">
-            <img src="assets/images/profile/<?= $usercard['uprofile_photo'] ?>"   alt="" class="pcm-img" />
+            <img src="assets/images/profile/<?= $usercard['uprofile_photo'] ?>"     class="pcm-img" />
             <div class="pcm-details">
               <p class="pcm-text pcm-username">u/<?= $usercard['username'] ?></p>
               <p class="pcm-text"><?= $usercard['uname'] ?></p>

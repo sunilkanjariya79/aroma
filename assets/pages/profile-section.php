@@ -19,7 +19,7 @@ global $user;
 </div> </div>";
    } else { ?>
     <div class="profile-card">
-      <img src="assets/images/profile/<?= $profile['uprofile_photo'] ?>"   alt="" class="profile-picture" />
+      <img src="assets/images/profile/<?= $profile['uprofile_photo'] ?>"     class="profile-picture" />
       <div class="profile-information">
         <div class="profile-info-1">
           <div class="profile-identity">
@@ -27,7 +27,7 @@ global $user;
             <div class="text-block-2"><?= $profile['uname'] ?></div>
           </div>
           <a class="profile-action w-inline-block">
-            <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg"   alt=""
+            <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg"    
               class="image-3 user-action" /></a>
            <?php
            if ($user['is_admin'] == 1) {
@@ -36,7 +36,7 @@ global $user;
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">User Actions</h2>
-                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
                 </div>
                 <div class="pop-up-content">
                   <a href="assets/php/action.php?block=<?= $profile['uid'] ?>&username=<?= $profile['username'] ?>"
@@ -54,7 +54,7 @@ global $user;
                 <div class="pop-up">
                   <div class="pop-up-heading">
                     <h2 class="heading-2">User Actions</h2>
-                    <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+                    <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
                   </div>
                   <div class="pop-up-content">
                     <a href="assets/php/action.php?block=<?= $profile['uid'] ?>&username=<?= $profile['username'] ?>"
@@ -71,7 +71,7 @@ global $user;
                   <div class="pop-up">
                     <div class="pop-up-heading">
                       <h2 class="heading-2">User Actions</h2>
-                      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+                      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
                     </div>
                     <div class="pop-up-content">
                       <a href="assets/php/action.php/?logout" class="pop-up-option">Log Out</a>
@@ -94,7 +94,7 @@ global $user;
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">Followeing</h2>
-                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
                 </div>
                 <div class="pop-up-content">
                    <div class="profile-list">
@@ -103,7 +103,7 @@ global $user;
                       $userdata = getUser($usercard[1]); ?>
                        <div class="profile-card-min">
                         <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
-                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
+                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"    
                             class="pcm-img" />
                           <div class="pcm-details">
                             <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -138,7 +138,7 @@ global $user;
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">Followers</h2>
-                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
                 </div>
                 <div class="pop-up-content">
                   <div class="profile-list">
@@ -146,7 +146,7 @@ global $user;
                       $userdata = getUser($usercard[2]) ?>
                       <div class="profile-card-min">
                         <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
-                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
+                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"    
                             class="pcm-img" />
                           <div class="pcm-details">
                             <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -215,7 +215,7 @@ global $user;
     <div class="pop-up">
       <div class="pop-up-heading">
         <h2 class="heading-2">Reporting user</h2>
-        <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
+        <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"  ></a>
       </div>
       <div class="pop-up-content">
         <form action="assets/php/action.php/?report" method="post">
@@ -228,5 +228,3 @@ global $user;
     </div>
   </div>
  <?php } ?>
-</body>
- </html>

@@ -1,7 +1,7 @@
 <?php
 include_once('assets/pages/header.php'); ?>
 <div class="log-reg-side">
-  <img src="assets/images/site-meta/bookshelf.png"   width="Auto" height="Auto" alt=""
+  <img src="assets/images/site-meta/bookshelf.png"   width="Auto" height="Auto"  
     class="log-reg-img" />
 </div>
 <div class="log-reg-form-container">
@@ -26,5 +26,3 @@ include_once('assets/pages/header.php'); ?>
   </div>
 </div>
 </div>
-<?php
-include_once('assets/pages/footer.php'); ?>
