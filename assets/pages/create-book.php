@@ -4,12 +4,12 @@
     <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">heading</h2>
-                  <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content" style="gap:20px;padding-bottom:20px">
-                <input type="text" name="btitle" id="btitle" placeholder="Title" class="log-reg-field">
-                <input type="text" name="btag" id="btag" placeholder="tag" class="log-reg-field">
-                <textarea placeholder="What's this book about" maxlength="220" name="babout" class="log-reg-field reg-edit-about w-input"></textarea>
+                <input type="text" name="btitle" id="btitle" placeholder="Title" value="<?=showFormaData('btitle')?>" class="log-reg-field">
+                <input type="text" name="btag" id="btag" placeholder="tag" value="<?=showFormaData('btag')?>" class="log-reg-field">
+                <textarea placeholder="What's this book about" maxlength="220" name="babout" value="<?=showFormaData('babout')?>" class="log-reg-field reg-edit-about w-input"></textarea>
                 <label for="file-upload" class="custom-file-upload">Add Book Cover   <img src="assets/images/site-meta/plus-circle.svg" alt=""  /></a></label>
                 <input id="file-upload" type="file" name="bcover" id="bcover"/> 
                 <a class="primery-button"> Add</a>
@@ -68,7 +68,7 @@
       <?=showError('babout')?>
       <?=showError('bcover')?>
       <?=showError('hidden-input')?>
-      <div id="text-input"  contenteditable="true"></div>
+      <div id="text-input"  contenteditable="true"><?=showFormaData('hidden-input')?></div>
       <input type="hidden" id="hidden-input" name="hidden-input">
       
     </div>

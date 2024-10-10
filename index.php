@@ -4,8 +4,7 @@ if (isset($_SESSION['auth'])) {
     $user = getUser($_SESSION['userdata']['uid']);
     $posts = filterPosts();
     $books = filterBooks();
-
-    $followSuggestions = filterFollowSuggestion();
+     $followSuggestions = filterFollowSuggestion();
 }
 //open register page
 if (isset($_GET['register'])) {
@@ -66,8 +65,7 @@ elseif (isset($_GET['login'])) {
     showPage('right-bar');
     showPage('top');
     showPage('post-wall');
-
-}elseif(isset($_GET['adminpanel']) && isset($_SESSION['auth']) && $_SESSION['userdata']['is_admin']==1) {
+ }elseif(isset($_GET['adminpanel']) && isset($_SESSION['auth']) && $_SESSION['userdata']['is_admin']==1) {
     $userlist= getAllUsers();
     $postlist= getPost();
     $booklist= getBook();
@@ -76,8 +74,7 @@ elseif (isset($_GET['login'])) {
     showPage('side-bar');
     showPage('admin-panel');
 }
-
-else {
+ else {
     if (isset($_SESSION['auth'])) {
         showPage('header', ['page_title' => 'Main wall']);
         showPage('side-bar');
@@ -89,7 +86,6 @@ else {
         showPage('login');
     }
 }
-
-showPage('footer');
+ showPage('footer');
 unset($_SESSION['error']);
 ?>

@@ -1,16 +1,13 @@
 // script.js
 $(document).ready(function () {
   synmsg();
-
-  setInterval(() => {
+   setInterval(() => {
     synmsg();
   },1000);
-
-  //opening last opened tab
+   //opening last opened tab
   // Check the stored value in localStorage
   var activeTab = localStorage.getItem('active');
-
-  // If no tab is set, default to casuals
+   // If no tab is set, default to casuals
   if (activeTab === 'books') {
     $('#casuals-container').addClass('hide').removeClass('show');
     $('#books-container').addClass('show').removeClass('hide');
@@ -22,8 +19,7 @@ $(document).ready(function () {
     $('#casuals').addClass('w--current');
     $('#books').removeClass('w--current');
   }
-
-
+ 
   //to change to casual posts tab
   $('#casuals').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
@@ -34,42 +30,33 @@ $(document).ready(function () {
     $('#casuals').addClass('w--current');
     $('#books').removeClass('w--current');
     $('#users').removeClass('w--current');
-
-    localStorage.setItem('active', 'casuals');
+     localStorage.setItem('active', 'casuals');
   });
-
-  //to change to books tab
+   //to change to books tab
   $('#books').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
-
-    $('#casuals-container').addClass('hide').removeClass('show');
+     $('#casuals-container').addClass('hide').removeClass('show');
     $('#books-container').addClass('show').removeClass('hide');
     $('#users-container').removeClass('show').addClass('hide');
     $('#books').addClass('w--current');
     $('#casuals').removeClass('w--current');
     localStorage.setItem('active', 'books');
     $('#users').removeClass('w--current');
-
-
+ 
   });
-
-  $('#users').click(function (event) {
+   $('#users').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
-
-    $('#casuals-container').addClass('hide').removeClass('show');
+     $('#casuals-container').addClass('hide').removeClass('show');
     $('#books-container').addClass('hide').removeClass('show');
     $('#users-container').addClass('show').removeClass('hide');
     $('#books').removeClass('w--current');
     $('#casuals').removeClass('w--current');
     $('#users').addClass('w--current');
     localStorage.setItem('active', 'books');
-
-  });
-
-  //for admin-panel
+   });
+   //for admin-panel
   var adminTab = localStorage.getItem('admin');
-
-  // If no tab is set, default to casuals
+   // If no tab is set, default to casuals
   if (adminTab === 'book') {
     $('#post-container').hide();
     $('#book-container').show();
@@ -94,8 +81,7 @@ $(document).ready(function () {
     $('#user-container').hide();
     $('#report-container').show();
   }
-
-
+ 
   $('#post-panel').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
     $('#post-container').show();
@@ -104,8 +90,7 @@ $(document).ready(function () {
     $('#report-container').hide();
     localStorage.setItem('admin', 'post');
   });
-
-  $('#book-panel').click(function (event) {
+   $('#book-panel').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
     $('#post-container').hide();
     $('#book-container').show();
@@ -113,8 +98,7 @@ $(document).ready(function () {
     $('#report-container').hide();
     localStorage.setItem('admin', 'book');
   });
-
-  $('#user-panel').click(function (event) {
+   $('#user-panel').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
     $('#post-container').hide();
     $('#book-container').hide();
@@ -122,8 +106,7 @@ $(document).ready(function () {
     $('#report-container').hide();
     localStorage.setItem('admin','user');
   });
-
-  $('#report-panel').click(function (event) {
+   $('#report-panel').click(function (event) {
     event.preventDefault(); // Prevent the default link behavior
     $('#post-container').hide();
     $('#book-container').hide();
@@ -135,101 +118,82 @@ $(document).ready(function () {
   $('.reg-edit-img-in').click(function (event) {
     $('.add-img').removeClass('hide');
   });
-
-  //to close pop up manu on page
+   //to close pop up manu on page
   $('.close').click(function (event) {
     $('.pop-up-window').addClass('hide');
   });
-
-  //to show add details menu in books section
+   //to show add details menu in books section
   $('.show-book-input').click(function (event) {
     $('.book-input').removeClass('hide');
   });
-
-  //to close pop up manu on page
+   //to close pop up manu on page
   $('.close').click(function (event) {
     $('.pop-up-window').addClass('hide');
   });
-
-  //to show add details menu in follow section
+   //to show add details menu in follow section
   $('.show-follow-input').click(function (event) {
     $('#following').removeClass('hide');
   });
-
-  //to close pop up manu on page
+   //to close pop up manu on page
   $('.close').click(function (event) {
     $('.pop-up-window').addClass('hide');
   });
-
-  //to show add details menu in followers section
+   //to show add details menu in followers section
   $('.show-follower-input').click(function (event) {
     $('#followers').removeClass('hide');
   });
-
-  //to close pop up manu on page
+   //to close pop up manu on page
   $('.close').click(function (event) {
     $('.pop-up-window').addClass('hide');
   });
-
-  //to show likes menu
+   //to show likes menu
   $('.show-likes').click(function (event) {
     $('#likes').removeClass('hide');
   });
-
-  //to close pop up manu on page
+   //to close pop up manu on page
   $('.close').click(function (event) {
     $('.pop-up-window').addClass('hide');
   });
-
-  //to show likes menu
+   //to show likes menu
   $('.profile-action').click(function (event) {
     $('#user-action').removeClass('hide');
   });
-
-  //to show likes menu
+   //to show likes menu
   $('.notification-button').click(function (event) {
     $('#notification_sidebar').removeClass('hide');
   });
-
-  //to close pop up manu on page
+   //to close pop up manu on page
   $('.close-side-bar').click(function (event) {
     $('#notification_sidebar').addClass('hide');
   });
-
-  //to show likes menu
+   //to show likes menu
   $('.messages-button').click(function (event) {
     $('#messages_sidebar').removeClass('hide');
   });
-
-  //to close pop up manu on page
+   //to close pop up manu on page
   $('.close-side-bar').click(function (event) {
     $('#messages_sidebar').addClass('hide');
   });
-
-  $('.create-post').click(function (event) {
+   $('.create-post').click(function (event) {
     $('#create-post').removeClass('hide');
   });
-
-  $('.report-post').click(function (event) {
+   $('.report-post').click(function (event) {
     var post_id = $(this).data('postId');
-    $('.report-post').removeClass('hide');
+    $('#report-post').removeClass('hide');
     $('#post-id').attr("value",post_id);
   });
-
-  $('.report-book').click(function (event) {
+   $('.report-book').click(function (event) {
     var book_id = $(this).data('bookId');
-    $('.report-book').removeClass('hide');
+    $('#report-book').removeClass('hide');
     $('#book-id').attr("value",book_id);
   });
-
-  
+   
   $('.report-user').click(function (event) {
     var user_id = $(this).data('userId');
-    $('.report-user').removeClass('hide');
+    $('#report-user').removeClass('hide');
     $('#user-id').attr("value",user_id);
   });
-
-  // create post, books and casual posts both
+   // create post, books and casual posts both
   let optionsButtons = $(".option-button");
   let advancedOptionButton = $(".adv-option-button");
   let linkButton = $("#createLink");
@@ -237,8 +201,7 @@ $(document).ready(function () {
   let spacingButtons = $(".spacing");
   let formatButtons = $(".format");
   let scriptButtons = $(".script");
-
-
+ 
   // Initial Settings
   const initializer = () => {
     // Function calls for highlighting buttons
@@ -247,8 +210,7 @@ $(document).ready(function () {
     highlighter(formatButtons, false);
     highlighter(scriptButtons, true);
   };
-
-  // Function to focus on contenteditable div
+   // Function to focus on contenteditable div
   const focusEditableDiv = () => {
     let editableDiv = $('div[contenteditable="true"]');
     if (editableDiv.length) {
@@ -257,24 +219,20 @@ $(document).ready(function () {
       console.error("Contenteditable div not found.");
     }
   };
-
-  // Main logic for text modification
+   // Main logic for text modification
   const modifyText = (command, defaultUi, value) => {
     document.execCommand(command, defaultUi, value);
     focusEditableDiv(); // Focus after modification
   };
-
-  // Add event listeners for basic operations
+   // Add event listeners for basic operations
   optionsButtons.on("click", function () {
     modifyText($(this).attr("id"), false, null);
   });
-
-  // Add event listeners for advanced options that require a value
+   // Add event listeners for advanced options that require a value
   advancedOptionButton.on("change", function () {
     modifyText($(this).attr("id"), false, $(this).val());
   });
-
-  // Add event listener for link creation
+   // Add event listener for link creation
   linkButton.on("click", function () {
     let userLink = prompt("Enter a URL");
     if (userLink) {
@@ -284,8 +242,7 @@ $(document).ready(function () {
       modifyText("createLink", false, userLink);
     }
   });
-
-  // Highlight clicked button
+   // Highlight clicked button
   const highlighter = (buttons, needsRemoval) => {
     buttons.on("click", function () {
       if (needsRemoval) {
@@ -299,16 +256,13 @@ $(document).ready(function () {
       }
     });
   };
-
-  // Remove highlights from all buttons in a group
+   // Remove highlights from all buttons in a group
   const highlighterRemover = (buttons) => {
     buttons.removeClass("active");
   };
-
-  // Initialize on page load
+   // Initialize on page load
   initializer();
-
-  $("#sendmsg").click(function () {
+   $("#sendmsg").click(function () {
     var user_id = chatting_user_id;
     var msg = $("#msginput").val();
     if (!msg) return;
@@ -335,9 +289,34 @@ $(document).ready(function () {
     });
   
   });
+   
+$('#sharethispage').click(function(){
+  var tempurl = $('<input>');
+  $('body').append(tempurl);
+  tempurl.val(window.location.href).select(); 
+  document.execCommand('copy');
+  tempurl.remove();
+  alert("done");
 });
-
-
+ $('#copypostlink').click(function(){
+  var cururl = window.location.href;
+  if(cururl.includes('?')){
+    var baseurl =cururl.split('?')[0];
+  }
+  else{
+    var baseurl = cururl;
+  }
+  var newquery = 'post='+$(this).data('postId');
+  var newurl = baseurl + '?' + newquery;
+  var tempurl = $('<input>');
+  $('body').append(tempurl);
+  tempurl.val(newurl).select(); 
+  document.execCommand('copy');
+  tempurl.remove();
+  alert("done");
+});
+});
+ 
 //for follow the user
 $(".followbtn").click(function () {
   var user_id_r = $(this).data('userId');
@@ -355,12 +334,10 @@ $(".followbtn").click(function () {
         $(button).html('Followed');
         $(button).removeClass('primery-button');
         $(button).addClass('secondary-button');
-
-
+ 
       } else {
         $(button).attr('disabled', false);
-
-        alert('something is wrong,try again after some time');
+         alert('something is wrong,try again after some time');
       }
     },
     error: function (xhr, status, error) {
@@ -370,10 +347,8 @@ $(".followbtn").click(function () {
       $(button).attr('disabled', false);  // Re-enable button on error
     }
   });
-
-});
-
-
+ });
+ 
 //for unfollow the user
 $(".unfollowbtn").click(function () {
   var user_id_r = $(this).data('userId');
@@ -391,12 +366,10 @@ $(".unfollowbtn").click(function () {
         $(button).html('Unfollowed');
         $(button).addClass('primery-button');
         $(button).removeClass('secondary-button');
-
-
+ 
       } else {
         $(button).attr('disabled', false);
-
-        alert('something is wrong,try again after some time');
+         alert('something is wrong,try again after some time');
       }
     },
     error: function (xhr, status, error) {
@@ -406,16 +379,11 @@ $(".unfollowbtn").click(function () {
       $(button).attr('disabled', false);  // Re-enable button on error
     }
   });
-
-});
-
-
-
-//for like the post
-
-
-
-$(".likepostbtn").click(function () {
+ });
+ 
+ //for like the post
+ 
+ $(".likepostbtn").click(function () {
   var post_id_r = $(this).data('postId');
   var button = this;
   $(button).attr('disabled', true);
@@ -427,20 +395,16 @@ $(".likepostbtn").click(function () {
     success: function (response) {
       console.log(response);
       if (response.status) {
-
-        $(button).attr('disabled', false);
+         $(button).attr('disabled', false);
         $(button).hide();
         $(button).siblings('.unlikepostbtn').show();
         $('#likecount' + post_id_r).text($('#likecount' + post_id_r).text() - (-1));
         // location.reload();
-
-      } else {
+       } else {
         $(button).attr('disabled', false);
         alert('something is wrong,try again after some time');
-
-      }
-
-
+       }
+ 
     },
     error: function (xhr, status, error) {
       // Handle errors
@@ -450,10 +414,8 @@ $(".likepostbtn").click(function () {
     }
   });
 });
-
-
-
-$(".unlikepostbtn").click(function () {
+ 
+ $(".unlikepostbtn").click(function () {
   var post_id_r = $(this).data('postId');
   var button = this;
   $(button).attr('disabled', true);
@@ -463,32 +425,23 @@ $(".unlikepostbtn").click(function () {
     dataType: 'json',
     data: { unlikepost: true, post_id: post_id_r },
     success: function (response) {
-
-      if (response.status) {
-
-        $(button).attr('disabled', false);
+       if (response.status) {
+         $(button).attr('disabled', false);
         $(button).hide()
         $(button).siblings('.likepostbtn').show();
         // location.reload();
         $('#likecount' + post_id_r).text($('#likecount' + post_id_r).text() - 1);
-
-      } else {
+       } else {
         $(button).attr('disabled', false);
-
-        alert('something is wrong,try again after some time');
-
-
+         alert('something is wrong,try again after some time');
+ 
       }
-
-
-
-    }
+ 
+     }
   });
 });
-
-
-
-$(".likebookbtn").click(function () {
+ 
+ $(".likebookbtn").click(function () {
   var book_id_r = $(this).data('bookId');
   var button = this;
   $(button).attr('disabled', true);
@@ -500,20 +453,16 @@ $(".likebookbtn").click(function () {
     success: function (response) {
       console.log(response);
       if (response.status) {
-
-        $(button).attr('disabled', false);
+         $(button).attr('disabled', false);
         $(button).hide();
         $(button).siblings('.unlikebookbtn').show();
         $('#likecount' + book_id_r).text($('#likecount' + book_id_r).text() - (-1));
         // location.reload();
-
-      } else {
+       } else {
         $(button).attr('disabled', false);
         alert('something is wrong,try again after some time');
-
-      }
-
-
+       }
+ 
     },
     error: function (xhr, status, error) {
       // Handle errors
@@ -523,10 +472,8 @@ $(".likebookbtn").click(function () {
     }
   });
 });
-
-
-
-
+ 
+ 
 $(".unlikebookbtn").click(function () {
   var book_id_r = $(this).data('bookId');
   var button = this;
@@ -537,30 +484,22 @@ $(".unlikebookbtn").click(function () {
     dataType: 'json',
     data: { unlikebook: true, book_id: book_id_r },
     success: function (response) {
-
-      if (response.status) {
-
-        $(button).attr('disabled', false);
+       if (response.status) {
+         $(button).attr('disabled', false);
         $(button).hide()
         $(button).siblings('.likebookbtn').show();
         // location.reload();
         $('#likecount' + book_id_r).text($('#likecount' + book_id_r).text() - 1);
-
-      } else {
+       } else {
         $(button).attr('disabled', false);
-
-        alert('something is wrong,try again after some time');
-
-
+         alert('something is wrong,try again after some time');
+ 
       }
-
-
-
-    }
+ 
+     }
   });
 });
-
-
+ 
 //for adding comment
 $(".addpostcomment").click(function () {
   var button = this;
@@ -579,8 +518,7 @@ $(".addpostcomment").click(function () {
     success: function (response) {
       console.log(response);
       if (response.status) {
-
-        $(button).attr('disabled', false);
+         $(button).attr('disabled', false);
         $(button).siblings('.comment-input').attr('disabled', false);
         $(button).siblings('.comment-input').val('');
         location.reload();
@@ -598,8 +536,7 @@ $(".addpostcomment").click(function () {
     }
   });
 });
-
-
+ 
 $(".addbookcomment").click(function () {
   var button = this;
   var comment_v = $(button).siblings('.comment-box').val();
@@ -617,8 +554,7 @@ $(".addbookcomment").click(function () {
     success: function (response) {
       console.log(response);
       if (response.status) {
-
-        $(button).attr('disabled', false);
+         $(button).attr('disabled', false);
         $(button).siblings('.comment-box').attr('disabled', false);
         $(button).siblings('.comment-box').val('');
         location.reload();
@@ -636,10 +572,8 @@ $(".addbookcomment").click(function () {
     }
   });
 });
-
-$(".show-not").click(function () {
-
-  $.ajax({
+ $(".show-not").click(function () {
+   $.ajax({
     url: 'assets/php/ajax.php?notread',
     method: 'post',
     dataType: 'json',
@@ -648,29 +582,20 @@ $(".show-not").click(function () {
       }
     }
   });
-
-});
-
-
-
-//to get text of post
-
-document.getElementById('add-post-form').addEventListener('submit', function (e) {
+ });
+ 
+ //to get text of post
+ document.getElementById('add-post-form').addEventListener('submit', function (e) {
   // Get the content of the contenteditable div
   var editableContent = document.getElementById('text-input').innerHTML;
-
-  // Set the value of the hidden input field
+   // Set the value of the hidden input field
   document.getElementById('hidden-input').value = editableContent;
 });
-
-var chatting_user_id = 0;
-
-function popchat(user_id) {
+ var chatting_user_id = 0;
+ function popchat(user_id) {
   $("#user_chat").html(`<div class="spinner-border text-center" role="status">
-
-  </div>`);
-
-  $("#chatter_username").text('loading..');
+   </div>`);
+   $("#chatter_username").text('loading..');
   $("#chatter_name").text('');
   $("#chatter_pic").attr('src', 'assets/images/profile/default_profile.jpg');
   chatting_user_id = user_id;
@@ -690,46 +615,35 @@ function synmsg() {
       } else {
         $("#new-chat").show();
         $("#chat").hide();
-
-
+ 
       }
       if (response.blocked) {
         $("#msgsender").hide();
         $("#blerror").show();
-
-      } else {
+       } else {
         $("#msgsender").show();
         $('.pop-up-footer').addClass('hide');
         $("#blerror").addClass('hide');
       }
-
-      if (typeof chatting_user_id === "number" &&chatting_user_id != 0 ) {
+       if (typeof chatting_user_id === "number" &&chatting_user_id != 0 ) {
         $("#user_chat").html(response.chat.msgs);
-
-        $("#chatter_username").text(response.chat.userdata.username);
+         $("#chatter_username").text(response.chat.userdata.username);
         $("#cplink").attr('href', '?u=' + response.chat.userdata.username);
-
-        $("#chatter_name").text(response.chat.userdata.uname);
+         $("#chatter_name").text(response.chat.userdata.uname);
         $("#chatter_pic").attr('src', 'assets/images/profile/' + response.chat.userdata.uprofile_photo);
       }
-
-
-
-    }
+ 
+     }
   });
 }
-
-function popchat(user_id) {
+ function popchat(user_id) {
   console.log('clicked');
   $('#chatbox').removeClass('hide');
   $("#user_chat").html(`<div class="spinner-border text-center" role="status">
-
-</div>`);
-
-  $("#chatter_username").text('loading..');
+ </div>`);
+   $("#chatter_username").text('loading..');
   $("#chatter_name").text('');
   $("#chatter_pic").attr('src', 'assets/images/profile/default_profile.jpg');
   chatting_user_id = user_id;
   $("#sendmsg").attr('data-user-id', user_id);
 }
-

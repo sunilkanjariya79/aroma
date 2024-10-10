@@ -1,4 +1,8 @@
 <?php global $profile;
+if (empty($profile)) {
+  showPage('404');
+  exit;
+}
 global $profile_post;
 global $profile_books;
 $following = getFollowing($profile['uid']);
@@ -13,10 +17,9 @@ global $user;
   <h2>You are blocked by this user</h2>
   <p>You can't see anything from this user, You have been blocked by him</p>
 </div> </div>";
-
-  } else { ?>
+   } else { ?>
     <div class="profile-card">
-      <img src="assets/images/profile/<?= $profile['uprofile_photo'] ?>" loading="lazy" alt="" class="profile-picture" />
+      <img src="assets/images/profile/<?= $profile['uprofile_photo'] ?>"   alt="" class="profile-picture" />
       <div class="profile-information">
         <div class="profile-info-1">
           <div class="profile-identity">
@@ -24,18 +27,16 @@ global $user;
             <div class="text-block-2"><?= $profile['uname'] ?></div>
           </div>
           <a class="profile-action w-inline-block">
-            <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg" loading="lazy" alt=""
+            <img src="assets/images/site-meta/zondicons_dots-horizontal-triple.svg"   alt=""
               class="image-3 user-action" /></a>
-
-          <?php
-
-          if ($user['is_admin'] == 1) {
+           <?php
+           if ($user['is_admin'] == 1) {
             ?>
             <div class="pop-up-window hide" id="user-action">
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">User Actions</h2>
-                  <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
                   <a href="assets/php/action.php?block=<?= $profile['uid'] ?>&username=<?= $profile['username'] ?>"
@@ -53,13 +54,13 @@ global $user;
                 <div class="pop-up">
                   <div class="pop-up-heading">
                     <h2 class="heading-2">User Actions</h2>
-                    <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+                    <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
                   </div>
                   <div class="pop-up-content">
                     <a href="assets/php/action.php?block=<?= $profile['uid'] ?>&username=<?= $profile['username'] ?>"
                       class="pop-up-option">Block</a>
                     <a data-bs-target="#chatbox" onclick="popchat(<?= $profile['uid'] ?>)" class="pop-up-option"> message</a>
-                    <a class="report-user pop-up-option" data-user-id="<?= $profile['uid'] ?>"> report User</a>
+                    <a class="pop-up-option" id="report-user" data-user-id="<?= $profile['uid'] ?>"> report User</a>
                   </div>
                 </div>
               </div>
@@ -70,7 +71,7 @@ global $user;
                   <div class="pop-up">
                     <div class="pop-up-heading">
                       <h2 class="heading-2">User Actions</h2>
-                      <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+                      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
                     </div>
                     <div class="pop-up-content">
                       <a href="assets/php/action.php/?logout" class="pop-up-option">Log Out</a>
@@ -93,18 +94,16 @@ global $user;
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">Followeing</h2>
-                  <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
-
-                  <div class="profile-list">
+                   <div class="profile-list">
                     <?php
                     foreach ($following as $usercard) {
                       $userdata = getUser($usercard[1]); ?>
-
-                      <div class="profile-card-min">
+                       <div class="profile-card-min">
                         <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
-                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
+                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
                             class="pcm-img" />
                           <div class="pcm-details">
                             <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -119,17 +118,14 @@ global $user;
                             ?>
                             <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
                               data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
-
-                            <?php
+                             <?php
                           } else {
                             ?>
                             <a href="#" class="primery-button lr-btn w-button followbtn"
                               data-user-id="<?= $userdata['uid'] ?>">Follow</a>
-
-                            <?php
+                             <?php
                           }
-
-                        }
+                         }
                         ?>
                       </div>
                     <?php } ?>
@@ -142,7 +138,7 @@ global $user;
               <div class="pop-up">
                 <div class="pop-up-heading">
                   <h2 class="heading-2">Followers</h2>
-                  <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+                  <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
                 </div>
                 <div class="pop-up-content">
                   <div class="profile-list">
@@ -150,7 +146,7 @@ global $user;
                       $userdata = getUser($usercard[2]) ?>
                       <div class="profile-card-min">
                         <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
-                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
+                          <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
                             class="pcm-img" />
                           <div class="pcm-details">
                             <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -165,22 +161,17 @@ global $user;
                             ?>
                             <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
                               data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
-
-                            <?php
+                             <?php
                           } else {
                             ?>
                             <a href="#" class="primery-button lr-btn w-button followbtn"
                               data-user-id="<?= $userdata['uid'] ?>">Follow</a>
-
-                            <?php
+                             <?php
                           }
-
-                        }
-
-                        ?>
+                         }
+                         ?>
                       </div>
-
-                    <?php } ?>
+                     <?php } ?>
                   </div>
                 </div>
               </div>
@@ -201,16 +192,13 @@ global $user;
             ?>
               <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
                 data-user-id="<?= $profile['uid'] ?>">Unfollow</a>
-
-            <?php
+             <?php
           } else {
             ?>
               <a href="#" class="primery-button lr-btn w-button followbtn" data-user-id="<?= $profile['uid'] ?>">Follow</a>
-
-            <?php
+             <?php
           }
-
-        }
+         }
         ?>
       </div>
     </div>
@@ -222,13 +210,12 @@ global $user;
       </div>
     <?php } ?>
   </div>
-
-
+ 
   <div class="pop-up-window report-user hide">
     <div class="pop-up">
       <div class="pop-up-heading">
         <h2 class="heading-2">Reporting user</h2>
-        <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+        <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
       </div>
       <div class="pop-up-content">
         <form action="assets/php/action.php/?report" method="post">
@@ -236,14 +223,10 @@ global $user;
             class="log-reg-field reg-edit-about w-input"></textarea>
           <input type="hidden" id="user-id" name="user-id" value="0">
           <input type="submit" class="primery-button" value="Report">
-
-        </form>
-
-      </div>
+         </form>
+       </div>
     </div>
   </div>
-
-<?php } ?>
+ <?php } ?>
 </body>
-
-</html>
+ </html>

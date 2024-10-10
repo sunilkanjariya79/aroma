@@ -1,15 +1,15 @@
 <?php
 global $book_data;
-$likes = getBookLikes($book_data[0]['bid']);
 if (empty($book_data)) {
-  echo "no book saar";
+  showPage('404');
   exit;
 }
+$likes = getBookLikes($book_data[0]['bid']);
 ?>
 <div class="book-page">
   <div class="top-fade"></div>
   <div class="book-page-content">
-    <div class="book-cover"><img src="assets/images/book-cover/<?= $book_data[0]['bcover'] ?>" loading="lazy" alt=""
+    <div class="book-cover"><img src="assets/images/book-cover/<?= $book_data[0]['bcover'] ?>"   alt=""
         class="image-5"></div>
     <div class="book-main-content">
       <h1 class="heading-2"><?= $book_data[0]['btitle'] ?></h1>
@@ -35,13 +35,11 @@ if (empty($book_data)) {
         <img src="assets/images/site-meta/heart-solid.svg " class="ps-option unlikebookbtn <?= $unlike_btn_display ?>"
           data-book-id="<?= $book_data[0]['bid'] ?>" data-user-id="<?= $_SESSION['userdata']['uid'] ?>" alt=""
           width="24" height="24" />
-      </div><img src="assets/images/site-meta/share-android-solid.svg" alt="" width="24" class="ps-option" height="24"><?php
+      </div><img src="assets/images/site-meta/share-android-solid.svg" id="sharethispage" alt="" width="24" class="ps-option" height="24"><?php
       if ($book_data[0]['uid'] == $_SESSION['userdata']['uid']) {
         ?>
-
         <a href="assets/php/action.php/?deletebook=<?= $book_data[0]['bid'] ?>" style="line-height:0px;" ><img
             src="assets/images/site-meta/bin-minus-in.svg" alt="" class="ps-option" width="24" height="24" /></a>
-
       <?php } else { ?>
         <a data-book-id="<?= $book_data[0]['bid'] ?>" style="line-height:0px;" class="report-book"><img
                   src="assets/images/site-meta/warning-circle.svg" alt="" class="ps-option" width="24" height="24" /></a>
@@ -57,13 +55,12 @@ if (empty($book_data)) {
           <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
         </div>
         <div class="pop-up-content">
-
-          <div class="profile-list">
+           <div class="profile-list">
             <?php foreach ($likes as $usercard) {
               $userdata = getUser($usercard['uid']) ?>
               <div class="profile-card-min">
                 <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">
-                  <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
+                  <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
                     class="pcm-img" />
                   <div class="pcm-details">
                     <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -78,17 +75,14 @@ if (empty($book_data)) {
                     ?>
                     <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
                       data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
-
-                    <?php
+                     <?php
                   } else {
                     ?>
                     <a href="#" class="primery-button lr-btn w-button followbtn"
                       data-user-id="<?= $userdata['uid'] ?>">Follow</a>
-
-                    <?php
+                     <?php
                   }
-
-                }
+                 }
                 ?>
               </div>
             <?php } ?>
@@ -98,7 +92,7 @@ if (empty($book_data)) {
     </div>
     <div class="ps-info">
       <a href="#" class="link-block w-inline-block"><img
-          src="assets/images/profile/<?= $book_data[0]['uprofile_photo'] ?>" loading="lazy" width="Auto" alt=""
+          src="assets/images/profile/<?= $book_data[0]['uprofile_photo'] ?>"   width="Auto" alt=""
           class="pcm-img">
         <div class="pcm-details">
           <p class="pcm-text pcm-username">u/<?= $book_data[0]['username'] ?></p>
@@ -140,8 +134,7 @@ if (empty($book_data)) {
           </div>
         <?php } ?>
       </div>
-
-    </div>
+     </div>
   </div>
 </div>
 <div class="right-panel book-suggestion">
@@ -154,7 +147,7 @@ if (empty($book_data)) {
       foreach ($display_books as $book_details) {
         ?>
         <div class="book-card book-suggestion">
-          <div class="book-thumbnail"><img src="assets/images/book-cover/<?= $book_details['bcover'] ?>" loading="lazy"
+          <div class="book-thumbnail"><img src="assets/images/book-cover/<?= $book_details['bcover'] ?>"  
               width="Auto" height="Auto" alt="" class="image bs"></div>
           <div class="book-details">
             <div class="book-title-container">
@@ -172,13 +165,12 @@ if (empty($book_data)) {
     </div>
   </div>
 </div>
-
-
-<div class="pop-up-window report-book hide">
+ 
+<div class="pop-up-window hide" id="report-book">
   <div class="pop-up">
     <div class="pop-up-heading">
       <h2 class="heading-2">Reporting Book</h2>
-      <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+      <a class="close" > <img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
     </div>
     <div class="pop-up-content">
       <form action="assets/php/action.php/?report" method="post">
@@ -186,12 +178,9 @@ if (empty($book_data)) {
           class="log-reg-field reg-edit-about w-input"></textarea>
         <input type="hidden" id="book-id" name="book-id" value="0">
         <input type="submit" class="primery-button" value="Report">
-
-      </form>
-
-    </div>
+       </form>
+     </div>
   </div>
 </div>
 </body>
-
-</html>
+ </html>

@@ -33,26 +33,18 @@
           if ($not['read_status'] == 0) {
             ?>
             <div class="p-1 bg-primary rounded-circle"></div>
-
             <?php
-
           } else if ($not['read_status'] == 2) {
             ?>
               <span class="badge bg-danger">Post Deleted</span>
             <?php
           }
           ?>
-
         </div>
-        </a>
-      <?php
-    }
-    ?>
-
+        </a> <?php } ?>
   </div>
 </div>
-
-<div class="left-panel hide pop-up-side-bar" id="messages_sidebar">
+ <div class="left-panel hide pop-up-side-bar" id="messages_sidebar">
   <div class="left-panel-header">
     <h5 class="heading-2" id="left-panel-title">Messages</h5>
     <a class="close-side-bar"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
@@ -60,14 +52,12 @@
   <div class="left-panel-body chatlist">
   </div>
 </div>
-
-
-<div class="pop-up-window hide" id="chatbox" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="pop-up-window hide" id="chatbox" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="pop-up chatbox">
     <div class="pop-up-heading" style="padding:15px 20px">
       <div class="profile-card-min" style="padding:0px;">
         <a href="" id="cplink" class="link-block w-inline-block">
-          <img src="assets/images/profile/default_profile.jpg" id="chatter_pic" loading="lazy" alt="" class="pcm-img" />
+          <img src="assets/images/profile/default_profile.jpg" id="chatter_pic"   alt="" class="pcm-img" />
           <div class="pcm-details">
             <p class="pcm-text pcm-username" id="chatter_username">Loading?></p>
             <p class="pcm-text" id="chatter_name">Loading</p>
@@ -75,7 +65,6 @@
         </a>
         <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" alt=""></a>
       </div>
-
     </div>
     <div class="pop-up-content" style="flex-direction:column-reverse;gap:0.5em; height:80%" id="user_chat">
       loading..
@@ -91,31 +80,19 @@
   </div>
 </div>
 </div>
-
-
-<div class="pop-up-window hide" id="create-post">
+ <div class="pop-up-window hide" id="create-post">
   <div class="pop-up">
     <div class="pop-up-heading">
       <h2 class="heading-2">create Post</h2>
-      <a class="close"><img src="assets/images/site-meta/charm_cross.svg" width="32" height="32" alt=""></a>
+      <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32" alt=""></a>
     </div>
     <div class="pop-up-content">
-      <a href="?create-post">create Text Post</a>
-      <a href="?create-book">Create book Post</a>
+      <a href="?create-post" class="pop-up-option">Create Text Post</a>
+      <a href="?create-book" class="pop-up-option">Create book Post</a>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-  crossorigin="anonymous"></script>
+<script src="assets/js/jquery-3.6.0.min.js" ></script>
 <script src="assets/js/myjs.js" type="text/javascript"></script>
-<script src="../js/myjs.js" type="text/javascript"></script>
 </body>
-
 </html>

@@ -1,48 +1,38 @@
 <?php
 require_once 'function.php';
 $response = array('status' => false);
-
-if (isset($_POST['follow'])) {
+ if (isset($_POST['follow'])) {
     $user_id = $_POST['user_id'];
     if (followUser($user_id)) {
         $response['status'] = true;
     } else {
         $response['status'] = false;
     }
-
-    echo json_encode($response);
+     echo json_encode($response);
 }
-
-if (isset($_POST['unfollow'])) {
+ if (isset($_POST['unfollow'])) {
     $user_id = $_POST['user_id'];
     if (unfollowUser($user_id)) {
         $response['status'] = true;
     } else {
         $response['status'] = false;
     }
-
-    echo json_encode($response);
+     echo json_encode($response);
 }
-
-
-
-if (isset($_POST['likepost'])) {
+ 
+ if (isset($_POST['likepost'])) {
     $post_id = $_POST['post_id'];
-
-    if (!checkPostLikeStatus($post_id)) {
+     if (!checkPostLikeStatus($post_id)) {
         if (likePost($post_id)) {
             $response['status'] = true;
         } else {
             $response['status'] = false;
         }
-
-        echo json_encode($response);
+         echo json_encode($response);
     }
-
-
+ 
 }
-
-if (isset($_POST['likebook'])) {
+ if (isset($_POST['likebook'])) {
     $book_id = $_POST['book_id'];
     if (!checkBookLikeStatus($book_id)) {
         if (likeBook($book_id)) {
@@ -50,47 +40,36 @@ if (isset($_POST['likebook'])) {
         } else {
             $response['status'] = false;
         }
-
-        echo json_encode($response);
+         echo json_encode($response);
     }
-
-
+ 
 }
-
-
+ 
 if (isset($_POST['unlikepost'])) {
     $post_id = $_POST['post_id'];
-
-    if (checkPostLikeStatus($post_id)) {
+     if (checkPostLikeStatus($post_id)) {
         if (unlikePost($post_id)) {
             $response['status'] = true;
         } else {
             $response['status'] = false;
         }
-
-        echo json_encode($response);
+         echo json_encode($response);
     }
-
-
+ 
 }
-
-if (isset($_POST['unlikebook'])) {
+ if (isset($_POST['unlikebook'])) {
     $book_id = $_POST['book_id'];
-
-    if (checkBookLikeStatus($book_id)) {
+     if (checkBookLikeStatus($book_id)) {
         if (unlikeBook($book_id)) {
             $response['status'] = true;
         } else {
             $response['status'] = false;
         }
-
-        echo json_encode($response);
+         echo json_encode($response);
     }
-
-
+ 
 }
-
-
+ 
 if (isset($_POST['addpostcomment'])) {
     $post_id = $_POST['post_id'];
     $comment = $_POST['comment'];
@@ -101,8 +80,7 @@ if (isset($_POST['addpostcomment'])) {
     }
     echo json_encode($response);
 }
-
-if (isset($_POST['addbookcomment'])) {
+ if (isset($_POST['addbookcomment'])) {
     $book_id = $_POST['book_id'];
     $comment = $_POST['comment'];
     if (addBookComment($book_id, $comment)) {
@@ -112,8 +90,7 @@ if (isset($_POST['addbookcomment'])) {
     }
     echo json_encode($response);
 }
-
-
+ 
 if (isset($_GET['notread'])) {
     if (setNotificationStatusAsRead()) {
         $response['status'] = true;
@@ -122,20 +99,16 @@ if (isset($_GET['notread'])) {
     }
     echo json_encode($response);
 }
-
-
+ 
 if (isset($_GET['sendmessage'])) {
     if (sendMessage($_POST['user_id'], $_POST['msg'])) {
         $response['status'] = true;
     } else {
         $response['status'] = false;
-
-    }
-
-    echo json_encode($response);
+     }
+     echo json_encode($response);
 }
-
-if (isset($_POST['getmessages'])) {
+ if (isset($_POST['getmessages'])) {
     $chats = getAllMessages();
     $chatlist = "";
     foreach ($chats as $chat) {
@@ -160,18 +133,14 @@ if (isset($_POST['getmessages'])) {
       
                           <div class="p-1 bg-primary rounded-circle ' . ($seen ? 'd-none' : '') . '"></div>
     
-
-    
-
-    
+     
+     
     
                         </div>
                     </div>';
-
-    }
+     }
     $json['chatlist'] = $chatlist;
-
-
+ 
     if (isset($_POST['chatter_id']) && $_POST['chatter_id'] != 0) {
         
         $messages = getMessages($_POST['chatter_id']);
@@ -180,11 +149,9 @@ if (isset($_POST['getmessages'])) {
             $json['blocked'] = true;
         } else {
             $json['blocked'] = false;
-
-        }
+         }
         updateMessageReadStatus($_POST['chatter_id']);
-
-        foreach ($messages as $cm) {
+         foreach ($messages as $cm) {
             if ($cm['from_user_id'] == $_SESSION['userdata']['uid']) {
                 $cl1 = ' message-self';
                 $cl2 = 'white-txt';
@@ -198,8 +165,7 @@ if (isset($_POST['getmessages'])) {
                 $cl2 = 'text-muted';
                 $cl3='';
             }
-
-            $chatmsg .= ' <div class="message-box' . $cl1 . '"><span style="display:block">' . $cm['msg'] . '</span>
+             $chatmsg .= ' <div class="message-box' . $cl1 . '"><span style="display:block">' . $cm['msg'] . '</span>
     <span style="font-size:.8em;display:block;text-align:right" class="' . $cl2 . '">' .  timeAgo($cm['created_at']) . $cl3 .'</span>
 </div>';
         }
@@ -209,7 +175,6 @@ if (isset($_POST['getmessages'])) {
         $json['chat']['msgs'] = '<div class="spinner-border text-center" role="status">
 </div>';
     }
-
-    $json['newmsgcount'] = newMsgCount();
+     $json['newmsgcount'] = newMsgCount();
     echo json_encode($json);
 }

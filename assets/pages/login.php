@@ -1,7 +1,7 @@
 <?php
 include_once('assets/pages/header.php'); ?>
 <div class="log-reg-side">
-  <img src="assets/images/site-meta/bookshelf.png" loading="lazy" width="Auto" height="Auto" alt=""
+  <img src="assets/images/site-meta/bookshelf.png"   width="Auto" height="Auto" alt=""
     class="log-reg-img" />
 </div>
 <div class="log-reg-form-container">
@@ -11,10 +11,10 @@ include_once('assets/pages/header.php'); ?>
     </div>
     <div class="form-block w-form">
       <form method="post" class="register-form" action="assets/php/action.php?login">
-        <input class="log-reg-field w-input" maxlength="20" name="username_email" placeholder="Email/Username"
+        <input class="log-reg-field w-input" maxlength="20" value="<?=showFormaData('username_email')?>" name="username_email" placeholder="Email/Username"
           type="text" />
         <?= showError('username_email') ?>
-        <input class="log-reg-field w-input" maxlength="256" name="upassword" placeholder="Your Password" type="text" />
+        <input class="log-reg-field w-input" value="<?=showFormaData('upassword')?>" maxlength="256" name="upassword" placeholder="Your Password" type="text" />
         <?= showError('upassword') ?>
         <?= showError('checkuser') ?>
         <div class="lr-field-box lr-fb-2">

@@ -8,7 +8,7 @@ global $followSuggestions;
       <?php foreach ($followSuggestions as $usercard) { ?>
         <div class="profile-card-min">
           <a href="?u=<?= $usercard['username'] ?>" class="link-block w-inline-block">
-            <img src="assets/images/profile/<?= $usercard['uprofile_photo'] ?>" loading="lazy" alt="" class="pcm-img" />
+            <img src="assets/images/profile/<?= $usercard['uprofile_photo'] ?>"   alt="" class="pcm-img" />
             <div class="pcm-details">
               <p class="pcm-text pcm-username">u/<?= $usercard['username'] ?></p>
               <p class="pcm-text"><?= $usercard['uname'] ?></p>
@@ -17,12 +17,10 @@ global $followSuggestions;
           <a class="primery-button pcm-btn w-button followbtn" data-user-id=<?= $usercard['uid'] ?>>Follow</a>
         </div>
       <?php }
-
-      if (count($followSuggestions) < 1) {
+       if (count($followSuggestions) < 1) {
         echo "<p>No Suggestions For You</p>";
       }
-
-      ?>
+       ?>
     </div>
   </div>
 </div>

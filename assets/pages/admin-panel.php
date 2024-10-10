@@ -28,10 +28,10 @@ global $reportlist;
         showError('post_img');
         if (count($postlist) < 1) {
             echo "<div class='no-posts'>
-  <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
-  <h2>No Posts Yet</h2>
-  <p>Looks like there’s nothing here. Start sharing your thoughts!</p>
-</div>";
+                    <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
+                    <h2>No Posts Yet</h2>
+                    <p>Looks like there’s nothing here. Start sharing your thoughts!</p>
+                </div>";
         }
         foreach ($postlist as $post_details) {
             $likes = getPostLikes($post_details['pid']);
@@ -69,19 +69,15 @@ global $reportlist;
                     <?php
                     if ($post_details['uid'] == $_SESSION['userdata']['uid'] || $_SESSION['userdata']['is_admin'] == 1) {
                         ?>
-
                         <a href="assets/php/action.php/?deletepost=<?= $post_details['pid'] ?>"><img
                                 src="assets/images/site-meta/bin-minus-in.svg" alt="" width="24" class="pc-control"
                                 height="24" /></a>
-
                     <?php } else { ?>
                         <a data-post-id="<?= $post_details['pid'] ?>" class="report-post"><img
                                 src="assets/images/site-meta/warning-circle.svg" alt="" width="24" class="pc-control"
                                 height="24" /></a>
                     <?php } ?>
-
                 </div>
-
                 <a href="?post=<?= $post_details['pid'] ?>" class="post-content-container">
                     <div class="pc-title-container">
                         <h1 class="heading-2"><?= $post_details['ptitle'] ?></h1>
@@ -100,10 +96,7 @@ global $reportlist;
                     </div>
                 </a>
             </div>
-
-            <?php
-        }
-        ?>
+            <?php } ?>
     </div>
     <div id="book-container" class="main-content">
         <?php
@@ -113,15 +106,13 @@ global $reportlist;
   <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
   <h2>No Posts Yet</h2>
   <p>Looks like there’s nothing here. Start sharing your thoughts!</p>
-</div>
-";
+</div>";
         }
         foreach ($booklist as $book_details) {
             ?>
-
             <div class="book-card tab-details">
                 <div class="book-thumbnail">
-                    <img src="assets/images/book-cover/<?= $book_details['bcover'] ?>" loading="lazy" width="Auto"
+                    <img src="assets/images/book-cover/<?= $book_details['bcover'] ?>"   width="Auto"
                         height="200" alt="" class="image" />
                 </div>
                 <div class="book-details">
@@ -143,12 +134,11 @@ global $reportlist;
                     </div>
                 </div>
             </div>
-
-            <?php
+             <?php
         }
         ?>
     </div>
-    <div id="user-container" class="main-content" ><?php
+    <div id="user-container" class="main-content"><?php
     if (count($userlist) < 1) {
         echo "<div class='no-posts'>
   <img src='assets/images/site-meta/warning-circle.svg' alt='No posts' class='no-posts-image'>
@@ -161,7 +151,7 @@ global $reportlist;
             <div class="profile-card-min">
                 <a href="?u=<?= $userdata['username'] ?>" style="width:100%; margin-right: 20px;"
                     class="link-block w-inline-block">
-                    <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>" loading="lazy" alt=""
+                    <img src="assets/images/profile/<?= $userdata['uprofile_photo'] ?>"   alt=""
                         class="pcm-img" />
                     <div class="pcm-details">
                         <p class="pcm-text pcm-username">u/<?= $userdata['username'] ?></p>
@@ -176,25 +166,21 @@ global $reportlist;
                         ?>
                         <a href="#" class="secondary-button lr-btn w-button unfollowbtn"
                             data-user-id="<?= $userdata['uid'] ?>">Unfollow</a>
-
                         <?php
                     } else {
                         ?>
                         <a href="#" class="primery-button lr-btn w-button followbtn"
                             data-user-id="<?= $userdata['uid'] ?>">Follow</a>
-
                         <?php
                     }
-
                 }
                 ?>
             </div>
-
             <?php
     }
     ?>
     </div>
-    <div id="report-container" class="main-content" ><?php
+    <div id="report-container" class="main-content"><?php
     showError('post_img');
     if (count($reportlist) < 1) {
         echo "<div class='no-posts'>
@@ -242,12 +228,8 @@ global $reportlist;
                             <p class="pcm-text"><?= timeAgo($report_details['report_time']) ?></p>
                         </div>
                     </div>
-                    </a>
+                </a>
             </div>
-
-            <?php
-    }
-    ?>
+            <?php } ?>
     </div>
-
 </div>
