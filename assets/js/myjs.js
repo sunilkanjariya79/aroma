@@ -513,6 +513,7 @@ $(".addbookcomment").click(function () {
     dataType: 'json',
     data: { addbookcomment: true, book_id: book_id_r, comment: comment_v },
     success: function (response) {
+      
       if (response.status) {
          $(button).attr('disabled', false);
         $(button).siblings('.comment-box').attr('disabled', false);

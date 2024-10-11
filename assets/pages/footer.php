@@ -28,15 +28,15 @@
             <span class="pcm-text"><?= timeAgo($not['created_at']) ?></span>
           </div>
         </div>
-        <div class="d-flex align-items-center">
+        <div style="display:flex;align-item:center; min-width:10px">
           <?php
           if ($not['read_status'] == 0) {
             ?>
-            <div class="p-1 bg-primary rounded-circle"></div>
+            <div class="primery-circle"></div>
             <?php
           } else if ($not['read_status'] == 2) {
             ?>
-              <span class="badge bg-danger">Post Deleted</span>
+              <div class="danger-label"></div>
             <?php
           }
           ?>
@@ -73,7 +73,7 @@
       <span id="blerror"> you are not allowed to send msg to this user anymore</span>
     </div>
     <div class="search-bar message-bar" id="msgsender">
-      <input type="text" class="log-reg-field search-area" style="width:100%" id="msginput"
+      <input type="text" class="log-reg-field " style="width:100% ;margin-right:8px;" id="msginput"
         placeholder="say something.." aria-label="Recipient's username" aria-describedby="button-addon2">
       <button class="primery-button" id="sendmsg" data-user-id="0" type="button">Send</button>
     </div>

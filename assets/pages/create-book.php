@@ -1,10 +1,10 @@
 <form action="assets/php/action.php?addbook" method="post" class="main-content" id="add-post-form"
   enctype="multipart/form-data" style="padding: 0px 20px; top:0px;">
-  <h2 class="secondary-heading" style="margin-right:auto"> Create Post</h2>
+  <h2 class="secondary-heading" style="margin-right:auto"> Create Book</h2>
   <div class="pop-up-window book-input hide">
     <div class="pop-up">
       <div class="pop-up-heading">
-        <h2 class="heading-2">heading</h2>
+        <h2 class="heading-2">Add Details</h2>
         <a class="close"><img src="assets/images/site-meta/xmark-circle.svg" width="32" height="32"></a>
       </div>
       <div class="pop-up-content" style="gap:20px;padding-bottom:20px">
@@ -17,7 +17,7 @@
         <label for="file-upload" class="custom-file-upload">Add Book Cover <img
             src="assets/images/site-meta/plus-circle.svg" /></a></label>
         <input id="file-upload" type="file" name="bcover" id="bcover" />
-        <a class="primery-button"> Add</a>
+        <a class="primery-button close"> Add</a>
       </div>
 
     </div>

@@ -14,18 +14,28 @@ function validateRegisterForm($form_data, $image_data)
 {
     $response = array();
     $response['status'] = true;
-    if (!$form_data['upassword']) {
-        $response['msg'] = "password is not given";
+    if (!$form_data['cpassword']) {
+        $response['msg'] = "Please Confirm your password";
+        $response['status'] = false;
+        $response['field'] = 'umail';
+    }
+    if (!$form_data['upassword'] || !checkLength($form_data['upassword'],12)) {
+        $response['msg'] = "password's length should be 1-12 characters";
         $response['status'] = false;
         $response['field'] = 'upassword';
     }
-    if (!$form_data['uabout']) {
-        $response['msg'] = "user about is not given";
+    if($form_data['upassword']!=$form_data['cpassword']){
+        $response['msg'] = "password does not match with confirm password";
+        $response['status'] = false;
+        $response['field'] = 'upassword';
+    }
+    if (!$form_data['uabout'] || !checkLength($form_data['uabout'],300)) {
+        $response['msg'] = "user about should be 1-300 character long";
         $response['status'] = false;
         $response['field'] = 'uabout';
     }
-    if (!$form_data['username']) {
-        $response['msg'] = "username is not given";
+    if (!$form_data['username'] || !checkLength($form_data['username'],20)) {
+        $response['msg'] = "username should be 1-20 character long";
         $response['status'] = false;
         $response['field'] = 'username';
     }
@@ -34,13 +44,13 @@ function validateRegisterForm($form_data, $image_data)
         $response['status'] = false;
         $response['field'] = 'username';
     }
-    if (!$form_data['uname']) {
-        $response['msg'] = " name is not given";
+    if (!$form_data['uname'] || !checkLength($form_data['uname'],30)) {
+        $response['msg'] = " name should be 1-30 character long";
         $response['status'] = false;
         $response['field'] = 'uname';
     }
-    if (!$form_data['umail']) {
-        $response['msg'] = "Email is not given";
+    if (!$form_data['umail'] || !checkLength($form_data['umail'],30)) {
+        $response['msg'] = "Email should be 1-30 character long";
         $response['status'] = false;
         $response['field'] = 'umail';
     }
@@ -70,6 +80,15 @@ function validateRegisterForm($form_data, $image_data)
         }
     }
     return $response;
+}
+
+function checkLength($str,$limit){
+    if (strlen($str) < $limit) {
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 //for managing login form
 function validateLoginForm($form_data)
@@ -398,18 +417,18 @@ function validateUpdateForm($form_data, $image_data)
 {
     $response = array();
     $response['status'] = true;
-    if (!$form_data['uabout']) {
-        $response['msg'] = "About is not given";
+    if (!$form_data['uabout'] || !checkLength($form_data['uabout'],300)) {
+        $response['msg'] = "About should be 1-300 character long";
         $response['status'] = false;
         $response['field'] = 'uabout';
     }
-    if (!$form_data['username']) {
-        $response['msg'] = "username is not given";
+    if (!$form_data['username'] || !checkLength($form_data['username'],20)) {
+        $response['msg'] = "username should be 1-20 character long";
         $response['status'] = false;
         $response['field'] = 'username';
     }
-    if (!$form_data['uname']) {
-        $response['msg'] = "name is not given";
+    if (!$form_data['uname'] || !checkLength($form_data['uname'],30)) {
+        $response['msg'] = "name should be 1-30 character long";
         $response['status'] = false;
         $response['field'] = 'name';
     }
@@ -450,8 +469,8 @@ function validateUpdatePass($form_data)
         $response['field'] = 'oldpass';
         $blank = true;
     }
-    if (!$form_data['newpass']) {
-        $response['msg'] = "Enter new password please";
+    if (!$form_data['newpass'] || !checkLength($form_data['newpass'],12)) {
+        $response['msg'] = "New password should be 1-12 character long";
         $response['status'] = false;
         $response['field'] = 'newpass';
         $blank = true;
@@ -501,13 +520,13 @@ function validatePostDetails($post_data)
         $response['status'] = false;
         $response['field'] = 'hidden-input';
     }
-    if (!$post_data['tag']) {
-        $response['msg'] = "Please add Tag";
+    if (!$post_data['tag'] || !checkLength($post_data['tag'],10)) {
+        $response['msg'] = "Tag should be 1-10 character long";
         $response['status'] = false;
         $response['field'] = 'tag';
     }
-    if (!$post_data['title']) {
-        $response['msg'] = "Please add Title";
+    if (!$post_data['title'] || !checkLength($post_data['title'],50)) {
+        $response['msg'] = "Title should be 1-50 character long";
         $response['status'] = false;
         $response['field'] = 'title';
     }
@@ -523,18 +542,18 @@ function validateBookDetails($book_data, $image_data)
         $response['status'] = false;
         $response['field'] = 'hidden-input';
     }
-    if (!$book_data['babout']) {
-        $response['msg'] = "Please add Tag";
+    if (!$book_data['babout'] || !checkLength($book_data['babout'], 180)) {
+        $response['msg'] = "About should be 1-180 character long";
         $response['status'] = false;
         $response['field'] = 'babout';
     }
-    if (!$book_data['btag']) {
-        $response['msg'] = "Please add Tag";
+    if (!$book_data['btag'] || !checkLength($book_data['btag'],10)) {
+        $response['msg'] = "Tag should be 1-10 character long";
         $response['status'] = false;
         $response['field'] = 'btag';
     }
-    if (!$book_data['btitle']) {
-        $response['msg'] = "Please add Title";
+    if (!$book_data['btitle'] || !checkLength($book_data['btitle'],50)) {
+        $response['msg'] = "Title should be 1-50 character long";
         $response['status'] = false;
         $response['field'] = 'btitle';
     }
@@ -1092,8 +1111,8 @@ function validateReport($report)
 {
     $response = array();
     $response['status'] = true;
-    if (!$report['preport']) {
-        $response['msg'] = "Add a reason to report this";
+    if (!$report['preport'] || !checkLength($report['preport'],520)) {
+        $response['msg'] = "Report should be 1-520 character long";
         $response['status'] = false;
         $response['field'] = 'preport';
     }

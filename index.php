@@ -13,6 +13,9 @@ if (isset($_GET['register'])) {
 }
 //open log-in if get is open
 elseif (isset($_GET['login'])) {
+    if(isset($_SESSION['formdata']) && !isset($_SESSION['formdata']['username_email'])){
+        unset($_SESSION['formdata']);
+    }
     showPage('header', ['page_title' => 'aroma-Log-In']);
     showPage('login');
 }elseif (isset($_GET['change-password'])) {

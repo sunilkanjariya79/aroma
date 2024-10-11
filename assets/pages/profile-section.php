@@ -142,7 +142,11 @@ global $user;
                 </div>
                 <div class="pop-up-content">
                   <div class="profile-list">
-                    <?php foreach ($follower as $usercard) {
+                    <?php 
+                    if(count($follower) <= 0) {
+                      echo 'No Followers';
+                    }
+                    foreach ($follower as $usercard) {
                       $userdata = getUser($usercard[2]) ?>
                       <div class="profile-card-min">
                         <a href="?u=<?= $userdata['username'] ?>" class="link-block w-inline-block">

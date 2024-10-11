@@ -73,6 +73,20 @@ select {
   border: 1px solid #020929;
   border-radius: 3px;
 }
+
+option{
+  color:#1a161c;
+}
+
+.primery-circle{
+  padding: 5px;
+  background-color: #8715eb;
+}
+
+.danger-label{
+  padding: 5px;
+  background-color: red;
+}
 .input-wrapper {
   display: flex;
   align-items: center;
@@ -625,7 +639,7 @@ select {
   width: 100%;
 }
  .pop-up-content {
-  padding: 0px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1007,6 +1021,7 @@ select {
 }
  .comment-box {
   resize: none;
+  height: 5em;
 }
  .ps-info {
   justify-content: flex-start;
